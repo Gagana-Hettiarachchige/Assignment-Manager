@@ -14,8 +14,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AssignmentManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Assignment Manager" Height="450" Width="800">
+
+
     <Grid>
+
+        <!-- Defining the grid rows. -->
+        <Grid.RowDefinitions>
+
+            <!-- Header row. -->
+            <RowDefinition Height="50"/>
+
+            <!-- Insert Row. -->
+            <RowDefinition Height="50"/>
+
+            <!-- Selecting Sort Type Row. -->
+            <RowDefinition Height="50"/>
+
+            <!-- Table results Row. -->
+            <RowDefinition Height="*"/>
+            
+        </Grid.RowDefinitions>
+
+
+        <!-- Header row. -->
+  
+
+
+        <!-- Insert Row. -->
+
+        
+        
+        <!-- Selecting Sort Type Row. -->
+
+
+
+        
+        <!-- Table results Row. -->
+        <DataGrid Name="Table"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            
+            HorizontalScrollBarVisibility="Visible"
+            VerticalScrollBarVisibility="Visible"
+            Grid.Row="3"
+            >
+        </DataGrid>
+
 
     </Grid>
 </Window>
