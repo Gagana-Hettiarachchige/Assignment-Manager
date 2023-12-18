@@ -38,7 +38,18 @@
 
 
         <!-- Header row. -->
-  
+        <Button Name="SchoolBtn"
+            Width="100"
+            Height="30"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Margin="10,0,0,0" Click="SchoolBtn_Click"
+                
+            
+            >
+            eConestoga
+        </Button>
 
 
         <!-- Insert Row. -->
@@ -51,7 +62,7 @@
 
         
         <!-- Table results Row. -->
-        <DataGrid Name="Table"
+        <DataGrid Name="TableGrid"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             
