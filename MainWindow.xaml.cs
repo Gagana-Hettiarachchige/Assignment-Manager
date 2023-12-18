@@ -34,7 +34,7 @@ namespace AssignmentManager
             InitializeComponent();
         }
 
-        private void SchoolBtn_Click(object sender, RoutedEventArgs e)
+        private void SchoolButton_Click(object sender, RoutedEventArgs e)
         {
             /* Opens tab to school's webpage. */
             System.Diagnostics.Process.Start("https://conestoga.desire2learn.com/d2l/home");
