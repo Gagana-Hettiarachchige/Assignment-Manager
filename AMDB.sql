@@ -12,6 +12,7 @@ CREATE DATABASE AM;
 USE AM;
 
 
+
 /* Holds assigment details. */
 CREATE TABLE Assignments
 (
@@ -20,6 +21,7 @@ CREATE TABLE Assignments
     AssignmentName VARCHAR(30) NOT NULL,
     CourseWeight FLOAT(10) NOT NULL,
     DueDate DATETIME NOT NULL,
+    AssignmentStatus VARCHAR(30) NOT NULL,
     SolutionPath VARCHAR(500) NULL,
     RepositoryLink VARCHAR(500) NULL,
     DropboxLink VARCHAR(500) NULL,
