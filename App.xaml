@@ -1,4 +1,13 @@
-﻿<Application x:Class="AssignmentManager.App"
+﻿<!-- 
+- FILE          : App.xaml
+- PROJECT       : Assignment Manager
+- PROGRAMMER    : Gagana Hettiarachchige
+- FIRST VERSION : 2023-12-17
+- DESCRIPTION   :
+-	Holds the app's references.
+-->
+
+<Application x:Class="AssignmentManager.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:AssignmentManager"

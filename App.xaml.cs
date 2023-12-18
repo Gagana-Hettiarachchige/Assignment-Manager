@@ -1,4 +1,13 @@
-﻿using System;
+﻿/* 
+* FILE          : App.xaml.cs
+* PROJECT       : Assignment Manager
+* PROGRAMMER    : Gagana Hettiarachchige
+* FIRST VERSION : 2023-12-17
+* DESCRIPTION   :
+*	Holds code behind of app.xaml.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;

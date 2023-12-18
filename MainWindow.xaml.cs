@@ -1,4 +1,13 @@
-﻿using System;
+﻿/* 
+* FILE          : MainWindow.xaml.cs
+* PROJECT       : Assignment Manager
+* PROGRAMMER    : Gagana Hettiarachchige
+* FIRST VERSION : 2023-12-17
+* DESCRIPTION   :
+*	Holds the code behind of the main window.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
