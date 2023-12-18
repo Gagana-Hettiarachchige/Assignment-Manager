@@ -37,31 +37,88 @@
         </Grid.RowDefinitions>
 
 
+        <!-- Creating borders. -->
+        <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1" />
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" />
+        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1" />
+        <Border Grid.Row="4" BorderBrush="Black" BorderThickness="1" />
+
         <!-- Header row. -->
-        <Button Name="SchoolBtn"
+        
+        
+        <!-- School Link button. -->
+        <Button Name="SchoolButton"
+            Grid.Row="0"
             Width="100"
             Height="30"
             
             HorizontalAlignment="Left"
             VerticalAlignment="Center" 
-            Margin="10,0,0,0" Click="SchoolBtn_Click"
+            Margin="10, 0, 0, 0" 
+            
+            Click="SchoolButton_Click"
                 
             
             >
             eConestoga
         </Button>
 
-
         <!-- Insert Row. -->
+        <!-- Class name input section. -->
+        <Label
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Margin="10, 0, 0, 0"
+            >
+            Class:
+        </Label>
+        <TextBox Name="ClassTextBox"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Margin="50, 0, 0, 0"
+            
+            Width="50"
+            >
 
-        
-        
+        </TextBox>
+
+        <!-- Assignment name input section. -->
+        <Label
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Margin="110, 0, 0, 0"
+            >
+            Assignment:
+        </Label>
+        <TextBox Name="AssignmentTextBox"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Margin="185, 0, 0, 0"
+            
+            Width="50"
+            >
+
+        </TextBox>
+
+
+
         <!-- Selecting Sort Type Row. -->
+        
 
 
-
+        
+        
         
         <!-- Table results Row. -->
+        <!-- Table to hold results. -->
         <DataGrid Name="TableGrid"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
