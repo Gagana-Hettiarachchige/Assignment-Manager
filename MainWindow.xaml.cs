@@ -32,6 +32,16 @@ namespace AssignmentManager
         public MainWindow()
         {
             InitializeComponent();
+
+            /* Making window fullscreen. */
+            this.WindowState = WindowState.Maximized;
+
+
+            /* Adding options to status combo box. */
+            StatusComboBox.Items.Add("Incomplete");
+            StatusComboBox.Items.Add("In Progress");
+            StatusComboBox.Items.Add("Complete");
+            StatusComboBox.SelectedIndex = 0;
         }
 
         private void SchoolButton_Click(object sender, RoutedEventArgs e)
