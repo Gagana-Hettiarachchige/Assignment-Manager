@@ -7,8 +7,10 @@
 *	Holds the code behind of the main window.
 */
 
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,6 +50,43 @@ namespace AssignmentManager
         {
             /* Opens tab to school's webpage. */
             System.Diagnostics.Process.Start("https://conestoga.desire2learn.com/d2l/home");
+        }
+
+
+        private void LocalResourcesAddButton_Click(object sender, RoutedEventArgs e)
+        {
+            /* Setting up dialog for adding files to be able to open. */
+            OpenFileDialog files_to_add = new OpenFileDialog();
+            files_to_add.Multiselect = true;
+            files_to_add.Filter = "Solutions (*.sln)|*.sln|" +
+                                 "HTML (*.html)|*.html|" +
+                                 "PHP (*.php)|*.php|" +
+                                 "ASP (*.asp)|*.asp|" +
+                                 "All files |*.*";
+
+            /* Asking user to pick resources. */
+            Nullable<bool> choice = files_to_add.ShowDialog();
+
+            if (choice == true)
+            {
+                int count = 0;
+
+                /* Adding resources to the combo box. */
+                while (count < files_to_add.FileNames.Length)
+                {
+                    LocalResourcesComboBox.Items.Add(files_to_add.FileNames[count]);
+                    ++count;
+                }
+
+                LocalResourcesComboBox.SelectedIndex = count - 1;
+            }
+            
+        }
+
+        private void LocalResourcesRemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            /* Removing selected item. */
+            LocalResourcesComboBox.Items.Remove(LocalResourcesComboBox.SelectedItem);
         }
     }
 }
