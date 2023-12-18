@@ -25,17 +25,16 @@
             <!-- Header row. -->
             <RowDefinition Height="50"/>
 
-            <!-- Insert Row. -->
-            <RowDefinition Height="50"/>
+            <!-- Insert/Edit Row. -->
+            <RowDefinition Height="80"/>
 
             <!-- Selecting Sort Type Row. -->
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
 
             <!-- Table results Row. -->
             <RowDefinition Height="*"/>
-            
-        </Grid.RowDefinitions>
 
+        </Grid.RowDefinitions>
 
         <!-- Creating borders. -->
         <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1" />
@@ -43,9 +42,9 @@
         <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1" />
         <Border Grid.Row="4" BorderBrush="Black" BorderThickness="1" />
 
+        
+        
         <!-- Header row. -->
-        
-        
         <!-- School Link button. -->
         <Button Name="SchoolButton"
             Grid.Row="0"
@@ -63,27 +62,29 @@
             eConestoga
         </Button>
 
-        <!-- Insert Row. -->
+
+
+        <!-- Insert/Edit Row. -->
         <!-- Class name input section. -->
         <Label
             Grid.Row="1"
             
             HorizontalAlignment="Left"
             VerticalAlignment="Center" 
-            Margin="10, 0, 0, 0"
+            Margin="7, -35, 0, 0"
             >
-            Class:
+            *Class:
         </Label>
         <TextBox Name="ClassTextBox"
             Grid.Row="1"
             
             HorizontalAlignment="Left"
             VerticalAlignment="Center" 
-            Margin="50, 0, 0, 0"
+            Margin="10, 0, 0, 0"
             
             Width="50"
             >
-
+            ABC
         </TextBox>
 
         <!-- Assignment name input section. -->
@@ -92,22 +93,86 @@
             
             HorizontalAlignment="Left"
             VerticalAlignment="Center" 
-            Margin="110, 0, 0, 0"
+            Margin="67, -35, 0, 0"
             >
-            Assignment:
+            *Assignment:
         </Label>
         <TextBox Name="AssignmentTextBox"
             Grid.Row="1"
             
             HorizontalAlignment="Left"
             VerticalAlignment="Center" 
-            Margin="185, 0, 0, 0"
+            Margin="70, 0, 0, 0"
+            
+            Width="80"
+            >
+            A-01
+        </TextBox>
+
+        <!-- Weight input section. -->
+        <Label
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Margin="157, -35, 0, 0"
+            >
+            *Weight:
+        </Label>
+        <TextBox Name="WeightTextBox"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Margin="160, 0, 0, 0"
             
             Width="50"
             >
-
+            10.01
+        </TextBox>
+        
+        <!-- Assignment name input section. -->
+        <Label
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Margin="217, -35, 0, 0"
+            >
+            *Due Date:
+        </Label>
+        <TextBox Name="DueDateTextBox"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Margin="220, 0, 0, 0"
+            
+            Width="115"
+            >
+            2023-12-16 11:00:00
         </TextBox>
 
+        <!-- Assignment status input section. -->
+        <Label
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Margin="347, -35, 0, 0"
+            >
+            *Status:
+        </Label>
+        <ComboBox Name="StatusComboBox"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Width="100"
+            
+            Margin="350, 0, 0, 0"
+            >
+        </ComboBox>
 
 
         <!-- Selecting Sort Type Row. -->
