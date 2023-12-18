@@ -22,9 +22,8 @@ CREATE TABLE Assignments
     AssignmentWeight FLOAT(10) NOT NULL,
     DueDate DATETIME NOT NULL,
     AssignmentStatus VARCHAR(30) NOT NULL,
-    SolutionPath VARCHAR(500) NULL,
-    RepositoryLink VARCHAR(500) NULL,
-    DropboxLink VARCHAR(500) NULL,
-    RequirementsPage VARCHAR(500) NULL,
+    LocalResources VARCHAR(5000) NULL,
+    OnlineResources VARCHAR(5000) NULL,
+    GitFolder VARCHAR(500) NULL,
     PRIMARY KEY (AssignmentNumber)
 );
