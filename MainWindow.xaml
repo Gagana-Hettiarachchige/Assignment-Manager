@@ -14,7 +14,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AssignmentManager"
         mc:Ignorable="d"
-        Title="Assignment Manager" Height="450" Width="800">
+        Title="Assignment Manager" Height="450" Width="800" MinWidth="800" MinHeight="450">
 
 
     <Grid>
@@ -174,6 +174,56 @@
             >
         </ComboBox>
 
+        <!-- Local resources input section. -->
+        <Label
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Margin="460, -35, 0, 0"
+            >
+            Local Resources:
+        </Label>
+        <ComboBox Name="LocalResourcesComboBox"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Width="100"
+            
+            Margin="465, 0, 0, 0"
+            >
+        </ComboBox>
+        <Button Name="LocalResourcesAddButton"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+          
+            Width="50"
+            Height="20"
+            
+            Margin="570, -25, 0, 0"
+            
+            Click="LocalResourcesAddButton_Click"
+            >
+            Add
+        </Button>
+        <Button Name="LocalResourcesRemoveButton"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+          
+            Width="50"
+            Height="20"
+            
+            Margin="570, 15, 0, 0" 
+            
+            Click="LocalResourcesRemoveButton_Click"
+            >
+            Remove
+        </Button>
 
         <!-- Selecting Sort Type Row. -->
         
