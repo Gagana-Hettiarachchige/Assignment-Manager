@@ -19,7 +19,7 @@ CREATE TABLE Assignments
     AssignmentNumber INT NOT NULL AUTO_INCREMENT,
     ClassName VARCHAR(30) NOT NULL,
     AssignmentName VARCHAR(30) NOT NULL,
-    CourseWeight FLOAT(10) NOT NULL,
+    AssignmentWeight FLOAT(10) NOT NULL,
     DueDate DATETIME NOT NULL,
     AssignmentStatus VARCHAR(30) NOT NULL,
     SolutionPath VARCHAR(500) NULL,
