@@ -84,6 +84,21 @@ namespace AssignmentManager
             
         }
 
+        private void LocalResourcesAddFolderButton_Click(object sender, RoutedEventArgs e)
+        {
+            CommonOpenFileDialog resource_folder = new CommonOpenFileDialog();
+            resource_folder.IsFolderPicker = true;
+
+            /* Asking user for folder with resources. */
+            if (resource_folder.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                /* Adding folder to the combo box. */
+                LocalResourcesComboBox.Items.Add(resource_folder.FileName);
+                LocalResourcesComboBox.SelectedIndex = LocalResourcesComboBox.Items.Count - 1;
+            }
+        }
+
+
         private void LocalResourcesRemoveButton_Click(object sender, RoutedEventArgs e)
         {
             /* Removing selected resource from the combo box. */
@@ -131,5 +146,7 @@ namespace AssignmentManager
             /* Removing the folder. */
             SelectedGitFolderComboBox.Items.Clear();
         }
+
+        
     }
 }
