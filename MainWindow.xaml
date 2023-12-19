@@ -349,9 +349,28 @@
             >
             Remove
         </Button>
-
-
-
+        
+        
+        <!-- Button to insert the data into the database. -->
+        <Button Name="InsertButton"
+            Grid.Row="1"
+                
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+          
+            Width="50"
+            Height="20"
+ 
+            Margin="1120,0,0,0" Click="InsertButton_Click"
+            >
+            Insert
+        </Button>
+        
+        
+        
+        
+        
+        
         <!-- Selecting Sort Type Row. -->
 
 
