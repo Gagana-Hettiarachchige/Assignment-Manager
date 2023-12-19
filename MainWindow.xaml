@@ -14,7 +14,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AssignmentManager"
         mc:Ignorable="d"
-        Title="Assignment Manager" Height="450" Width="800" MinWidth="800" MinHeight="450">
+        Title="Assignment Manager" Height="450" Width="1000" MinWidth="1000" MinHeight="450">
 
 
     <Grid>
@@ -224,7 +224,69 @@
             >
             Remove
         </Button>
+        
+        <!-- Online resources input section. -->
+        <Label
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Margin="630, -35, 0, 0"
+            >
+            Online Resources:
+        </Label>
+        <TextBox Name="OnlineResourcesTextBox"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Margin="635, 0, 0, 0"
+                 
+            Width="100"
+            >
+            https://
+        </TextBox>
+        <ComboBox Name="OnlineResourcesComboBox"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Width="100"
+            
+            Margin="735, 0, 0, 0"
+            >
+        </ComboBox>
+        <Button Name="OnlineResourcesAddButton"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+          
+            Width="50"
+            Height="20"
+            
+            Margin="840, -25, 0, 0" Click="OnlineResourcesAddButton_Click"
+           
+            >
+            Add
+        </Button>
+        <Button Name="OnlineResourcesRemoveButton"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+          
+            Width="50"
+            Height="20"
+            
+            Margin="840, 15, 0, 0" Click="OnlineResourcesRemoveButton_Click" 
+            
 
+            >
+            Remove
+        </Button>
+        
+        
         <!-- Selecting Sort Type Row. -->
         
 
