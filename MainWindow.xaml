@@ -393,6 +393,8 @@
             AutoGenerateColumns="False"
             >
             <DataGrid.Columns>
+
+                <!-- Mandatory coulmns. -->
                 <DataGridTextColumn Header="No." Binding="{Binding AssignmentNumber}" />
                 <DataGridTextColumn Header="Class" Binding="{Binding ClassName}" />
                 <DataGridTextColumn Header="Assignment" Binding="{Binding AssignmentName}" />
@@ -400,16 +402,26 @@
                 <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate}" />
                 <DataGridTextColumn Header="Status" Binding="{Binding AssignmentStatus}" />
 
-
-                <DataGridHyperlinkColumn Header="Local Resources" Binding="{Binding LocalResources}">
-                    <DataGridHyperlinkColumn.ElementStyle>
-                        <Style>
-                            <EventSetter Event="Hyperlink.Click" Handler="LocalResources_Click"/>
+                <!-- Optional columns.-->
+                <!-- Local Resources list. -->
+                <DataGridTextColumn Header="Local Resources" Binding="{Binding LocalResources}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <EventSetter Event="MouseLeftButtonUp" Handler="Resources_MouseLeftButtonUp"/>
                         </Style>
-                    </DataGridHyperlinkColumn.ElementStyle>
-                </DataGridHyperlinkColumn>
-                <DataGridHyperlinkColumn Header="Online Resources" Binding="{Binding OnlineResources}" />
-                
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!-- Online Resources list. -->
+                <DataGridTextColumn Header="Online Resources" Binding="{Binding OnlineResources}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <EventSetter Event="MouseLeftButtonUp" Handler="Resources_MouseLeftButtonUp"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!-- Git CMD trigger. -->
                 <DataGridTemplateColumn Header="Git Folder">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
