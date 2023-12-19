@@ -61,7 +61,7 @@ namespace AssignmentManager
         private void SchoolButton_Click(object sender, RoutedEventArgs e)
         {
             /* Opens tab to school's webpage. */
-            System.Diagnostics.Process.Start("https://conestoga.desire2learn.com/d2l/home");
+            Process.Start("https://conestoga.desire2learn.com/d2l/home");
         }
 
 
@@ -201,11 +201,23 @@ namespace AssignmentManager
             
         }
 
-
-        private void LocalResources_Click(object sender, RoutedEventArgs e)
+        private void Resources_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            /* Splitting links into individual links. */
-            string[] links = e.OriginalSource.ToString().Split('\n');
+            /* Getting the resources. */
+            TextBlock text_block = (TextBlock)e.OriginalSource;
+            
+            /* Getting each resource as a string. */
+            string[] resources = text_block.Text.Split('\n');
+
+            int count = 0;
+
+            /* Iterating through each item and opening them. */
+            while (resources[count] != "") 
+            {
+                Process.Start('"' + resources[count] + '"');
+                ++count;
+            }
+
 
         }
     }
