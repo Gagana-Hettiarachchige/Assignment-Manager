@@ -387,7 +387,37 @@
             HorizontalScrollBarVisibility="Visible"
             VerticalScrollBarVisibility="Visible"
             Grid.Row="3"
+                  
+            IsReadOnly="True"
+                  
+            AutoGenerateColumns="False"
             >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="No." Binding="{Binding AssignmentNumber}" />
+                <DataGridTextColumn Header="Class" Binding="{Binding ClassName}" />
+                <DataGridTextColumn Header="Assignment" Binding="{Binding AssignmentName}" />
+                <DataGridTextColumn Header="Weight (%)" Binding="{Binding AssignmentWeight}" />
+                <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate}" />
+                <DataGridTextColumn Header="Status" Binding="{Binding AssignmentStatus}" />
+
+
+                <DataGridHyperlinkColumn Header="Local Resources" Binding="{Binding LocalResources}">
+                    <DataGridHyperlinkColumn.ElementStyle>
+                        <Style>
+                            <EventSetter Event="Hyperlink.Click" Handler="LocalResources_Click"/>
+                        </Style>
+                    </DataGridHyperlinkColumn.ElementStyle>
+                </DataGridHyperlinkColumn>
+                <DataGridHyperlinkColumn Header="Online Resources" Binding="{Binding OnlineResources}" />
+                
+                <DataGridTemplateColumn Header="Git Folder">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button>Open</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+             </DataGrid.Columns>
         </DataGrid>
 
 
