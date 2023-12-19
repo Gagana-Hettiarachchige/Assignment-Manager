@@ -85,8 +85,25 @@ namespace AssignmentManager
 
         private void LocalResourcesRemoveButton_Click(object sender, RoutedEventArgs e)
         {
-            /* Removing selected item. */
+            /* Removing selected resource from the combo box. */
             LocalResourcesComboBox.Items.Remove(LocalResourcesComboBox.SelectedItem);
+        }
+
+        private void OnlineResourcesAddButton_Click(object sender, RoutedEventArgs e)
+        {
+            /* Adding selected resource to the combo box. */
+            if (OnlineResourcesTextBox.Text != "")
+            {
+                OnlineResourcesComboBox.Items.Add(OnlineResourcesTextBox.Text);
+                OnlineResourcesComboBox.SelectedIndex = OnlineResourcesComboBox.Items.IndexOf(OnlineResourcesTextBox.Text);
+            }
+            
+        }
+
+        private void OnlineResourcesRemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            /* Removing selected resource from the combo box. */
+            OnlineResourcesComboBox.Items.Remove(OnlineResourcesComboBox.SelectedItem);
         }
     }
 }
