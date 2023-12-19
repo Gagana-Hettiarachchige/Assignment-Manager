@@ -23,6 +23,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace AssignmentManager
 {
@@ -104,6 +105,31 @@ namespace AssignmentManager
         {
             /* Removing selected resource from the combo box. */
             OnlineResourcesComboBox.Items.Remove(OnlineResourcesComboBox.SelectedItem);
+        }
+
+        private void GitFolderAddButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if (SelectedGitFolderComboBox.Items.Count < 1)
+            {
+                CommonOpenFileDialog git_folder = new CommonOpenFileDialog();
+                git_folder.IsFolderPicker = true;
+
+                /* Asking user for folder to run open cmd in. */
+                if (git_folder.ShowDialog() == CommonFileDialogResult.Ok)
+                {
+                    /* Adding folder to the combo box. */
+                    SelectedGitFolderComboBox.Items.Add(git_folder.FileName);
+                    SelectedGitFolderComboBox.SelectedIndex = 0;
+                }
+
+            }
+        }
+
+        private void GitFolderRemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            /* Removing the folder. */
+            SelectedGitFolderComboBox.Items.Clear();
         }
     }
 }
