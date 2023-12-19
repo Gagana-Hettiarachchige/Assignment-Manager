@@ -14,7 +14,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AssignmentManager"
         mc:Ignorable="d"
-        Title="Assignment Manager" Height="450" Width="1000" MinWidth="1000" MinHeight="450">
+        Title="Assignment Manager" Height="450" Width="1200" MinWidth="1200" MinHeight="450">
 
 
     <Grid>
@@ -264,9 +264,10 @@
           
             Width="50"
             Height="20"
-            
-            Margin="840, -25, 0, 0" Click="OnlineResourcesAddButton_Click"
-           
+ 
+            Margin="840, -25, 0, 0" 
+                
+            Click="OnlineResourcesAddButton_Click"
             >
             Add
         </Button>
@@ -279,12 +280,62 @@
             Width="50"
             Height="20"
             
-            Margin="840, 15, 0, 0" Click="OnlineResourcesRemoveButton_Click" 
-            
-
+            Margin="840, 15, 0, 0" 
+                
+            Click="OnlineResourcesRemoveButton_Click" 
             >
             Remove
         </Button>
+        
+        <!-- Git folder input section. -->
+        <Label
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Margin="900, -35, 0, 0"
+            >
+            Git Folder:
+        </Label>
+        <ComboBox Name="SelectedGitFolderComboBox"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+          
+            Width="100"
+            Height="20"
+            
+            Margin="905, 0, 0, 0" 
+            >
+        </ComboBox>
+        <Button Name="GitFolderAddButton"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+          
+            Width="50"
+            Height="20"
+ 
+            Margin="1010, -25, 0, 0" Click="GitFolderAddButton_Click" 
+            >
+            Add
+        </Button>
+        <Button Name="GitFolderRemoveButton"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+          
+            Width="50"
+            Height="20"
+ 
+            Margin="1010, 15, 0, 0" Click="GitFolderRemoveButton_Click" 
+            >
+            Remove
+        </Button>
+        
         
         
         <!-- Selecting Sort Type Row. -->
