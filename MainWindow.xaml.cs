@@ -181,6 +181,18 @@ namespace AssignmentManager
                 ++count;
             }
 
+            count = 0;
+
+            /* Getting all online resources. */
+            while (count < OnlineResourcesComboBox.Items.Count)
+            {
+                /* Adding all online resources to single string. */
+                online_items += OnlineResourcesComboBox.Items[count];
+                online_items += '\n';
+                ++count;
+            }
+
+
             /* Creating new assignment. */
             Assignment new_assignment = new Assignment()
             {
@@ -219,6 +231,29 @@ namespace AssignmentManager
             }
 
 
+        }
+
+
+        private void Resources_MouseEnter(object sender, MouseEventArgs e)
+        {
+            TextBlock text_block = (TextBlock)e.OriginalSource;
+
+            if (text_block.Text != "")
+            {
+                Cursor = Cursors.Hand;
+            }
+            
+        }
+
+        private void Resources_MouseLeave(object sender, MouseEventArgs e)
+        {
+            TextBlock text_block = (TextBlock)e.OriginalSource;
+
+            if (text_block.Text != "")
+            {
+                Cursor = Cursors.Arrow;
+            }
+            
         }
     }
 }
