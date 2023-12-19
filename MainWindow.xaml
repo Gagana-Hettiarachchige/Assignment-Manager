@@ -258,7 +258,7 @@
                  
             Width="100"
             >
-            https://
+            
         </TextBox>
         <ComboBox Name="OnlineResourcesComboBox"
             Grid.Row="1"
@@ -408,6 +408,8 @@
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <EventSetter Event="MouseLeftButtonUp" Handler="Resources_MouseLeftButtonUp"/>
+                            <EventSetter Event="MouseEnter" Handler="Resources_MouseEnter"/>
+                            <EventSetter Event="MouseLeave" Handler="Resources_MouseLeave"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
@@ -417,6 +419,8 @@
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <EventSetter Event="MouseLeftButtonUp" Handler="Resources_MouseLeftButtonUp"/>
+                            <EventSetter Event="MouseEnter" Handler="Resources_MouseEnter"/>
+                            <EventSetter Event="MouseLeave" Handler="Resources_MouseLeave"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
