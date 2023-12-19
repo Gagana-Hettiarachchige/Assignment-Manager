@@ -24,6 +24,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using AssignmentManager.CodeFiles;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace AssignmentManager
 {
@@ -32,6 +35,14 @@ namespace AssignmentManager
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        /* All assignments. */
+        ObservableCollection<Assignment> loadedAssignments = new ObservableCollection<Assignment>();
+
+
+        int assignmentNumber = 0;   // Testing substitution for assignment number.
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -147,6 +158,55 @@ namespace AssignmentManager
             SelectedGitFolderComboBox.Items.Clear();
         }
 
-        
+        private void InsertButton_Click(object sender, RoutedEventArgs e)
+        {
+            ++assignmentNumber; // Testing.
+
+
+            /* Holds all local resource paths. */
+            string local_items = "";
+
+            /* Holds all online resource paths. */
+            string online_items = "";
+
+
+            int count = 0;
+
+            /* Getting all local resources. */
+            while (count < LocalResourcesComboBox.Items.Count) 
+            {
+                /* Adding all local resources to single string. */
+                local_items += LocalResourcesComboBox.Items[count];
+                local_items += '\n';
+                ++count;
+            }
+
+            /* Creating new assignment. */
+            Assignment new_assignment = new Assignment()
+            {
+                AssignmentNumber = assignmentNumber,
+                ClassName = ClassTextBox.Text,
+                AssignmentName = AssignmentTextBox.Text,
+                AssignmentWeight = double.Parse(WeightTextBox.Text),
+                DueDate = DateTime.Parse(DueDateTextBox.Text),
+                AssignmentStatus = StatusComboBox.Text,
+                LocalResources = local_items,
+                OnlineResources = online_items,
+                GitFolder = SelectedGitFolderComboBox.Text
+            };
+
+            loadedAssignments.Add(new_assignment);
+
+            TableGrid.ItemsSource = loadedAssignments;
+            
+        }
+
+
+        private void LocalResources_Click(object sender, RoutedEventArgs e)
+        {
+            /* Splitting links into individual links. */
+            string[] links = e.OriginalSource.ToString().Split('\n');
+
+        }
     }
 }
