@@ -4,7 +4,7 @@
 * PROGRAMMER    : Gagana Hettiarachchige
 * FIRST VERSION : 2023-12-19
 * DESCRIPTION   :
-*	This file holds the code behind for the
+*   This file holds the code behind for the
 *	menu that allows the user to open
 *	certain or all resources.
 */
@@ -30,9 +30,18 @@ namespace AssignmentManager.CodeFiles
     /// </summary>
     public partial class ResourceOpenMenu : Window
     {
+        /* 
+        * METHOD        : ResourceMenuOpen
+        * DESCRIPTION   :
+        *   Creates new dialog resource opening dialog.
+        * PARAMETERS    :
+        *   List<string> resources : the resources to open
+        */
         public ResourceOpenMenu(List<string> resources)
         {
             InitializeComponent();
+            Title = "Open Resources";
+            /* Need to load resources into a control. */
         }
     }
 }
