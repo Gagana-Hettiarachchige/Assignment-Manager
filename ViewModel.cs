@@ -17,7 +17,18 @@ using System.Threading.Tasks;
 
 namespace AssignmentManager.CodeFiles
 {
-    internal class ViewModel
+    internal static class ViewModel
     {
+        /* The assignment currently selected. */
+        private static Assignment selectedAssignment = new Assignment();
+
+        /* Properties. */
+
+        public static Assignment SelectedAssignment 
+        {
+            get { return selectedAssignment; } 
+            set { selectedAssignment = value; } 
+        }
+
     }
 }
