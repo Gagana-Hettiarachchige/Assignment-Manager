@@ -188,16 +188,6 @@
             >
             Local Resources:
         </Label>
-        <ComboBox Name="LocalResourcesComboBox"
-            Grid.Row="1"
-            
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center" 
-            Width="100"
-            
-            Margin="470,0,0,0"
-            >
-        </ComboBox>
         <Button Name="LocalResourcesButton"
             Grid.Row="1"
             
@@ -209,51 +199,7 @@
             Margin="472,0,0,0" 
             Click="LocalResourcesButton_Click"
             >
-            
-        </Button>
-        <Button Name="LocalResourcesAddButton"
-            Grid.Row="1"
-            
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top" 
-          
-            Width="70"
-            Height="20"
-            
-            Margin="570,8,0,0"
-            
-            Click="LocalResourcesAddButton_Click"
-            >
-            Add File
-        </Button>
-        <Button Name="LocalResourcesAddFolderButton"
-            Grid.Row="1"
-            
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top" 
-          
-            Width="70"
-            Height="20"
-            
-            Margin="570,28,0,0" Click="LocalResourcesAddFolderButton_Click"
-            
-            >
-            Add Folder
-        </Button>
-        <Button Name="LocalResourcesRemoveButton"
-            Grid.Row="1"
-            
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top" 
-          
-            Width="70"
-            Height="20"
-            
-            Margin="570,48,0,0" 
-            
-            Click="LocalResourcesRemoveButton_Click"
-            >
-            Remove
+
         </Button>
 
         <!-- Online resources input section. -->
@@ -261,19 +207,33 @@
             Grid.Row="1"
             
             HorizontalAlignment="Left"
-            VerticalAlignment="Top" 
-            Margin="651,10,0,0"
+            VerticalAlignment="Top"
+            
+            Margin="568,8,0,0"
             >
             Online Resources:
         </Label>
+        <Button Name="OnlineResourcesButton"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Width="95"
+            Height="20"
+            
+            Margin="573,0,0,0" 
+            Click="OnlineResourcesButton_Click"
+            >
+
+        </Button>
         <TextBox Name="OnlineResourcesTextBox"
             Grid.Row="1"
             
             HorizontalAlignment="Left"
             VerticalAlignment="Center" 
-            Margin="655,0,0,0"
+            Margin="689,0,0,0"
                  
-            Width="100"
+            Width="105"
             >
 
         </TextBox>
