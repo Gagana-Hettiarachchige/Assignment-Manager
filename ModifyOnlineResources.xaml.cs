@@ -33,5 +33,15 @@ namespace AssignmentManager.CodeFiles
         {
             InitializeComponent();
         }
+
+        private void OnlineResourceAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnlineResourceRemove_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
