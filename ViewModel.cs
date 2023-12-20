@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,12 @@ namespace AssignmentManager.CodeFiles
         /* The assignment currently selected. */
         private static Assignment selectedAssignment = new Assignment();
 
+        /* The list of local resources of the currentlly selected assignment. */
+        private static ObservableCollection<string> selectedLocalResources = new ObservableCollection<string>();
+
+        /* The list of online resources of the currentlly selected assignment. */
+        private static ObservableCollection<string> selectedOnlineResources = new ObservableCollection<string>();
+
         /* Properties. */
 
         public static Assignment SelectedAssignment 
@@ -30,5 +37,16 @@ namespace AssignmentManager.CodeFiles
             set { selectedAssignment = value; } 
         }
 
+        public static ObservableCollection<string> SelectedLocalResources
+        { 
+            get { return selectedLocalResources; }
+            set { selectedLocalResources = value; }
+        }
+
+        public static ObservableCollection<string> SelectedOnlineResources
+        {
+            get { return selectedOnlineResources; }
+            set { selectedOnlineResources = value; }
+        }
     }
 }
