@@ -32,6 +32,23 @@ namespace AssignmentManager.CodeFiles
         public ModifyLocalResources()
         {
             InitializeComponent();
+
+
+        }
+
+        private void AddFileOption_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddFolderOption_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RemoveOption_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
