@@ -27,6 +27,8 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using AssignmentManager.CodeFiles;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
+using System.Windows.Threading;
 
 namespace AssignmentManager
 {
@@ -48,6 +50,7 @@ namespace AssignmentManager
         ObservableCollection<Assignment> loadedAssignments = new ObservableCollection<Assignment>();
         int assignmentNumber = 0;   // Testing substitution for assignment number.
 
+        double lastValidWeight = 10.01;
 
 
         /* Constructors. */
@@ -72,6 +75,8 @@ namespace AssignmentManager
             StatusComboBox.Items.Add("In Progress");
             StatusComboBox.Items.Add("Complete");
             StatusComboBox.SelectedIndex = 0;
+            
+            
         }
 
 
@@ -324,22 +329,45 @@ namespace AssignmentManager
 
 
             /* Creating new assignment. */
-            Assignment new_assignment = new Assignment()
+            //Assignment new_assignment = new Assignment()
+            //{
+            //    AssignmentNumber = assignmentNumber,
+            //    ClassName = ClassTextBox.Text,
+            //    AssignmentName = AssignmentTextBox.Text,
+            //    AssignmentWeight = double.Parse(WeightTextBox.Text),
+            //    DueDate = DateTime.Parse(DueDateTextBox.Content.ToString()),
+            //    AssignmentStatus = StatusComboBox.Text,
+            //    LocalResources = local_items,
+            //    OnlineResources = online_items,
+            //    GitFolder = SelectedGitFolderComboBox.Text
+            //};
+
+            //loadedAssignments.Add(new_assignment); //Temporary until database used.
+
+            /* Updating the selected assignment before inserting. */
+            try
             {
-                AssignmentNumber = assignmentNumber,
-                ClassName = ClassTextBox.Text,
-                AssignmentName = AssignmentTextBox.Text,
-                AssignmentWeight = double.Parse(WeightTextBox.Text),
-                DueDate = DateTime.Parse(DueDateTextBox.Text),
-                AssignmentStatus = StatusComboBox.Text,
-                LocalResources = local_items,
-                OnlineResources = online_items,
-                GitFolder = SelectedGitFolderComboBox.Text
-            };
+                ViewModel.SelectedAssignment.AssignmentNumber = assignmentNumber; //Temporary until database used.
+                ViewModel.SelectedAssignment.ClassName = ClassTextBox.Text;
+                ViewModel.SelectedAssignment.AssignmentName = AssignmentTextBox.Text;
+                ViewModel.SelectedAssignment.AssignmentWeight = double.Parse(WeightTextBox.Text);
+                ViewModel.SelectedAssignment.DueDate = DateTime.Parse(DueDateButton.Content.ToString());
+                ViewModel.SelectedAssignment.AssignmentStatus = StatusComboBox.Text;
+                ViewModel.SelectedAssignment.LocalResources = local_items;
+                ViewModel.SelectedAssignment.OnlineResources = online_items;
+                ViewModel.SelectedAssignment.GitFolder = SelectedGitFolderComboBox.Text;
 
-            loadedAssignments.Add(new_assignment);
+                loadedAssignments.Add(ViewModel.SelectedAssignment); //Temporary until database used.
 
-            TableGrid.ItemsSource = loadedAssignments;
+
+                TableGrid.ItemsSource = loadedAssignments;
+            }
+            
+            catch
+            {
+                MessageBox.Show(this, "Weight cannot be blank.", "Weight Input Error", 
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             
         }
 
@@ -430,6 +458,36 @@ namespace AssignmentManager
                 Cursor = Cursors.Arrow;
             }
             
+        }
+
+        private void DueDateButton_Click(object sender, RoutedEventArgs e)
+        {
+            DueDatePicker due_date_picker = new DueDatePicker();
+
+            due_date_picker.ShowDialog();
+
+            /* Getting the updated date for the main window UI through view model. */
+            //ViewModel.SelectedAssignment.DueDate = DateTime.Parse(DueDateButton.Content.ToString());
+            DueDateButton.Content = ViewModel.SelectedAssignment.DueDate.ToString("yyyy-MM-dd hh:mm:ss tt");
+        }
+
+        private void WeightTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                /* Checking if weight is a double. */
+                lastValidWeight = double.Parse(WeightTextBox.Text);
+            }
+
+            catch
+            {
+                if (WeightTextBox.Text != "")
+                {
+                    WeightTextBox.Text = lastValidWeight.ToString();
+                    MessageBox.Show(this, "Only numbers and decimals are allowed in weight.",
+                                        "Weight Input Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
         }
     }
 }
