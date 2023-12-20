@@ -27,7 +27,7 @@
             <!-- Header row. -->
             <RowDefinition Height="50"/>
 
-            <!-- Insert/Edit Row. -->
+            <!-- Modify Row. -->
             <RowDefinition Height="80"/>
 
             <!-- Table results Row. -->
@@ -63,7 +63,7 @@
 
 
 
-        <!-- Insert/Edit Row. -->
+        <!-- Modify Row. -->
         <!-- Class name input section. -->
         <Label
             Grid.Row="1"
@@ -83,7 +83,7 @@
             
             Width="50"
             >
-            ABC
+            GGH
         </TextBox>
 
         <!-- Assignment name input section. -->
@@ -105,7 +105,7 @@
             
             Width="80"
             >
-            A-01
+            G-01
         </TextBox>
 
         <!-- Weight input section. -->
@@ -129,7 +129,7 @@
                  
             TextChanged="WeightTextBox_TextChanged"
             >
-            10.01
+            20.04
         </TextBox>
 
         <!-- Assignment name input section. -->
@@ -152,7 +152,7 @@
             
             Click="DueDateButton_Click"
             >
-            2023-12-16 11:00:00 PM
+            2023-12-16 12:00:00 AM
         </Button>
 
         <!-- Assignment status input section. -->
@@ -173,6 +173,8 @@
             Width="100"
             
             Margin="365,0,0,0"
+                  
+            SelectionChanged="StatusComboBox_SelectionChanged"
             >
         </ComboBox>
 
@@ -196,6 +198,19 @@
             Margin="470,0,0,0"
             >
         </ComboBox>
+        <Button Name="LocalResourcesButton"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Width="90"
+            Height="20"
+            
+            Margin="472,0,0,0" 
+            Click="LocalResourcesButton_Click"
+            >
+            
+        </Button>
         <Button Name="LocalResourcesAddButton"
             Grid.Row="1"
             
