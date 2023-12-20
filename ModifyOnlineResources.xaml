@@ -39,8 +39,8 @@
             >
             </TextBox>
 
-            <MenuItem Name="OnlineResourceAdd" Header="Add" FontSize="14"/>
-            <MenuItem Name="OnlineResourceRemove" Header="Remove" FontSize="14"/>
+            <MenuItem Name="OnlineResourceAdd" Header="Add" FontSize="14" Click="OnlineResourceAdd_Click"/>
+            <MenuItem Name="OnlineResourceRemove" Header="Remove" FontSize="14" Click="OnlineResourceRemove_Click"/>
         </Menu>
         
         
