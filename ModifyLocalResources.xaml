@@ -20,6 +20,37 @@
         WindowStartupLocation="CenterScreen"
         >
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Action section. -->
+        <Menu Name="LocalResourcesMenu"
+            Grid.Row="0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            >
+            <MenuItem Name="AddFileOption" Header="Add File" FontSize="14" Click="AddFileOption_Click" />
+            <MenuItem Name="AddFolderOption" Header="Add Folder" FontSize="14" Click="AddFolderOption_Click" />
+            <MenuItem Name="RemoveOption" Header="Remove" FontSize="14" Click="RemoveOption_Click" />
+        </Menu>
         
+        
+        
+        
+        <!-- Resource list section. -->
+        <ListBox Name="LocalResourcesList"
+            Grid.Row="1"
+                 
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+                 
+            ScrollViewer.HorizontalScrollBarVisibility="Visible"
+            ScrollViewer.VerticalScrollBarVisibility="Visible"
+            >
+            
+        </ListBox>
+
     </Grid>
 </Window>
