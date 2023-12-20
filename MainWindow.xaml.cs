@@ -82,11 +82,10 @@ namespace AssignmentManager
             AssignmentTextBox.Text = ViewModel.SelectedAssignment.AssignmentName;
             WeightTextBox.Text = ViewModel.SelectedAssignment.AssignmentWeight.ToString();
             DueDateButton.Content = ViewModel.SelectedAssignment.DueDate.ToString("yyyy-MM-dd hh:mm:ss tt");
-            LocalResourcesButton.Content = ViewModel.SelectedLocalResources.Count; // Need to do same for online resources.
+            LocalResourcesButton.Content = ViewModel.SelectedLocalResources.Count;
+            OnlineResourcesButton.Content = ViewModel.SelectedOnlineResources.Count;
 
-            //ViewModel.SelectedLocalResources.Add("wefwef");
-            //ViewModel.SelectedLocalResources.Add("abababa");
-            //ViewModel.SelectedLocalResources.Remove("wefwef");
+
         }
 
 
@@ -160,13 +159,24 @@ namespace AssignmentManager
         {
             ModifyLocalResources modify_local_resources = new ModifyLocalResources();
 
-            /* Prompting user to show */
+            /* Opening modify local resources menu. */
             modify_local_resources.ShowDialog();
 
             /* Updating UI with new count of items if changed. */
             LocalResourcesButton.Content = ViewModel.SelectedLocalResources.Count;
         }
 
+
+        private void OnlineResourcesButton_Click(object sender, RoutedEventArgs e)
+        {
+            ModifyOnlineResources modify_online_resources = new ModifyOnlineResources();
+
+            /* Opening modify online resources menu. */
+            modify_online_resources.ShowDialog();
+
+            /* Updating UI with new count of items if changed. */
+            OnlineResourcesButton.Content = ViewModel.SelectedOnlineResources.Count;
+        }
 
         /* 
         * METHOD        : OnlineResourcesAddButton_Click
