@@ -14,9 +14,179 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AssignmentManager.CodeFiles"
         mc:Ignorable="d"
-        Title="DueDatePicker" Height="450" Width="800"
+        Title="Pick Due Date" Height="400" Width="300"
         WindowStartupLocation="CenterScreen">
     <Grid>
+        <!-- Calender to pick due day. -->
+        <Calendar Name="DueDayCalender"
+            
+            SelectedDatesChanged="Calendar_SelectedDatesChanged"
+            >
+        </Calendar>
+
+
+
+        <!-- Time input section. -->
+
+        <!-- Hour input section. -->
+        <Button Name="HourIncrementButton"
+            
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="-100, 60, 0, 0"
+            
+            Width="30"
+            Height="30"
+               
+            FontSize="30" 
+            
+            Click="HourIncrementButton_Click"
+            >
+            ^            
+        </Button>
+        <TextBlock Name="HourValue"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+                   
+            Margin="-100, 120, 0, 0" 
+                 
+            Text="11" 
+            FontSize="30" RenderTransformOrigin="0.012,0.502"
+             
+            >
+        </TextBlock>
+        <Button Name="HourDecrementButton"
+            
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="-100, 180, 0, 0"
+            
+            Width="30"
+            Height="30"
+               
+            FontSize="20" 
+            Click="HourDecrementButton_Click"
+            >
+            V
+        </Button>
+
+
+
+        <Label 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center"
+            
+            Margin="-50, 120,0,0" 
+            
+            Content=":"
+            FontSize="30"
+            />
+
+
+
+        <!-- Minute input section. -->
+        <Button Name="MinuteIncrementButton"
+            
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="0, 60, 0, 0"
+            
+            Width="30"
+            Height="30"
+               
+            FontSize="30" 
+            
+            Click="MinuteIncrementButton_Click"
+            >
+            ^
+        </Button>
+        <TextBlock Name="MinuteValue"
+                   
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+                   
+            Margin="0, 120, 0, 0" 
+                 
+            Text="00" 
+            FontSize="30"
+             
+            />
+        <Button Name="MinuteDecrementButton"
+            
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="0, 180, 0, 0"
+            
+            Width="30"
+            Height="30"
+               
+            FontSize="20" 
+            Click="MinuteDecrementButton_Click"
+            >
+            V
+        </Button>
+
+        
+        <!-- AM/PM input section. -->
+        <Button Name="AmPmValueUpButton"
+            
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="100, 60, 0, 0"
+            
+            Width="30"
+            Height="30"
+               
+            FontSize="30" 
+            
+            Click="AmPmValueButton_Click"
+            >
+            ^
+        </Button>
+        <TextBlock x:Name="AmPmValue"
+                   
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+                   
+            Margin="100, 120, 0, 0" 
+                 
+            Text="PM" 
+            FontSize="30"
+             
+            />
+        <Button Name="AmPmValueDownButton"
+            
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="100, 180, 0, 0"
+            
+            Width="30"
+            Height="30"
+               
+            FontSize="20" 
+            Click="AmPmValueButton_Click"
+            >
+            V
+        </Button>
+
+
+        <!-- Save date section. -->
+        <Button Name="SaveDueDateButton"
+            
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="0, 300, 0, 0"
+                
+            
+            Width="100"
+            Height="40"
+                
+            FontSize="24"
+                
+            Click="SaveDueDateButton_Click"
+            >
+            Save
+        </Button>
         
     </Grid>
 </Window>
