@@ -8,8 +8,10 @@
 *	the use to modify their local resources.
 */
 
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +22,15 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.WindowsAPICodePack.Dialogs;
+using AssignmentManager.CodeFiles;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Globalization;
+using System.Windows.Threading;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace AssignmentManager.CodeFiles
 {
@@ -33,21 +43,72 @@ namespace AssignmentManager.CodeFiles
         {
             InitializeComponent();
 
-
+            foreach (string resource in ViewModel.SelectedLocalResources)
+            {
+                LocalResourcesList.Items.Add(resource);
+            }
         }
 
         private void AddFileOption_Click(object sender, RoutedEventArgs e)
         {
+            /* Setting up dialog for adding files to be able to open. */
+            OpenFileDialog files_to_add = new OpenFileDialog();
+            files_to_add.Multiselect = true;
+            files_to_add.Filter = "Solutions (*.sln)|*.sln|" +
+                                  "HTML (*.html)|*.html|" +
+                                  "HTM (*.htm)|*.htm|" +
+                                  "PHP (*.php)|*.php|" +
+                                  "ASP (*.asp)|*.asp|" +
+                                  "All files |*.*";
 
+            /* Asking user to pick resources. */
+            Nullable<bool> choice = files_to_add.ShowDialog();
+
+            if (choice == true)
+            {
+                int count = 0;
+
+                /* Adding resources to the lists. */
+                while (count < files_to_add.FileNames.Length)
+                {
+                    LocalResourcesList.Items.Add(files_to_add.FileNames[count]);
+                    ViewModel.SelectedLocalResources.Add(files_to_add.FileNames[count]);
+                    ++count;
+                }
+            }
         }
 
         private void AddFolderOption_Click(object sender, RoutedEventArgs e)
         {
+            /* Setting up dialog for selecting a folder. */
+            CommonOpenFileDialog resource_folder = new CommonOpenFileDialog();
+            resource_folder.IsFolderPicker = true;
 
+            /* Asking user for folder. */
+            if (resource_folder.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                /* Adding folder to the lists. */
+                LocalResourcesList.Items.Add(resource_folder.FileName);
+                ViewModel.SelectedLocalResources.Add(resource_folder.FileName);
+            }
         }
 
         private void RemoveOption_Click(object sender, RoutedEventArgs e)
         {
+            /* Removing selected resource from the lists. */
+            if (LocalResourcesList.SelectedItem != null)
+            {
+                /* Removing item from current list. */
+                LocalResourcesList.Items.Remove(LocalResourcesList.SelectedItem);
+
+                /* Clearing and updating ViewModel list. */
+                ViewModel.SelectedLocalResources.Clear();
+                foreach (string resource in LocalResourcesList.Items)
+                {
+                    ViewModel.SelectedLocalResources.Add(resource);
+                }
+            }
+            
 
         }
     }
