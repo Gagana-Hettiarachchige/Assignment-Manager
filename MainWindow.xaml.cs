@@ -220,17 +220,27 @@ namespace AssignmentManager
             
             /* Getting each resource as a string. */
             string[] resources = text_block.Text.Split('\n');
+            List<string> list_resources = new List<string>();
 
             int count = 0;
 
             /* Iterating through each item and opening them. */
             while (resources[count] != "") 
             {
-                Process.Start('"' + resources[count] + '"');
+                //Process.Start('"' + resources[count] + '"');
+                list_resources.Add(resources[count]);
                 ++count;
             }
 
 
+            if (count >= 1)
+            {
+                /* Creating new resource menu with current resources. */
+                ResourceOpenMenu resource_menu = new ResourceOpenMenu(list_resources);
+                resource_menu.ShowDialog();
+            }
+
+            
         }
 
 
