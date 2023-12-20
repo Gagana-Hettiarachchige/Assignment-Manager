@@ -20,11 +20,11 @@ namespace AssignmentManager.CodeFiles
 {
     internal class Assignment
     {
-        /* Assignment table column values. */
+        /* Assignment table column default values. */
         private int assignmentNumber = 0;
-        private string className = "";
-        private string assignmentName = "";
-        private double assignmentWeight = 0.0;
+        private string className = "ABCD";
+        private string assignmentName = "A-01";
+        private double assignmentWeight = 10.01;
         private DateTime dueDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 00, 00);
         private string assignmentStatus = "";
         private string localResources = "";
