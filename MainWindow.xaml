@@ -14,9 +14,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AssignmentManager"
         mc:Ignorable="d"
-        Title="Assignment Manager" Height="450" Width="1200" MinWidth="1200" MinHeight="450">
-
-
+        Title="Assignment Manager" 
+        Height="450" Width="1200" 
+        MinHeight="450" MinWidth="1200"
+        WindowStartupLocation="CenterScreen"
+        >
     <Grid>
 
         <!-- Defining the grid rows. -->
