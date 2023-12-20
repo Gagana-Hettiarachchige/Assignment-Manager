@@ -30,9 +30,6 @@
             <!-- Insert/Edit Row. -->
             <RowDefinition Height="80"/>
 
-            <!-- Selecting Sort Type Row. -->
-            <RowDefinition Height="100"/>
-
             <!-- Table results Row. -->
             <RowDefinition Height="*"/>
 
@@ -129,6 +126,8 @@
             Margin="160, 0, 0, 0"
             
             Width="50"
+                 
+            TextChanged="WeightTextBox_TextChanged"
             >
             10.01
         </TextBox>
@@ -143,25 +142,26 @@
             >
             *Due Date:
         </Label>
-        <TextBox Name="DueDateTextBox"
+        <Button Name="DueDateButton"
             Grid.Row="1"
             
             HorizontalAlignment="Left"
             VerticalAlignment="Center" 
             Margin="220, 0, 0, 0"
             
-            Width="115"
+            
+            Click="DueDateButton_Click"
             >
-            2023-12-16 11:00:00
-        </TextBox>
+            2023-12-16 11:00:00 PM
+        </Button>
 
         <!-- Assignment status input section. -->
         <Label
             Grid.Row="1"
             
             HorizontalAlignment="Left"
-            VerticalAlignment="Center" 
-            Margin="347, -35, 0, 0"
+            VerticalAlignment="Top" 
+            Margin="358,11,0,0"
             >
             *Status:
         </Label>
@@ -172,7 +172,7 @@
             VerticalAlignment="Center" 
             Width="100"
             
-            Margin="350, 0, 0, 0"
+            Margin="365,0,0,0"
             >
         </ComboBox>
 
@@ -181,8 +181,8 @@
             Grid.Row="1"
             
             HorizontalAlignment="Left"
-            VerticalAlignment="Center" 
-            Margin="460, -35, 0, 0"
+            VerticalAlignment="Top" 
+            Margin="467,8,0,0"
             >
             Local Resources:
         </Label>
@@ -193,7 +193,7 @@
             VerticalAlignment="Center" 
             Width="100"
             
-            Margin="465, 0, 0, 0"
+            Margin="470,0,0,0"
             >
         </ComboBox>
         <Button Name="LocalResourcesAddButton"
@@ -260,7 +260,7 @@
                  
             Width="100"
             >
-            
+
         </TextBox>
         <ComboBox Name="OnlineResourcesComboBox"
             Grid.Row="1"
@@ -351,8 +351,8 @@
             >
             Remove
         </Button>
-        
-        
+
+
         <!-- Button to insert the data into the database. -->
         <Button Name="InsertButton"
             Grid.Row="1"
@@ -367,12 +367,12 @@
             >
             Insert
         </Button>
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
         <!-- Selecting Sort Type Row. -->
 
 
@@ -388,7 +388,7 @@
             
             HorizontalScrollBarVisibility="Visible"
             VerticalScrollBarVisibility="Visible"
-            Grid.Row="3"
+            Grid.Row="2"
                   
             IsReadOnly="True"
                   
@@ -435,7 +435,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-             </DataGrid.Columns>
+            </DataGrid.Columns>
         </DataGrid>
 
 
