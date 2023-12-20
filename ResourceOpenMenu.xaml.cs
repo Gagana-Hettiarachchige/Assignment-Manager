@@ -28,12 +28,19 @@ namespace AssignmentManager.CodeFiles
     /// <summary>
     /// Interaction logic for ResourceOpenMenu.xaml
     /// </summary>
+    
+    /*
+    * NAME	  : ResourceOpenMenu
+    * PURPOSE : The resource open menu allows for the user to
+    *           select which resources passed they want to open.
+    */
     public partial class ResourceOpenMenu : Window
     {
         /* 
         * METHOD        : ResourceMenuOpen
         * DESCRIPTION   :
-        *   Creates new dialog resource opening dialog.
+        *   Constructor that creates a new 
+        *   resource opening dialog.
         * PARAMETERS    :
         *   List<string> resources : the resources to open
         */
