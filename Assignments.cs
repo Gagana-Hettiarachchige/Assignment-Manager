@@ -25,7 +25,7 @@ namespace AssignmentManager.CodeFiles
         private string className = "";
         private string assignmentName = "";
         private double assignmentWeight = 0.0;
-        private DateTime dueDate = DateTime.Now;
+        private DateTime dueDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 00, 00);
         private string assignmentStatus = "";
         private string localResources = "";
         private string onlineResources = "";
