@@ -91,6 +91,9 @@ namespace AssignmentManager.CodeFiles
                 LocalResourcesList.Items.Add(folder_to_add.FileName);
                 ViewModel.SelectedLocalResources.Add(folder_to_add.FileName);
             }
+
+            this.WindowState = WindowState.Maximized;
+            this.WindowState = WindowState.Normal;
         }
 
         private void RemoveOption_Click(object sender, RoutedEventArgs e)
