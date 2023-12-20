@@ -15,8 +15,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AssignmentManager.CodeFiles"
         mc:Ignorable="d"
-        Title="ModifyOnlineResources" Height="450" Width="800">
+        Title="ModifyOnlineResources" 
+        Height="450" Width="800"
+        MinHeight="200" MinWidth="632"
+        WindowStartupLocation="CenterScreen"
+        >
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <!-- Action section. -->
+        <Menu Name="OnlineResourceMenu"
+            Grid.Row="0"
+            
+            >
+            <TextBox Name="OnlineResourceTextBox"        
+                 Width="500"
+                 
+                 FontSize="12"
+            >
+            </TextBox>
+
+            <MenuItem Name="OnlineResourceAdd" Header="Add" FontSize="14"/>
+            <MenuItem Name="OnlineResourceRemove" Header="Remove" FontSize="14"/>
+        </Menu>
+        
+        
+        <!-- Resource list section. -->
+        <ListBox Name="LocalResourcesList"
+            Grid.Row="1"
+                 
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+                 
+            ScrollViewer.HorizontalScrollBarVisibility="Visible"
+            ScrollViewer.VerticalScrollBarVisibility="Visible"
+            >
+
+        </ListBox>
+        
         
     </Grid>
 </Window>
