@@ -74,15 +74,27 @@ namespace AssignmentManager
             StatusComboBox.Items.Add("Incomplete");
             StatusComboBox.Items.Add("In Progress");
             StatusComboBox.Items.Add("Complete");
-            StatusComboBox.SelectedIndex = 0;
+            StatusComboBox.SelectedIndex = 0; /* Initializes selected assignment's status. */
 
-            /* Setting default selected time to now. */
+
+            /* Setting and getting defaults. */
+            ClassTextBox.Text = ViewModel.SelectedAssignment.ClassName;
+            AssignmentTextBox.Text = ViewModel.SelectedAssignment.AssignmentName;
+            WeightTextBox.Text = ViewModel.SelectedAssignment.AssignmentWeight.ToString();
             DueDateButton.Content = ViewModel.SelectedAssignment.DueDate.ToString("yyyy-MM-dd hh:mm:ss tt");
+            LocalResourcesButton.Content = ViewModel.SelectedLocalResources.Count; // Need to do same for online resources.
+
+            //ViewModel.SelectedLocalResources.Add("wefwef");
+            //ViewModel.SelectedLocalResources.Add("abababa");
+            //ViewModel.SelectedLocalResources.Remove("wefwef");
         }
 
 
 
         /* Event handlers. */
+
+
+        /* Header row. */
 
         /* 
         * METHOD        : SchoolButton_Click
@@ -102,7 +114,7 @@ namespace AssignmentManager
         }
 
 
-
+        /* Modify row. */
 
 
         private void WeightTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -129,13 +141,30 @@ namespace AssignmentManager
         {
             DueDatePicker due_date_picker = new DueDatePicker();
 
+            /* Prompting user to pick the due date. */
             due_date_picker.ShowDialog();
 
-            /* Getting the updated date for the main window UI through view model. */
-            //ViewModel.SelectedAssignment.DueDate = DateTime.Parse(DueDateButton.Content.ToString());
-
-            /* Updating the UI with new date. */
+            /* Updating the UI with new date if changed. */
             DueDateButton.Content = ViewModel.SelectedAssignment.DueDate.ToString("yyyy-MM-dd hh:mm:ss tt");
+        }
+
+
+        private void StatusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            /* Updating the selected assignment's assignment status. */
+            ViewModel.SelectedAssignment.AssignmentStatus = StatusComboBox.SelectedItem.ToString();
+        }
+
+
+        private void LocalResourcesButton_Click(object sender, RoutedEventArgs e)
+        {
+            ModifyLocalResources modify_local_resources = new ModifyLocalResources();
+
+            /* Prompting user to show */
+            modify_local_resources.ShowDialog();
+
+            /* Updating UI with new count of items if changed. */
+            LocalResourcesButton.Content = ViewModel.SelectedLocalResources.Count;
         }
 
 
@@ -346,32 +375,25 @@ namespace AssignmentManager
             string online_items = "";
 
 
-            int count = 0;
 
-            /* Getting all local resources. */
-            while (count < LocalResourcesComboBox.Items.Count) 
+            /* Looping through the local resources list. */
+            foreach(string resource in ViewModel.SelectedLocalResources)
             {
                 /* Adding all local resources to single string. */
-                local_items += LocalResourcesComboBox.Items[count];
-                local_items += '\n';
-                ++count;
+                local_items += resource;
+                local_items+= '\n';
             }
 
-            count = 0;
-
-            /* Getting all online resources. */
-            while (count < OnlineResourcesComboBox.Items.Count)
+            /* Looping through the online resources list. */
+            foreach (string resource in ViewModel.SelectedOnlineResources)
             {
                 /* Adding all online resources to single string. */
-                online_items += OnlineResourcesComboBox.Items[count];
+                online_items += resource;
                 online_items += '\n';
-                ++count;
             }
 
 
-            
 
-            /* Updating the selected assignment before inserting. */
             try
             {
                 // Need to use viewmodel when items are changed changed so that
