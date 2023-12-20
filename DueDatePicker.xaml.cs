@@ -37,7 +37,12 @@ namespace AssignmentManager.CodeFiles
         public DueDatePicker()
         {
             InitializeComponent();
-            DueDayCalender.SelectedDate = DateTime.Now;
+
+            /* Defaulting to selected date. */
+            DueDayCalender.SelectedDate = ViewModel.SelectedAssignment.DueDate;
+            HourValue.Text = ViewModel.SelectedAssignment.DueDate.ToString("hh");
+            MinuteValue.Text = ViewModel.SelectedAssignment.DueDate.ToString("mm");
+            AmPmValue.Text = ViewModel.SelectedAssignment.DueDate.ToString("tt");
         }
 
         
