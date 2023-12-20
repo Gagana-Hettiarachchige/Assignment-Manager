@@ -161,7 +161,7 @@
             
             HorizontalAlignment="Left"
             VerticalAlignment="Top" 
-            Margin="358,11,0,0"
+            Margin="358,8,0,0"
             >
             *Status:
         </Label>
