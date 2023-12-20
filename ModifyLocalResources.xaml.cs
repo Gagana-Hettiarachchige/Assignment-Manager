@@ -81,15 +81,15 @@ namespace AssignmentManager.CodeFiles
         private void AddFolderOption_Click(object sender, RoutedEventArgs e)
         {
             /* Setting up dialog for selecting a folder. */
-            CommonOpenFileDialog resource_folder = new CommonOpenFileDialog();
-            resource_folder.IsFolderPicker = true;
+            CommonOpenFileDialog folder_to_add = new CommonOpenFileDialog();
+            folder_to_add.IsFolderPicker = true;
 
             /* Asking user for folder. */
-            if (resource_folder.ShowDialog() == CommonFileDialogResult.Ok)
+            if (folder_to_add.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 /* Adding folder to the lists. */
-                LocalResourcesList.Items.Add(resource_folder.FileName);
-                ViewModel.SelectedLocalResources.Add(resource_folder.FileName);
+                LocalResourcesList.Items.Add(folder_to_add.FileName);
+                ViewModel.SelectedLocalResources.Add(folder_to_add.FileName);
             }
         }
 
