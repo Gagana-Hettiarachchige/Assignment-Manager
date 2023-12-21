@@ -55,10 +55,19 @@ namespace AssignmentManager.CodeFiles
             OpenFileDialog files_to_add = new OpenFileDialog();
             files_to_add.Multiselect = true;
             files_to_add.Filter = "Solutions (*.sln)|*.sln|" +
-                                  "HTML (*.html)|*.html|" +
-                                  "HTM (*.htm)|*.htm|" +
-                                  "PHP (*.php)|*.php|" +
-                                  "ASP (*.asp)|*.asp|" +
+                                  "C Files (*.c)|*.c|" +
+                                  "C++ Files (*.cpp)|*.cpp|" +
+                                  "C# Files (*.cs)|*.cs|" +
+                                  "XAML Files (*.xaml)|*.xaml|" +
+                                  "Config Files (*.confog)|*.config|" +
+                                  "HTML Files (*.html)|*.html|" +
+                                  "HTM Files (*.htm)|*.htm|" +
+                                  "PHP Files (*.php)|*.php|" +
+                                  "ASP Files (*.asp)|*.asp|" +
+                                  "ASPX Files (*.aspx)|*.aspx|" +
+                                  "CSS Files (*.css)|*.css|" +
+                                  "SQL Files (*.sql)|*.sql|" +
+                                  "Text Files (*.txt)|*.txt|" +
                                   "All files |*.*";
 
             /* Asking user to pick resources. */
