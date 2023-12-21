@@ -88,6 +88,9 @@ namespace AssignmentManager
             OnlineResourcesButton.Content = ViewModel.SelectedOnlineResources.Count;
 
 
+            /* Assigning data source to table. */
+            TableGrid.ItemsSource = loadedAssignments;
+
 
             /* Setting time. */
             ClockTextBlock.Text = DateTime.Now.ToString("F");
@@ -270,7 +273,7 @@ namespace AssignmentManager
 
                 loadedAssignments.Add(new_assignment); //Temporary until database used.
 
-                TableGrid.ItemsSource = loadedAssignments;
+                
             }
             
             catch
