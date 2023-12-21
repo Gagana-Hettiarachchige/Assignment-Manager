@@ -32,16 +32,42 @@ namespace AssignmentManager.CodeFiles
         public ModifyOnlineResources()
         {
             InitializeComponent();
+
+            /* Adding the selected assignment's resources to the list. */
+            foreach (string resource in ViewModel.SelectedOnlineResources)
+            {
+                OnlineResourcesList.Items.Add(resource);
+            }
         }
 
         private void OnlineResourceAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            /* Checking if resource to add is not empty. */
+            if (OnlineResourceTextBox.Text != "")
+            {
+                /* Adding entered resource to the lists. */
+                OnlineResourcesList.Items.Add(OnlineResourceTextBox.Text);
+                ViewModel.SelectedOnlineResources.Add(OnlineResourceTextBox.Text);
+            }
         }
 
         private void OnlineResourceRemove_Click(object sender, RoutedEventArgs e)
         {
 
+            /* Checking if resource to remove is not empty. */
+            if (OnlineResourcesList.SelectedItem != null)
+            {
+                /* Removing resource from UI. */
+                OnlineResourcesList.Items.Remove(OnlineResourcesList.SelectedItem);
+
+                /* Clearing and adding the remaining resources to the view model's list. */
+                ViewModel.SelectedOnlineResources.Clear();
+                foreach (string resource in OnlineResourcesList.Items)
+                {
+                    OnlineResourcesList.Items.Add(resource);
+                }
+            }
+            
         }
     }
 }
