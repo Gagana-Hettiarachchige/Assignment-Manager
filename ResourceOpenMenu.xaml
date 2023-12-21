@@ -5,7 +5,7 @@
 - FIRST VERSION : 2023-12-19
 - DESCRIPTION   :
 -	This file holds the markup for the menu
--    to open resources.
+-   to open resources.
 -->
 
 <Window x:Class="AssignmentManager.CodeFiles.ResourceOpenMenu"
@@ -15,7 +15,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AssignmentManager.CodeFiles"
         mc:Ignorable="d"
-        Title="ResourceOpenMenu" 
+        Title="Open Resources" 
         Height="450" Width="800"
         WindowStartupLocation="CenterScreen"
         >
@@ -33,7 +33,7 @@
             >
             <MenuItem Name="OpenAllOption" Header="Open All" FontSize="14" Click="OpenAllOption_Click"/>
             <MenuItem Name="OpenOption" Header="Open" FontSize="14" Click="OpenOption_Click"/>
-            <MenuItem Name="OpenCmdOption" Header="Open With CMD" FontSize="14" Click="OpenCmdOption_Click"/>
+            <MenuItem Name="OpenCmdOption" Header="Open CMD" FontSize="14" Click="OpenCmdOption_Click"/>
         </Menu>
 
 
