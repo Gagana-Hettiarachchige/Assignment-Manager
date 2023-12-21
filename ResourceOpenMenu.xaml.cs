@@ -50,5 +50,20 @@ namespace AssignmentManager.CodeFiles
             Title = "Open Resources";
             /* Need to load resources into a control. */
         }
+
+        private void OpenAllOption_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OpenOption_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OpenCmdOption_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
