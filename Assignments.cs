@@ -29,7 +29,7 @@ namespace AssignmentManager.CodeFiles
         private string assignmentStatus = "";
         private string localResources = "";
         private string onlineResources = "";
-        private string gitFolder = "";
+        private string gitFolders = "";
 
         /* Properties for assignment assignment values. */
         public int AssignmentNumber 
@@ -72,10 +72,10 @@ namespace AssignmentManager.CodeFiles
             get { return onlineResources; }
             set { onlineResources = value; }
         }
-        public string GitFolder 
+        public string GitFolders 
         {
-            get { return gitFolder; }
-            set { gitFolder = value; }
+            get { return gitFolders; }
+            set { gitFolders = value; }
         }
 
 
