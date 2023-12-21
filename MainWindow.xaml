@@ -184,7 +184,7 @@
             
             HorizontalAlignment="Left"
             VerticalAlignment="Top" 
-            Margin="467,8,0,0"
+            Margin="471,8,0,0"
             >
             Local Resources:
         </Label>
@@ -193,10 +193,10 @@
             
             HorizontalAlignment="Left"
             VerticalAlignment="Center" 
-            Width="90"
+            Width="88"
             Height="20"
             
-            Margin="472,0,0,0" 
+            Margin="475,0,0,0" 
             Click="LocalResourcesButton_Click"
             >
 
@@ -209,7 +209,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             
-            Margin="568,8,0,0"
+            Margin="571,8,0,0"
             >
             Online Resources:
         </Label>
@@ -221,73 +221,38 @@
             Width="95"
             Height="20"
             
-            Margin="573,0,0,0" 
+            Margin="575,0,0,0" 
             Click="OnlineResourcesButton_Click"
             >
 
         </Button>
-        <TextBox Name="OnlineResourcesTextBox"
-            Grid.Row="1"
-            
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center" 
-            Margin="689,0,0,0"
-                 
-            Width="105"
-            >
 
-        </TextBox>
-        <ComboBox Name="OnlineResourcesComboBox"
-            Grid.Row="1"
-            
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center" 
-            Width="100"
-            
-            Margin="760,0,0,0"
-            >
-        </ComboBox>
-        <Button Name="OnlineResourcesAddButton"
-            Grid.Row="1"
-            
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top" 
-          
-            Width="50"
-            Height="20"
- 
-            Margin="865,16,0,0" 
-                
-            Click="OnlineResourcesAddButton_Click"
-            >
-            Add
-        </Button>
-        <Button Name="OnlineResourcesRemoveButton"
-            Grid.Row="1"
-            
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top" 
-          
-            Width="50"
-            Height="20"
-            
-            Margin="865,38,0,0" 
-                
-            Click="OnlineResourcesRemoveButton_Click" 
-            >
-            Remove
-        </Button>
-
-        <!-- Git folder input section. -->
+        <!-- Git folders input section. -->
         <Label
             Grid.Row="1"
             
             HorizontalAlignment="Left"
             VerticalAlignment="Top" 
-            Margin="931,10,0,0"
+            Margin="675,8,0,0"
             >
-            Git Folder:
+            Git Folders:
         </Label>
+        <Button Name="GitFoldersButton"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" 
+            Width="60"
+            Height="20"
+            
+            Margin="680,0,0,0" Click="GitFolderButton_Click" 
+            
+            >
+
+        </Button>
+
+
+
         <ComboBox Name="SelectedGitFolderComboBox"
             Grid.Row="1"
             
@@ -402,14 +367,19 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
 
-                <!-- Git CMD trigger. -->
-                <DataGridTemplateColumn Header="Git Folder">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button>Open</Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <!-- Git Folders. -->
+                <DataGridTextColumn Header="Git Folders" Binding="{Binding GitFolders}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <!--<EventSetter Event="MouseLeftButtonUp" Handler="Resources_MouseLeftButtonUp"/>-->
+                            <EventSetter Event="MouseEnter" Handler="Resources_MouseEnter"/>
+                            <EventSetter Event="MouseLeave" Handler="Resources_MouseLeave"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+
+
             </DataGrid.Columns>
         </DataGrid>
 
