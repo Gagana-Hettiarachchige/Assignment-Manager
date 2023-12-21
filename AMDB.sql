@@ -24,6 +24,5 @@ CREATE TABLE Assignments
     AssignmentStatus VARCHAR(30) NOT NULL,
     LocalResources VARCHAR(5000) NULL,
     OnlineResources VARCHAR(5000) NULL,
-    GitFolders VARCHAR(5000) NULL,
     PRIMARY KEY (AssignmentNumber)
 );
