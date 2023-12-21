@@ -15,7 +15,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AssignmentManager.CodeFiles"
         mc:Ignorable="d"
-        Title="ModifyOnlineResources" 
+        Title="Modify Online Resources" 
         Height="450" Width="800"
         MinHeight="200" MinWidth="632"
         WindowStartupLocation="CenterScreen"
@@ -45,7 +45,7 @@
         
         
         <!-- Resource list section. -->
-        <ListBox Name="LocalResourcesList"
+        <ListBox Name="OnlineResourcesList"
             Grid.Row="1"
                  
             HorizontalAlignment="Stretch"
