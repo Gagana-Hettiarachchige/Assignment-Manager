@@ -29,6 +29,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Threading;
+using System.Windows.Media.Animation;
 
 namespace AssignmentManager
 {
@@ -51,6 +52,7 @@ namespace AssignmentManager
         int assignmentNumber = 0;   // Testing substitution for assignment number.
 
         double lastValidWeight = 10.01;
+        DispatcherTimer headerClock;
 
 
         /* Constructors. */
@@ -85,6 +87,16 @@ namespace AssignmentManager
             LocalResourcesButton.Content = ViewModel.SelectedLocalResources.Count;
             OnlineResourcesButton.Content = ViewModel.SelectedOnlineResources.Count;
 
+
+            /* Creating clock. */
+            headerClock = new DispatcherTimer();
+
+            /* Making it update every second. */
+            headerClock.Interval = TimeSpan.FromSeconds(0.1);
+            headerClock.Tick += new EventHandler(HeaderClock_Tick);
+            
+            /* Starting clock. */
+            headerClock.Start();
         }
 
 
@@ -93,6 +105,13 @@ namespace AssignmentManager
 
 
         /* Header row. */
+
+        private void HeaderClock_Tick(object sender, EventArgs e)
+        {
+            /* Updating time. */
+            ClockTextBlock.Text = DateTime.Now.ToString("F");
+        }
+
 
         /* 
         * METHOD        : SchoolButton_Click
