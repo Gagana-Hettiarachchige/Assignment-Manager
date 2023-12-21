@@ -84,7 +84,6 @@ namespace AssignmentManager
             DueDateButton.Content = ViewModel.SelectedAssignment.DueDate.ToString("yyyy-MM-dd hh:mm:ss tt");
             LocalResourcesButton.Content = ViewModel.SelectedLocalResources.Count;
             OnlineResourcesButton.Content = ViewModel.SelectedOnlineResources.Count;
-            GitFoldersButton.Content = ViewModel.SelectedGitFolders.Count;
 
         }
 
@@ -179,60 +178,9 @@ namespace AssignmentManager
         }
 
 
-        private void GitFolderButton_Click(object sender, RoutedEventArgs e)
-        {
+        
 
-        }
-
-
-        /* 
-        * METHOD        : GitFolderAddButton_Click
-        * DESCRIPTION   :
-        *   Raised when the add git folder button is clicked and
-        *   creates a dialog to select a single folder and
-        *   adds it to the git folder combo box. 
-        * PARAMETERS    :
-        *   object sender   : the sender
-        *   RouterEventArgs : the routed event arguments
-        * RETURNS       :
-        *   void
-        */
-        private void GitFolderAddButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-            if (SelectedGitFolderComboBox.Items.Count < 1)
-            {
-                CommonOpenFileDialog git_folder = new CommonOpenFileDialog();
-                git_folder.IsFolderPicker = true;
-
-                /* Asking user for folder to run open cmd in. */
-                if (git_folder.ShowDialog() == CommonFileDialogResult.Ok)
-                {
-                    /* Adding folder to the combo box. */
-                    SelectedGitFolderComboBox.Items.Add(git_folder.FileName);
-                    SelectedGitFolderComboBox.SelectedIndex = 0;
-                }
-
-            }
-        }
-
-
-        /* 
-        * METHOD        : GitFolderRemoveButton_Click
-        * DESCRIPTION   :
-        *   Raised when the remove git folder button is clicked and
-        *   removes the selected folder from the git folder combo box.
-        * PARAMETERS    :
-        *   object sender   : the sender
-        *   RouterEventArgs : the routed event arguments
-        * RETURNS       :
-        *   void
-        */
-        private void GitFolderRemoveButton_Click(object sender, RoutedEventArgs e)
-        {
-            /* Removing the folder. */
-            SelectedGitFolderComboBox.Items.Clear();
-        }
+        /* Modify row. */
 
 
         /* 
@@ -258,9 +206,6 @@ namespace AssignmentManager
             /* Holds all online resource paths. */
             string online_items = "";
 
-            /* Holds all git folders paths. */
-            string git_folders = "";
-
 
             /* Looping through the local resources list. */
             foreach(string resource in ViewModel.SelectedLocalResources)
@@ -278,14 +223,6 @@ namespace AssignmentManager
                 online_items += '\n';
             }
 
-            /* Looping through the git folders in list. */
-            foreach (string folder in ViewModel.SelectedGitFolders)
-            {
-                /* Adding all git folders to single string. */
-                git_folders += folder;
-                git_folders += '\n';
-            }
-
 
             try
             {
@@ -296,6 +233,8 @@ namespace AssignmentManager
                 /* Creating new assignment. */ 
                 Assignment new_assignment = new Assignment()
                 {
+
+                    //Need to add validation to stop blank values for mandatory.
                     AssignmentNumber = assignmentNumber,
                     ClassName = ClassTextBox.Text,
                     AssignmentName = AssignmentTextBox.Text,
@@ -304,7 +243,6 @@ namespace AssignmentManager
                     AssignmentStatus = StatusComboBox.Text,
                     LocalResources = local_items,
                     OnlineResources = online_items,
-                    GitFolders = git_folders
                 };
 
                 loadedAssignments.Add(new_assignment); //Temporary until database used.
@@ -319,6 +257,13 @@ namespace AssignmentManager
             }
             
         }
+
+
+
+
+
+        /* Table row. */
+
 
 
         /* 
@@ -408,7 +353,5 @@ namespace AssignmentManager
             }
             
         }
-
-        
     }
 }
