@@ -20,6 +20,36 @@
         WindowStartupLocation="CenterScreen"
         >
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Action section. -->
+        <Menu Name="OpenResourcesMenu"
+            Grid.Row="0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            >
+            <MenuItem Name="OpenAllOption" Header="Open All" FontSize="14" Click="OpenAllOption_Click"/>
+            <MenuItem Name="OpenOption" Header="Open" FontSize="14" Click="OpenOption_Click"/>
+            <MenuItem Name="OpenCmdOption" Header="Open With CMD" FontSize="14" Click="OpenCmdOption_Click"/>
+        </Menu>
+
+
+
+
+        <!-- Resource list section. -->
+        <ListBox Name="ResourcesList"
+            Grid.Row="1"
+                 
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+                 
+            ScrollViewer.HorizontalScrollBarVisibility="Visible"
+            ScrollViewer.VerticalScrollBarVisibility="Visible"
+            >
+
+        </ListBox>
     </Grid>
 </Window>
