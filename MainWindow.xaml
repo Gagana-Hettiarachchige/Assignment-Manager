@@ -16,7 +16,7 @@
         mc:Ignorable="d"
         Title="Assignment Manager" 
         Height="450" Width="1200" 
-        MinHeight="450" MinWidth="1200"
+        MinHeight="450" MinWidth="800"
         WindowStartupLocation="CenterScreen"
         >
     <Grid>
@@ -44,15 +44,31 @@
 
 
         <!-- Header row. -->
+
+        <TextBlock Name="ClockTextBlock"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            
+            Margin="10, 0, 0, 0"
+            
+            Grid.Row="0"
+            
+            FontSize="30"
+            >
+            December 16th, 2023 12:00:00 AM
+        </TextBlock>
+        
+        
         <!-- School Link button. -->
         <Button Name="SchoolButton"
             Grid.Row="0"
             Width="100"
             Height="30"
             
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Right"
             VerticalAlignment="Center" 
-            Margin="10, 0, 0, 0" 
+            Margin="0, 0, 10, 0" 
             
             Click="SchoolButton_Click"
                 
@@ -61,9 +77,16 @@
             eConestoga
         </Button>
 
+        
+        
+        
 
 
+        
+        
+        
         <!-- Modify Row. -->
+        
         <!-- Class name input section. -->
         <Label
             Grid.Row="1"
@@ -232,20 +255,26 @@
         <Button Name="InsertButton"
             Grid.Row="1"
                 
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Right"
             VerticalAlignment="Center" 
           
             Width="50"
             Height="20"
  
-            Margin="706,0,0,0" Click="InsertButton_Click"
+            Margin="0, 0, 25, 0" 
+            Click="InsertButton_Click"
             >
             Insert
         </Button>
 
 
 
+        
+        
+        
+        
         <!-- Table results Row. -->
+        
         <!-- Table to hold results. -->
         <DataGrid Name="TableGrid"
             HorizontalAlignment="Stretch"
@@ -268,7 +297,24 @@
                 <DataGridTextColumn Header="Assignment" Binding="{Binding AssignmentName}" />
                 <DataGridTextColumn Header="Weight (%)" Binding="{Binding AssignmentWeight}" />
                 <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate}" />
-                <DataGridTextColumn Header="Status" Binding="{Binding AssignmentStatus}" />
+                <DataGridTextColumn Header="Status" Binding="{Binding AssignmentStatus}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="Incomplete">
+                                    <Setter Property="Background" Value="Tomato"/>
+                                </Trigger>
+                                <Trigger Property="Text" Value="In Progress">
+                                    <Setter Property="Background" Value="Yellow"/>
+                                </Trigger>
+                                <Trigger Property="Text" Value="Complete">
+                                    <Setter Property="Background" Value="LightGreen"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                
 
                 <!-- Optional columns.-->
                 <!-- Local Resources list. -->
