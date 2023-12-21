@@ -84,7 +84,7 @@ namespace AssignmentManager
             DueDateButton.Content = ViewModel.SelectedAssignment.DueDate.ToString("yyyy-MM-dd hh:mm:ss tt");
             LocalResourcesButton.Content = ViewModel.SelectedLocalResources.Count;
             OnlineResourcesButton.Content = ViewModel.SelectedOnlineResources.Count;
-
+            GitFoldersButton.Content = ViewModel.SelectedGitFolders.Count;
 
         }
 
@@ -178,45 +178,10 @@ namespace AssignmentManager
             OnlineResourcesButton.Content = ViewModel.SelectedOnlineResources.Count;
         }
 
-        /* 
-        * METHOD        : OnlineResourcesAddButton_Click
-        * DESCRIPTION   :
-        *   Raised when the online resources add button is clicked and 
-        *   adds the online resource entered in the online resource texbox to
-        *   the online resouces combo box.
-        * PARAMETERS    :
-        *   object sender   : the sender
-        *   RouterEventArgs : the routed event arguments
-        * RETURNS       :
-        *   void
-        */
-        private void OnlineResourcesAddButton_Click(object sender, RoutedEventArgs e)
-        {
-            /* Adding selected resource to the combo box. */
-            if (OnlineResourcesTextBox.Text != "")
-            {
-                OnlineResourcesComboBox.Items.Add(OnlineResourcesTextBox.Text);
-                OnlineResourcesComboBox.SelectedIndex = OnlineResourcesComboBox.Items.IndexOf(OnlineResourcesTextBox.Text);
-            }
-            
-        }
 
-
-        /* 
-        * METHOD        : OnlineResourcesRemoveButton_Click
-        * DESCRIPTION   :
-        *   Raised when the remove online resources button is clicked and
-        *   removes the select online resource from the combo box.
-        * PARAMETERS    :
-        *   object sender   : the sender
-        *   RouterEventArgs : the routed event arguments
-        * RETURNS       :
-        *   void
-        */
-        private void OnlineResourcesRemoveButton_Click(object sender, RoutedEventArgs e)
+        private void GitFolderButton_Click(object sender, RoutedEventArgs e)
         {
-            /* Removing selected resource from the combo box. */
-            OnlineResourcesComboBox.Items.Remove(OnlineResourcesComboBox.SelectedItem);
+
         }
 
 
@@ -293,6 +258,8 @@ namespace AssignmentManager
             /* Holds all online resource paths. */
             string online_items = "";
 
+            /* Holds all git folders paths. */
+            string git_folders = "";
 
 
             /* Looping through the local resources list. */
@@ -311,6 +278,13 @@ namespace AssignmentManager
                 online_items += '\n';
             }
 
+            /* Looping through the git folders in list. */
+            foreach (string folder in ViewModel.SelectedGitFolders)
+            {
+                /* Adding all git folders to single string. */
+                git_folders += folder;
+                git_folders += '\n';
+            }
 
 
             try
@@ -330,7 +304,7 @@ namespace AssignmentManager
                     AssignmentStatus = StatusComboBox.Text,
                     LocalResources = local_items,
                     OnlineResources = online_items,
-                    GitFolder = SelectedGitFolderComboBox.Text
+                    GitFolders = git_folders
                 };
 
                 loadedAssignments.Add(new_assignment); //Temporary until database used.
