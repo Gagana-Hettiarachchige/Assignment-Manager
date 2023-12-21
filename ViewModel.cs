@@ -29,6 +29,11 @@ namespace AssignmentManager.CodeFiles
         /* The list of online resources of the currentlly selected assignment. */
         private static ObservableCollection<string> selectedOnlineResources = new ObservableCollection<string>();
 
+        /* The list of git folders. */
+        private static ObservableCollection<string> selectedGitFolders = new ObservableCollection<string>();
+
+
+
         /* Properties. */
 
         public static Assignment SelectedAssignment 
@@ -47,6 +52,12 @@ namespace AssignmentManager.CodeFiles
         {
             get { return selectedOnlineResources; }
             set { selectedOnlineResources = value; }
+        }
+
+        public static ObservableCollection<string> SelectedGitFolders
+        {
+            get { return selectedGitFolders; }
+            set { selectedGitFolders = value; }
         }
     }
 }
