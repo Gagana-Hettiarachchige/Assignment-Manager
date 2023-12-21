@@ -88,11 +88,15 @@ namespace AssignmentManager
             OnlineResourcesButton.Content = ViewModel.SelectedOnlineResources.Count;
 
 
+
+            /* Setting time. */
+            ClockTextBlock.Text = DateTime.Now.ToString("F");
+
             /* Creating clock. */
             headerClock = new DispatcherTimer();
 
             /* Making it update every second. */
-            headerClock.Interval = TimeSpan.FromSeconds(0.1);
+            headerClock.Interval = TimeSpan.FromSeconds(1);
             headerClock.Tick += new EventHandler(HeaderClock_Tick);
             
             /* Starting clock. */
