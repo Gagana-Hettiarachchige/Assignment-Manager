@@ -15,8 +15,8 @@
         xmlns:local="clr-namespace:AssignmentManager"
         mc:Ignorable="d"
         Title="Assignment Manager" 
-        Height="450" Width="1200" 
-        MinHeight="450" MinWidth="800"
+        Height="450" Width="850" 
+        MinHeight="450" MinWidth="850"
         WindowStartupLocation="CenterScreen"
         >
     <Grid>
@@ -56,7 +56,22 @@
             
             FontSize="30"
             >
-            December 16th, 2023 12:00:00 AM
+            December 16, 2023 12:00:00 AM
+        </TextBlock>
+
+        <TextBlock Name="GeneralInfoTextBlock"
+            
+            Grid.Row="0"
+            
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            
+            Margin="450, 0, 0, 0"
+            MaxWidth="260"
+            
+            FontSize="14"
+            >
+            General information over hovered objects.
         </TextBlock>
         
         
@@ -72,7 +87,7 @@
             
             Click="SchoolButton_Click"
                 
-            
+            ToolTip="Go to eConestoga..."
             >
             eConestoga
         </Button>
@@ -105,6 +120,8 @@
             Margin="10, 0, 0, 0"
             
             Width="50"
+            
+            ToolTip="Change assignment class name..."
             >
             GGH
         </TextBox>
@@ -127,6 +144,8 @@
             Margin="70, 0, 0, 0"
             
             Width="80"
+            
+            ToolTip="Change assignment name..."
             >
             G-01
         </TextBox>
@@ -151,6 +170,8 @@
             Width="50"
                  
             TextChanged="WeightTextBox_TextChanged"
+            
+            ToolTip="Change assignment grade weight percentage..."
             >
             20.04
         </TextBox>
@@ -174,6 +195,8 @@
             
             
             Click="DueDateButton_Click"
+                
+            ToolTip="Change assignment due date..."
             >
             2023-12-16 12:00:00 AM
         </Button>
@@ -185,6 +208,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top" 
             Margin="358,8,0,0"
+            
             >
             *Status:
         </Label>
@@ -198,6 +222,8 @@
             Margin="365,0,0,0"
                   
             SelectionChanged="StatusComboBox_SelectionChanged"
+                  
+            ToolTip="Change status of completion..."
             >
         </ComboBox>
 
@@ -208,6 +234,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top" 
             Margin="471,8,0,0"
+            
             >
             Local Resources:
         </Label>
@@ -221,6 +248,8 @@
             
             Margin="475,0,0,0" 
             Click="LocalResourcesButton_Click"
+                
+            ToolTip="Add or remove local resources..."
             >
 
         </Button>
@@ -233,6 +262,7 @@
             VerticalAlignment="Top"
             
             Margin="571,8,0,0"
+            
             >
             Online Resources:
         </Label>
@@ -246,29 +276,37 @@
             
             Margin="575,0,0,0" 
             Click="OnlineResourcesButton_Click"
+                
+            ToolTip="Add or remove online resources..."
             >
 
         </Button>
 
 
         <!-- Button to insert the data into the database. -->
-        <Button Name="InsertButton"
+        <!--Click="InsertAlterDeleteButton_Click"-->
+        <Button Name="InsertAlterDeleteButton"
             Grid.Row="1"
                 
             HorizontalAlignment="Right"
             VerticalAlignment="Center" 
-          
-            Width="50"
-            Height="20"
- 
+            
+            Width="120"
+            Height="30"
+
             Margin="0, 0, 25, 0" 
+            
             Click="InsertButton_Click"
+                
+            ToolTip="Insert/alter/delete current assignment..."
             >
-            Insert
+            Insert/Alter/Delete
         </Button>
 
 
 
+        
+        
         
         
         
@@ -296,7 +334,14 @@
                 <DataGridTextColumn Header="Class" Binding="{Binding ClassName}" />
                 <DataGridTextColumn Header="Assignment" Binding="{Binding AssignmentName}" />
                 <DataGridTextColumn Header="Weight (%)" Binding="{Binding AssignmentWeight}" />
-                <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate}" />
+                <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <EventSetter Event="MouseEnter" Handler="DueDate_MouseEnter"/>
+                            <EventSetter Event="MouseLeave" Handler="DueDate_MouseLeave"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Status" Binding="{Binding AssignmentStatus}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
@@ -316,6 +361,7 @@
                 </DataGridTextColumn>
                 
 
+                
                 <!-- Optional columns.-->
                 <!-- Local Resources list. -->
                 <DataGridTextColumn Header="Local Resources" Binding="{Binding LocalResources}">
