@@ -53,12 +53,13 @@
                   
             IsReadOnly="True"
                   
-            AutoGenerateColumns="False" 
+            AutoGenerateColumns="False"
+            CanUserSortColumns="False"
             >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Column" Binding="{Binding ColumnName}"/>
-                <DataGridTextColumn Header="Old Values" Binding="{Binding OldColumnValues}"/>
-                <DataGridTextColumn Header="New Values" Binding="{Binding NewColumnValues}"/>
+                <DataGridTextColumn Header="Old Values" Binding="{Binding OldValue}"/>
+                <DataGridTextColumn Header="New Values" Binding="{Binding NewValue}"/>
             </DataGrid.Columns>
         </DataGrid>
 
