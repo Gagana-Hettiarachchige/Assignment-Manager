@@ -69,6 +69,15 @@ namespace AssignmentManager
             this.WindowState = WindowState.Maximized;
 
 
+            /* Checking database connection. */
+            if(Database.Connect() == false)
+            {
+                /* Closing program if database failed to connect. */
+                Close();
+            }
+
+            Database.Disconnect();
+
             /* Adding options to status combo box. */
             StatusComboBox.Items.Add("Incomplete");
             StatusComboBox.Items.Add("In Progress");
