@@ -296,7 +296,7 @@
 
             Margin="0, 0, 25, 0" 
             
-            Click="InsertButton_Click"
+            Click="InsertAlterDeleteButton_Click"
                 
             ToolTip="Insert/alter/delete current assignment..."
             >
