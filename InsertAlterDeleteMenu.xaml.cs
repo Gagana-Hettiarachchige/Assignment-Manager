@@ -35,5 +35,25 @@ namespace AssignmentManager.CodeFiles
         {
             InitializeComponent();
         }
+
+        private void InsertOption_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AlterOption_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteOption_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteAllOption_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
