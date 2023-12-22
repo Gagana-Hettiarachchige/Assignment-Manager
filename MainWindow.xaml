@@ -121,9 +121,11 @@
             
             Width="50"
             
+            TextChanged="ClassTextBox_TextChanged"     
+            
             ToolTip="Change assignment class name..."
             >
-            GGH
+            
         </TextBox>
 
         <!-- Assignment name input section. -->
@@ -145,9 +147,11 @@
             
             Width="80"
             
+            TextChanged="AssignmentTextBox_TextChanged"     
+            
             ToolTip="Change assignment name..."
             >
-            G-01
+            
         </TextBox>
 
         <!-- Weight input section. -->
@@ -173,7 +177,7 @@
             
             ToolTip="Change assignment grade weight percentage..."
             >
-            20.04
+            
         </TextBox>
 
         <!-- Assignment name input section. -->
