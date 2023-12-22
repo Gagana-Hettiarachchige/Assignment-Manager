@@ -64,10 +64,23 @@ namespace AssignmentManager.CodeFiles
                 ViewModel.SelectedOnlineResources.Clear();
                 foreach (string resource in OnlineResourcesList.Items)
                 {
-                    OnlineResourcesList.Items.Add(resource);
+                    ViewModel.SelectedOnlineResources.Add(resource);
                 }
             }
             
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            /* Clearing out view model's selected online resources. */
+            ViewModel.SelectedAssignment.OnlineResources = "";
+
+            /* Looping through the online resources list. */
+            foreach (string resource in ViewModel.SelectedOnlineResources)
+            {
+                /* Adding all online resources to single string. */
+                ViewModel.SelectedAssignment.OnlineResources += (resource + '\n');
+            }
         }
     }
 }
