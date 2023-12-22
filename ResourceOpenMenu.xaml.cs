@@ -117,7 +117,7 @@ namespace AssignmentManager.CodeFiles
                     {
                         string directory = System.IO.Path.GetDirectoryName(resource);
 
-                        /* Running git diff on file. */
+                        /* Running git log on file. */
                         info.WorkingDirectory = directory;
                         info.FileName = "CMD.exe";
                         info.Arguments = "/K git log --name-only " + resource;
