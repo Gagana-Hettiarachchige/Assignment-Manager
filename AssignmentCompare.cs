@@ -23,6 +23,30 @@ namespace AssignmentManager.CodeFiles
 {
     internal class AssignmentCompare
     {
+        /* Data members. */
+        private string columnName = ""; /* Each column name in an assignment. */
+        private string oldValue = ""; /* Old value for each column. */
+        private string newValue = ""; /* New value for each column. */
+
+        /* Properties. */
+        public string ColumnName
+        {
+            get { return columnName; }
+            set { columnName = value; }
+        }
+
+        public string OldValue
+        {
+            get { return oldValue; }
+            set { oldValue = value; }
+        }
+
+        public string NewValue
+        {
+            get { return newValue; }
+            set { newValue = value; }
+        }
+
 
     }
 }
