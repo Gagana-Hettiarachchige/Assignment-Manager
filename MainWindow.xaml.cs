@@ -75,6 +75,10 @@ namespace AssignmentManager
                 /* Closing program if database failed to connect. */
                 Close();
             }
+            else
+            {
+                Database.UpdateAssignments();
+            }
 
             Database.Disconnect();
 
@@ -89,13 +93,19 @@ namespace AssignmentManager
             ClassTextBox.Text = ViewModel.SelectedAssignment.ClassName;
             AssignmentTextBox.Text = ViewModel.SelectedAssignment.AssignmentName;
             WeightTextBox.Text = ViewModel.SelectedAssignment.AssignmentWeight.ToString();
+
+            /* Initializing due date. */
+            ViewModel.SelectedAssignment.DueDate = new DateTime(DateTime.Now.Year, 
+                                                       DateTime.Now.Month, DateTime.Now.Day, 
+                                                       23, 00, 00);
             DueDateButton.Content = ViewModel.SelectedAssignment.DueDate.ToString("yyyy-MM-dd hh:mm:ss tt");
+            
             LocalResourcesButton.Content = ViewModel.SelectedLocalResources.Count;
             OnlineResourcesButton.Content = ViewModel.SelectedOnlineResources.Count;
 
 
             /* Assigning data source to table. */
-            TableGrid.ItemsSource = Database.databaseAssignments;
+            TableGrid.ItemsSource = Database.DatabaseAssignments;
 
 
             /* Setting time. */
@@ -149,7 +159,17 @@ namespace AssignmentManager
 
 
         /* Modify row. */
+        private void ClassTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            /* Making the class name the textbox value. */
+            ViewModel.SelectedAssignment.ClassName = ClassTextBox.Text;
+        }
 
+        private void AssignmentTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            /* Making the name the textbox value. */
+            ViewModel.SelectedAssignment.AssignmentName = AssignmentTextBox.Text;
+        }
 
         private void WeightTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -157,12 +177,21 @@ namespace AssignmentManager
             {
                 /* Checking if weight is a double. */
                 lastValidWeight = double.Parse(WeightTextBox.Text);
+
+                /* Making the value the selected value. */
+                ViewModel.SelectedAssignment.AssignmentWeight = double.Parse(WeightTextBox.Text);
             }
 
             catch
             {
-                if (WeightTextBox.Text != "")
+                if (WeightTextBox.Text == "")
                 {
+                    /* Setting weight to 0 if blank. */
+                    ViewModel.SelectedAssignment.AssignmentWeight = 0;
+                }
+                else
+                {
+                    /* Displaying error. */
                     WeightTextBox.Text = lastValidWeight.ToString();
                     MessageBox.Show(this, "Only numbers and decimals are allowed in weight.",
                                         "Weight Input Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -290,7 +319,7 @@ namespace AssignmentManager
                     OnlineResources = online_items,
                 };
 
-                Database.databaseAssignments.Add(new_assignment); //Temporary until database used.
+                Database.DatabaseAssignments.Add(new_assignment); //Temporary until database used.
 
                 
             }
@@ -442,5 +471,7 @@ namespace AssignmentManager
             GeneralInfoTextBlock.Background = Brushes.White;
             GeneralInfoTextBlock.Text = "";
         }
+
+        
     }
 }
