@@ -95,11 +95,15 @@ namespace AssignmentManager
             /* Setting time. */
             ClockTextBlock.Text = DateTime.Now.ToString("F");
 
+            /* Making general info text block blank. */
+            GeneralInfoTextBlock.Text = "";
+
+
             /* Creating clock. */
             headerClock = new DispatcherTimer();
 
             /* Making it update every second. */
-            headerClock.Interval = TimeSpan.FromSeconds(1);
+            headerClock.Interval = TimeSpan.FromSeconds(0.1);
             headerClock.Tick += new EventHandler(HeaderClock_Tick);
             
             /* Starting clock. */
@@ -204,10 +208,18 @@ namespace AssignmentManager
         }
 
 
-        
+
 
         /* Modify row. */
 
+        private void InsertAlterDeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            //Need to add new screen.
+
+
+        }
 
         /* 
         * METHOD        : InsertButton_Click
@@ -378,6 +390,50 @@ namespace AssignmentManager
                 Cursor = Cursors.Arrow;
             }
             
+        }
+
+        private void DueDate_MouseEnter(object sender, MouseEventArgs e)
+        {
+            /* Getting the hovered over assignment's due date. */
+            TextBlock text_block = (TextBlock)e.OriginalSource;
+            DateTime due_date = DateTime.Parse(text_block.Text);
+            
+            /* Getting number of days left. */
+            int days_due = (due_date - DateTime.Now).Days;
+
+            /* Checking how many days are left. */
+            if (days_due == 2)
+            {
+                /* Displaying info about how many days left. */
+                GeneralInfoTextBlock.Background = Brushes.Yellow;
+                GeneralInfoTextBlock.Text = "Assignment is due day after tommorrow.";
+            }
+
+            else if (days_due == 1)
+            {
+                GeneralInfoTextBlock.Background = Brushes.Orange;
+                GeneralInfoTextBlock.Text = "Assignment is due tommorrow.";
+            }
+
+            else if (days_due == 0)
+            {
+                GeneralInfoTextBlock.Background = Brushes.OrangeRed;
+                GeneralInfoTextBlock.Text = "Assignment is due today.";
+            }
+
+            else
+            {
+                GeneralInfoTextBlock.Text = $"Assignment is due in {days_due} days.";
+            }
+            
+            
+        }
+
+        private void DueDate_MouseLeave(object sender, MouseEventArgs e)
+        {
+            /* Resetting info text block. */
+            GeneralInfoTextBlock.Background = Brushes.White;
+            GeneralInfoTextBlock.Text = "";
         }
     }
 }
