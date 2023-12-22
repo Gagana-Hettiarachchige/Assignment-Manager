@@ -26,3 +26,9 @@ CREATE TABLE Assignments
     OnlineResources VARCHAR(5000) NULL,
     PRIMARY KEY (AssignmentNumber)
 );
+
+
+/* Creating user to access assignment manager database from code. */
+DROP USER IF EXISTS "AssignmentManager"@"localhost";
+CREATE USER "AssignmentManager"@"localhost" IDENTIFIED BY "manage";
+GRANT ALL PRIVILEGES ON AM.* TO "AssignmentManager"@"localhost";
