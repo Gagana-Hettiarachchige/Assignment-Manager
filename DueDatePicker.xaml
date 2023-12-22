@@ -34,15 +34,18 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Margin="-100, 60, 0, 0"
-            
-            Width="30"
-            Height="30"
-               
-            FontSize="30" 
+            FontSize="20" 
             
             Click="HourIncrementButton_Click"
+            Width="40"
+                
+            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+            RenderTransformOrigin="0.5,0.5"
             >
-            ^            
+            V
+            <Button.RenderTransform>
+                <ScaleTransform ScaleY="-1" />
+            </Button.RenderTransform>
         </Button>
         <TextBlock Name="HourValue"
             HorizontalAlignment="Center"
@@ -52,20 +55,21 @@
                  
             Text="11" 
             FontSize="30" RenderTransformOrigin="0.012,0.502"
-             
+            
             >
         </TextBlock>
         <Button Name="HourDecrementButton"
             
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Margin="-100, 180, 0, 0"
-            
-            Width="30"
-            Height="30"
+            Margin="-100, 190, 0, 0"
                
-            FontSize="20" 
+            FontSize="20"
+            Width="40"
+                
             Click="HourDecrementButton_Click"
+            
+            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
             >
             V
         </Button>
@@ -90,15 +94,19 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Margin="0, 60, 0, 0"
-            
-            Width="30"
-            Height="30"
                
-            FontSize="30" 
-            
+            FontSize="20" 
+            Width="40"
+                
             Click="MinuteIncrementButton_Click"
+            
+            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+            RenderTransformOrigin="0.5,0.5"
             >
-            ^
+            V
+            <Button.RenderTransform>
+                <ScaleTransform ScaleY="-1" />
+            </Button.RenderTransform>
         </Button>
         <TextBlock Name="MinuteValue"
                    
@@ -115,13 +123,14 @@
             
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Margin="0, 180, 0, 0"
-            
-            Width="30"
-            Height="30"
+            Margin="0, 190, 0, 0"
                
-            FontSize="20" 
+            FontSize="20"
+            Width="40"    
+                
             Click="MinuteDecrementButton_Click"
+            
+            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
             >
             V
         </Button>
@@ -133,15 +142,19 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Margin="100, 60, 0, 0"
-            
-            Width="30"
-            Height="30"
                
-            FontSize="30" 
-            
+            FontSize="20" 
+            Width="40"
+                
             Click="AmPmValueButton_Click"
+            
+            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+            RenderTransformOrigin="0.5,0.5"
             >
-            ^
+            V
+            <Button.RenderTransform>
+                <ScaleTransform ScaleY="-1" />
+            </Button.RenderTransform>
         </Button>
         <TextBlock x:Name="AmPmValue"
                    
@@ -152,19 +165,19 @@
                  
             Text="PM" 
             FontSize="30"
-             
+            
             />
         <Button Name="AmPmValueDownButton"
             
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Margin="100, 180, 0, 0"
-            
-            Width="30"
-            Height="30"
+            Margin="100, 190, 0, 0"
                
-            FontSize="20" 
+            FontSize="20"
+            Width="40"
             Click="AmPmValueButton_Click"
+            
+            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
             >
             V
         </Button>
@@ -187,6 +200,6 @@
             >
             Save
         </Button>
-        
+
     </Grid>
 </Window>
