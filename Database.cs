@@ -11,6 +11,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -97,6 +98,60 @@ namespace AssignmentManager.CodeFiles
             {
                 connection.Close();
             }
+        }
+
+
+        /* 
+        * METHOD        : InsertAssignment
+        * DESCRIPTION   :
+        *   Inserts the selected assignment into the database.
+        * PARAMETERS    :
+        *   void
+        * RETURNS       :
+        *   bool : whether or not the insert worked.
+        */
+        public static bool InsertAssignment()
+        {
+            try
+            {
+                Connect();
+
+                /* Creating insert command. */
+                MySqlCommand insert = new MySqlCommand
+                    ("INSERT INTO Assignments(ClassName, AssignmentName, AssignmentWeight, " +
+                    "DueDate, AssignmentStatus, LocalResources, OnlineResources) " +
+                    "VALUES" +
+                    $"('{ViewModel.SelectedAssignment.ClassName}', " +
+                    $"'{ViewModel.SelectedAssignment.AssignmentName}', " +
+                    $"{ViewModel.SelectedAssignment.AssignmentWeight}, " +
+                    $"'{ViewModel.SelectedAssignment.DueDate.ToString("yyyy-MM-dd HH:mm:ss")}', " +
+                    $"'{ViewModel.SelectedAssignment.AssignmentStatus}', " +
+                    $"'{ViewModel.SelectedAssignment.LocalResources}', " +
+                    $"'{ViewModel.SelectedAssignment.OnlineResources}');", 
+                    connection);
+
+                
+                /* Creating editor with insert command. */
+                MySqlDataAdapter editor = new MySqlDataAdapter(insert);
+                DataSet database = new DataSet(DATABASE);
+                
+                /* Editing the database. */
+                editor.Fill(database);
+
+
+                Disconnect();
+
+                return true;
+            }
+            catch (Exception error)
+            {
+                /* Displaying error. */
+                MessageBox.Show(error.Message, "Database Insert Failed", 
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+
+                return false;
+            }
+            
         }
     }
 }
