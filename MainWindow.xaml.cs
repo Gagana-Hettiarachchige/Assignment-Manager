@@ -220,9 +220,10 @@ namespace AssignmentManager
 
         private void InsertAlterDeleteButton_Click(object sender, RoutedEventArgs e)
         {
+            InsertAlterDeleteMenu insert_alter_delete_menu = new InsertAlterDeleteMenu();
 
-
-            //Need to add new screen.
+            /* Opening insert alter delete menu. */
+            insert_alter_delete_menu.ShowDialog();
 
 
         }
