@@ -46,9 +46,6 @@ namespace AssignmentManager
     */
     public partial class MainWindow : Window
     {
-
-        /* All assignments. */
-        ObservableCollection<Assignment> loadedAssignments = new ObservableCollection<Assignment>();
         int assignmentNumber = 0;   // Testing substitution for assignment number.
 
         double lastValidWeight = 10.01;
@@ -89,7 +86,7 @@ namespace AssignmentManager
 
 
             /* Assigning data source to table. */
-            TableGrid.ItemsSource = loadedAssignments;
+            TableGrid.ItemsSource = Database.databaseAssignments;
 
 
             /* Setting time. */
@@ -283,7 +280,7 @@ namespace AssignmentManager
                     OnlineResources = online_items,
                 };
 
-                loadedAssignments.Add(new_assignment); //Temporary until database used.
+                Database.databaseAssignments.Add(new_assignment); //Temporary until database used.
 
                 
             }
