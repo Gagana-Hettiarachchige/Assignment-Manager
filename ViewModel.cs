@@ -75,6 +75,15 @@ namespace AssignmentManager.CodeFiles
         }
 
 
+        /* 
+        * METHOD        : GetCompare
+        * DESCRIPTION   :
+        *   Updates the selected assignments compare.
+        * PARAMETERS    :
+        *   void
+        * RETURNS       :
+        *   void
+        */
         public static void GetCompare()
         {
             /* Clearing the the compare to only have 8 columns of two assignments. */
