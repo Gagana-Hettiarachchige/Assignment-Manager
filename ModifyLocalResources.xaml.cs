@@ -123,5 +123,18 @@ namespace AssignmentManager.CodeFiles
             
 
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            /* Clearing out view model's selected local resources. */
+            ViewModel.SelectedAssignment.LocalResources = "";
+
+            /* Looping through the local resources list. */
+            foreach (string resource in ViewModel.SelectedLocalResources)
+            {
+                /* Adding all local resources to single string. */
+                ViewModel.SelectedAssignment.LocalResources += (resource + '\n');
+            }
+        }
     }
 }
