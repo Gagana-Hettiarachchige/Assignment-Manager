@@ -10,6 +10,7 @@
 *	delete assignments in the database.
 */
 
+using MySqlX.XDevAPI.Relational;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,11 +35,32 @@ namespace AssignmentManager.CodeFiles
         public InsertAlterDeleteMenu()
         {
             InitializeComponent();
+
+            /* Getting comparison. */
+            ViewModel.GetCompare();
+            TableGrid.ItemsSource = ViewModel.SelectedAssignmentCompare;
         }
 
         private void InsertOption_Click(object sender, RoutedEventArgs e)
         {
 
+            Database.Connect();
+
+            /* Inserting into the database. */
+            if(Database.InsertAssignment())
+            {
+                Database.UpdateAssignments();
+                
+                
+                Database.Disconnect();
+
+                /* Closing the window if it worked. */
+                Close();
+            }
+
+            Database.Disconnect();
+
+            
         }
 
         private void AlterOption_Click(object sender, RoutedEventArgs e)
