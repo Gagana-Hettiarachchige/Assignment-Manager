@@ -19,6 +19,7 @@
         Height="450" Width="800"
         MinHeight="200" MinWidth="632"
         WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing"
         >
     <Grid>
         <Grid.RowDefinitions>
