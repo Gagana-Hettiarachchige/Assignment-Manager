@@ -30,8 +30,16 @@ namespace AssignmentManager.CodeFiles
         private static MySqlConnection connection = new MySqlConnection();
 
         /* All assignments in database. */
-        public static ObservableCollection<Assignment> databaseAssignments = new ObservableCollection<Assignment>();
+        private static ObservableCollection<Assignment> databaseAssignments = new ObservableCollection<Assignment>();
 
+
+
+        /* Properties. */
+        public static ObservableCollection<Assignment> DatabaseAssignments
+        {
+            get { return databaseAssignments; }
+            set { databaseAssignments = value; }
+        }
 
        
         /* 
@@ -94,7 +102,7 @@ namespace AssignmentManager.CodeFiles
         public static void Disconnect()
         {
             /* Closing only if already opened. */
-            if (connection.State == System.Data.ConnectionState.Open)
+            if (connection.State == ConnectionState.Open)
             {
                 connection.Close();
             }
@@ -114,7 +122,11 @@ namespace AssignmentManager.CodeFiles
         {
             try
             {
-                Connect();
+                /* Making database friendly versions of the paths. */
+                string database_friendly_local_path =
+                       ViewModel.SelectedAssignment.LocalResources.Replace(@"\", @"\\");
+                string database_friendly_online_path = 
+                       ViewModel.SelectedAssignment.OnlineResources.Replace(@"\", @"\\");
 
                 /* Creating insert command. */
                 MySqlCommand insert = new MySqlCommand
@@ -126,8 +138,8 @@ namespace AssignmentManager.CodeFiles
                     $"{ViewModel.SelectedAssignment.AssignmentWeight}, " +
                     $"'{ViewModel.SelectedAssignment.DueDate.ToString("yyyy-MM-dd HH:mm:ss")}', " +
                     $"'{ViewModel.SelectedAssignment.AssignmentStatus}', " +
-                    $"'{ViewModel.SelectedAssignment.LocalResources}', " +
-                    $"'{ViewModel.SelectedAssignment.OnlineResources}');", 
+                    $"'{database_friendly_local_path}', " +
+                    $"'{database_friendly_online_path}');", 
                     connection);
 
                 
@@ -138,20 +150,87 @@ namespace AssignmentManager.CodeFiles
                 /* Editing the database. */
                 editor.Fill(database);
 
-
-                Disconnect();
-
                 return true;
             }
+
             catch (Exception error)
             {
+                Disconnect();
+
                 /* Displaying error. */
                 MessageBox.Show(error.Message, "Database Insert Failed", 
                                 MessageBoxButton.OK, MessageBoxImage.Error);
 
                 return false;
             }
-            
+        }
+
+
+        /* 
+        * METHOD        : UpdateAssignments
+        * DESCRIPTION   :
+        *   Updates the UI with the current assignments in database.
+        * PARAMETERS    :
+        *   void
+        * RETURNS       :
+        *   bool : whether or not the update worked.
+        */
+        public static bool UpdateAssignments()
+        {
+            try
+            {
+                /* Creating read query. */
+                MySqlCommand read = new MySqlCommand("SELECT * FROM Assignments;", connection);
+
+
+                /* Starting read. */
+                MySqlDataReader reader = read.ExecuteReader();
+
+
+                /* Clearing old list of database assignments. */
+                databaseAssignments.Clear();
+
+
+                /* Reading all assignments from assignments database. */
+                while (reader.Read()) 
+                {
+
+                    /* Getting assignment from database. */
+                    Assignment assignment = new Assignment()
+                    {
+                        AssignmentNumber = int.Parse(reader[0].ToString()),
+                        ClassName = reader[1].ToString(),
+                        AssignmentName = reader[2].ToString(),
+                        AssignmentWeight = double.Parse(reader[3].ToString()),
+                        DueDate = DateTime.Parse(reader[4].ToString()),
+                        AssignmentStatus = reader[5].ToString(),
+                        LocalResources = reader[6].ToString(),
+                        OnlineResources = reader[7].ToString()
+                    };
+
+                    /* Updating list of assignments in database. */
+                    databaseAssignments.Add(assignment);
+
+                    /* Updating the selected assignment's number to match the one in the database. */
+                    ViewModel.SelectedAssignment.AssignmentNumber = int.Parse(reader[0].ToString());
+                }
+
+                /* Stopping read. */
+                reader.Close();
+
+                return true;
+            }
+
+            catch (Exception error) 
+            {
+                Disconnect();
+
+                /* Displaying error. */
+                MessageBox.Show(error.Message, "Database Update Failed",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+
+                return false;
+            }
         }
     }
 }
