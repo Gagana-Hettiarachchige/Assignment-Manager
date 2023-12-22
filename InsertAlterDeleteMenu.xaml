@@ -15,8 +15,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AssignmentManager.CodeFiles"
         mc:Ignorable="d"
-        Title="InsertAlterDeleteMenu" Height="450" Width="800">
+        Title="Insert/Alter/Delete" 
+        Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        >
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         
+        <!-- Action menu. -->
+        <Menu Name="ActionMenu"
+            Grid.Row="0"
+            
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            
+            >
+            <MenuItem Name="InsertOption" Header="Insert" FontSize="14" Click="InsertOption_Click" />
+            <MenuItem Name="AlterOption" Header="Alter" FontSize="14" Click="AlterOption_Click" />
+            <MenuItem Name="DeleteOption" Header="Delete" FontSize="14" Click="DeleteOption_Click" />
+            <MenuItem Name="DeleteAllOption" Header="Delete All Assignments" FontSize="14" Click="DeleteAllOption_Click" />
+        </Menu>
+
+        
+        <!-- Grid to show the column, old values and new values. -->
+        <DataGrid Name="TableGrid"
+            
+            Grid.Row="1"
+                  
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            
+            HorizontalScrollBarVisibility="Visible"
+            VerticalScrollBarVisibility="Visible"
+                  
+            IsReadOnly="True"
+                  
+            AutoGenerateColumns="False" 
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Column" Binding="{Binding ColumnName}"/>
+                <DataGridTextColumn Header="Old Values" Binding="{Binding OldColumnValues}"/>
+                <DataGridTextColumn Header="New Values" Binding="{Binding NewColumnValues}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+
     </Grid>
 </Window>
