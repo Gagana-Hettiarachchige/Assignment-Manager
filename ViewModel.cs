@@ -24,6 +24,9 @@ namespace AssignmentManager.CodeFiles
         /* The assignment currently selected. */
         private static Assignment selectedAssignment = new Assignment();
 
+        /* Old version of selected assignment. */
+        private static Assignment oldSelectedAssignment = new Assignment();
+
         /* The list of local resources of the currentlly selected assignment. */
         private static ObservableCollection<string> selectedLocalResources = 
                    new ObservableCollection<string>();
@@ -46,6 +49,13 @@ namespace AssignmentManager.CodeFiles
             set { selectedAssignment = value; } 
         }
 
+
+        public static Assignment OldSelectedAssignment
+        {
+            get { return oldSelectedAssignment; }
+            set { oldSelectedAssignment = value; }
+        }
+
         public static ObservableCollection<string> SelectedLocalResources
         { 
             get { return selectedLocalResources; }
@@ -63,6 +73,7 @@ namespace AssignmentManager.CodeFiles
             get { return selectedAssignmentCompare; }
             set { selectedAssignmentCompare = value; }
         }
+
 
         public static void GetCompare()
         {
