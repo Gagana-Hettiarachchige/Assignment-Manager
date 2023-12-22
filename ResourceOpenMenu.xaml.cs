@@ -120,7 +120,7 @@ namespace AssignmentManager.CodeFiles
                         /* Running git diff on file. */
                         info.WorkingDirectory = directory;
                         info.FileName = "CMD.exe";
-                        info.Arguments = "/K git diff " + resource;
+                        info.Arguments = "/K git log --name-only " + resource;
                         Process.Start(info);
                     }
                 }
