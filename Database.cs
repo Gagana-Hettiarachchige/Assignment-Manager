@@ -147,7 +147,7 @@ namespace AssignmentManager.CodeFiles
                 MySqlDataAdapter editor = new MySqlDataAdapter(insert);
                 DataSet database = new DataSet(DATABASE);
                 
-                /* Editing the database. */
+                /* Adding the assignment to the database. */
                 editor.Fill(database);
 
                 return true;
@@ -241,6 +241,39 @@ namespace AssignmentManager.CodeFiles
         }
 
 
+
+        public static bool DeleteSelectedAssignment(int assignment_number)
+        {
+            try
+            {
+                /* Creating delete command. */
+                MySqlCommand delete = new MySqlCommand($"DELETE FROM Assignments " +
+                                                       $"WHERE AssignmentNumber = {assignment_number};",
+                                                       connection);
+
+                /* Creating editor with delete command. */
+                MySqlDataAdapter editor = new MySqlDataAdapter(delete);
+                DataSet database = new DataSet(DATABASE);
+
+
+                /* Deleting the assignment from the database. */
+                editor.Fill(database);
+
+
+                return true;
+            }
+
+            catch (Exception error) 
+            {
+                Disconnect();
+
+                /* Displaying error. */
+                MessageBox.Show(error.Message, "Database Delete Failed",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+
+                return false;
+            }
+        }
 
 
 
