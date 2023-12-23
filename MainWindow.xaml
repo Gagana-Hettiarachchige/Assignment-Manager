@@ -27,7 +27,7 @@
             <!-- Header row. -->
             <RowDefinition Height="50"/>
 
-            <!-- Modify Row. -->
+            <!-- Insert Row. -->
             <RowDefinition Height="80"/>
 
             <!-- Table results Row. -->
@@ -100,7 +100,7 @@
         
         
         
-        <!-- Modify Row. -->
+        <!-- Insert Row. -->
         
         <!-- Class name input section. -->
         <Label
@@ -289,22 +289,25 @@
 
         <!-- Button to insert the data into the database. -->
         <!--Click="InsertAlterDeleteButton_Click"-->
-        <Button Name="InsertAlterDeleteButton"
+        <Button Name="InsertButton"
             Grid.Row="1"
                 
             HorizontalAlignment="Right"
             VerticalAlignment="Center" 
             
-            Width="120"
+            Width="100"
             Height="30"
 
+                
+            
             Margin="0, 0, 10, 0" 
             
-            Click="InsertAlterDeleteButton_Click"
-                
-            ToolTip="Insert/alter/delete current assignment..."
+            Click="InsertButton_Click"
+            
+            FontSize="14"
+            ToolTip="Insert current assignment..."
             >
-            Insert/Alter/Delete
+            Insert
         </Button>
 
 
@@ -334,7 +337,15 @@
             <DataGrid.Columns>
 
                 <!-- Mandatory coulmns. -->
-                <DataGridTextColumn Header="No." Binding="{Binding AssignmentNumber}" />
+                <DataGridTextColumn Header="No." Binding="{Binding AssignmentNumber}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <EventSetter Event="MouseLeftButtonUp" Handler="AssignmentNumber_MouseLeftButtonUp"/>
+                            <EventSetter Event="MouseEnter" Handler="ClickableText_MouseEnter"/>
+                            <EventSetter Event="MouseLeave" Handler="ClickableText_MouseLeave"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Class" Binding="{Binding ClassName}" />
                 <DataGridTextColumn Header="Assignment" Binding="{Binding AssignmentName}" />
                 <DataGridTextColumn Header="Weight (%)" Binding="{Binding AssignmentWeight}" />
@@ -372,8 +383,8 @@
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <EventSetter Event="MouseLeftButtonUp" Handler="Resources_MouseLeftButtonUp"/>
-                            <EventSetter Event="MouseEnter" Handler="Resources_MouseEnter"/>
-                            <EventSetter Event="MouseLeave" Handler="Resources_MouseLeave"/>
+                            <EventSetter Event="MouseEnter" Handler="ClickableText_MouseEnter"/>
+                            <EventSetter Event="MouseLeave" Handler="ClickableText_MouseLeave"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
@@ -383,8 +394,8 @@
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <EventSetter Event="MouseLeftButtonUp" Handler="Resources_MouseLeftButtonUp"/>
-                            <EventSetter Event="MouseEnter" Handler="Resources_MouseEnter"/>
-                            <EventSetter Event="MouseLeave" Handler="Resources_MouseLeave"/>
+                            <EventSetter Event="MouseEnter" Handler="ClickableText_MouseEnter"/>
+                            <EventSetter Event="MouseLeave" Handler="ClickableText_MouseLeave"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
