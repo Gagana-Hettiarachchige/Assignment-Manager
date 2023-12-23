@@ -39,7 +39,7 @@ namespace AssignmentManager.CodeFiles
             InitializeComponent();
 
             /* Defaulting to selected date. */
-            DueDayCalender.SelectedDate = ViewModel.SelectedAssignment.DueDate;
+            DueDayPicker.SelectedDate = ViewModel.SelectedAssignment.DueDate;
             HourValue.Text = ViewModel.SelectedAssignment.DueDate.ToString("hh");
             MinuteValue.Text = ViewModel.SelectedAssignment.DueDate.ToString("mm");
             AmPmValue.Text = ViewModel.SelectedAssignment.DueDate.ToString("tt");
@@ -131,11 +131,9 @@ namespace AssignmentManager.CodeFiles
 
         /* Event handlers. */
 
-        private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        private void DueDayPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            SelectedDatesCollection days = DueDayCalender.SelectedDates;
-
-            DateTime due_date_time = days[0];
+            DateTime due_date_time = (DateTime)DueDayPicker.SelectedDate;
             dueDay = due_date_time.ToString("yyyy-MM-dd");
         }
 
@@ -171,11 +169,11 @@ namespace AssignmentManager.CodeFiles
 
         private void SaveDueDateButton_Click(object sender, RoutedEventArgs e)
         {
-            /* Getting the selected date */
-            SelectedDatesCollection days = DueDayCalender.SelectedDates;
+            /* Getting the selected due day */
+            DateTime day = (DateTime)DueDayPicker.SelectedDate;
 
             /* Creating full date and time. */
-            dueDay = days[0].ToString("yyyy-MM-dd");
+            dueDay = day.ToString("yyyy-MM-dd");
             dueHour = HourValue.Text + ':' + MinuteValue.Text + ":00 " + AmPmValue.Text;
 
             /* Saving in view model. */
