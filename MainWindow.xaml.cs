@@ -46,8 +46,6 @@ namespace AssignmentManager
     */
     public partial class MainWindow : Window
     {
-        int assignmentNumber = 0;   // Testing substitution for assignment number.
-
         double lastValidWeight = 10.01;
         DispatcherTimer headerClock;
 
@@ -158,17 +156,37 @@ namespace AssignmentManager
         }
 
 
-        /* Modify row. */
+
+
+        /* Insert row. */
         private void ClassTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            /* Making the class name the textbox value. */
-            ViewModel.SelectedAssignment.ClassName = ClassTextBox.Text;
+            if (ClassTextBox.Text == "")
+            {
+                /* Making the class name N/A if left blank. */
+                ViewModel.SelectedAssignment.ClassName = "N/A";
+            }
+
+            else
+            {
+                /* Making the class name the textbox value. */
+                ViewModel.SelectedAssignment.ClassName = ClassTextBox.Text;
+            }
         }
 
         private void AssignmentTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            /* Making the name the textbox value. */
-            ViewModel.SelectedAssignment.AssignmentName = AssignmentTextBox.Text;
+            if (AssignmentTextBox.Text == "")
+            {
+                /* Making the name N/A if left blank. */
+                ViewModel.SelectedAssignment.AssignmentName = "N/A";
+            }
+
+            else
+            {
+                /* Making the name the textbox value. */
+                ViewModel.SelectedAssignment.AssignmentName = AssignmentTextBox.Text;
+            }
         }
 
         private void WeightTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -255,6 +273,8 @@ namespace AssignmentManager
             insert_alter_delete_menu.ShowDialog();
 
 
+            // Needs to be removed.
+
         }
 
         /* 
@@ -271,65 +291,16 @@ namespace AssignmentManager
         */
         private void InsertButton_Click(object sender, RoutedEventArgs e)
         {
-            ++assignmentNumber; // Testing.
+            Database.Connect();
+
+            /* Inserting selected assignment. */
+            Database.InsertAssignment();
+
+            /* Updating UI with newest addition. */
+            Database.UpdateAssignments();
 
 
-            /* Holds all local resource paths. */
-            string local_items = "";
-
-            /* Holds all online resource paths. */
-            string online_items = "";
-
-
-            /* Looping through the local resources list. */
-            foreach(string resource in ViewModel.SelectedLocalResources)
-            {
-                /* Adding all local resources to single string. */
-                local_items += resource;
-                local_items+= '\n';
-            }
-
-            /* Looping through the online resources list. */
-            foreach (string resource in ViewModel.SelectedOnlineResources)
-            {
-                /* Adding all online resources to single string. */
-                online_items += resource;
-                online_items += '\n';
-            }
-
-
-            try
-            {
-                // Need to use viewmodel when items are changed changed so that
-                // values for the new_assignment are correct.
-
-
-                /* Creating new assignment. */ 
-                Assignment new_assignment = new Assignment()
-                {
-
-                    //Need to add validation to stop blank values for mandatory.
-                    AssignmentNumber = assignmentNumber,
-                    ClassName = ClassTextBox.Text,
-                    AssignmentName = AssignmentTextBox.Text,
-                    AssignmentWeight = double.Parse(WeightTextBox.Text),
-                    DueDate = DateTime.Parse(DueDateButton.Content.ToString()),
-                    AssignmentStatus = StatusComboBox.Text,
-                    LocalResources = local_items,
-                    OnlineResources = online_items,
-                };
-
-                Database.DatabaseAssignments.Add(new_assignment); //Temporary until database used.
-
-                
-            }
-            
-            catch
-            {
-                MessageBox.Show(this, "Weight cannot be blank.", "Weight Input Error", 
-                                MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            
+            Database.Disconnect();
         }
 
 
@@ -339,6 +310,16 @@ namespace AssignmentManager
         /* Table row. */
 
 
+        private void AssignmentNumber_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            TextBlock assignment_number = (TextBlock)e.OriginalSource;
+
+
+            MessageBox.Show("Slected Assignment: " + assignment_number.Text);
+
+
+            //Need to add screen for just editing and deleting. 
+        }
 
         /* 
         * METHOD        : Resources_MouseLeftButtonUp
@@ -355,10 +336,10 @@ namespace AssignmentManager
         private void Resources_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             /* Getting the resources. */
-            TextBlock text_block = (TextBlock)e.OriginalSource;
+            TextBlock resources_text = (TextBlock)e.OriginalSource;
             
             /* Getting each resource as a string. */
-            string[] resources = text_block.Text.Split('\n');
+            string[] resources = resources_text.Text.Split('\n');
             List<string> list_resources = new List<string>();
 
             int count = 0;
@@ -384,17 +365,17 @@ namespace AssignmentManager
 
 
         /* 
-        * METHOD        : Resources_MouseEnter
+        * METHOD        : ClickableText_MouseEnter
         * DESCRIPTION   :
-        *   Raised when either the local or online resources are hovered over and
-        *   change the mouse to a hand icon.
+        *   Raised when clickable text is hovered over and
+        *   changes the mouse to a hand icon.
         * PARAMETERS    :
         *   object sender        : the sender
         *   MouseButtonEventArgs : the mouse event args
         * RETURNS       :
         *   void
         */
-        private void Resources_MouseEnter(object sender, MouseEventArgs e)
+        private void ClickableText_MouseEnter(object sender, MouseEventArgs e)
         {
             TextBlock text_block = (TextBlock)e.OriginalSource;
 
@@ -407,17 +388,17 @@ namespace AssignmentManager
 
 
         /* 
-        * METHOD        : Resources_MouseLeave
+        * METHOD        : ClickableText_MouseLeave
         * DESCRIPTION   :
-        *   Raised when either the local or online resources are hovered off and
-        *   change the mouse back to an arrow.
+        *   Raised when a clickable text section is hovered off and
+        *   changes the mouse back to an arrow.
         * PARAMETERS    :
         *   object sender        : the sender
         *   MouseButtonEventArgs : the mouse event args
         * RETURNS       :
         *   void
         */
-        private void Resources_MouseLeave(object sender, MouseEventArgs e)
+        private void ClickableText_MouseLeave(object sender, MouseEventArgs e)
         {
             TextBlock text_block = (TextBlock)e.OriginalSource;
 
@@ -431,8 +412,8 @@ namespace AssignmentManager
         private void DueDate_MouseEnter(object sender, MouseEventArgs e)
         {
             /* Getting the hovered over assignment's due date. */
-            TextBlock text_block = (TextBlock)e.OriginalSource;
-            DateTime due_date = DateTime.Parse(text_block.Text);
+            TextBlock due_date_text = (TextBlock)e.OriginalSource;
+            DateTime due_date = DateTime.Parse(due_date_text.Text);
             
             /* Getting number of days left. */
             int days_due = (due_date - DateTime.Now).Days;
