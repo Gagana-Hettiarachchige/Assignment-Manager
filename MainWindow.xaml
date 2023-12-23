@@ -16,7 +16,7 @@
         mc:Ignorable="d"
         Title="Assignment Manager" 
         Height="450" Width="850" 
-        MinHeight="450" MinWidth="850"
+        MinHeight="450" MinWidth="1000"
         WindowStartupLocation="CenterScreen"
         >
     <Grid>
@@ -73,8 +73,8 @@
             >
             General information over hovered objects.
         </TextBlock>
-        
-        
+
+
         <!-- School Link button. -->
         <Button Name="SchoolButton"
             Grid.Row="0"
@@ -92,16 +92,16 @@
             eConestoga
         </Button>
 
-        
-        
-        
 
 
-        
-        
-        
+
+
+
+
+
+
         <!-- Insert Row. -->
-        
+
         <!-- Class name input section. -->
         <Label
             Grid.Row="1"
@@ -125,7 +125,7 @@
             
             ToolTip="Change assignment class name..."
             >
-            
+
         </TextBox>
 
         <!-- Assignment name input section. -->
@@ -151,7 +151,7 @@
             
             ToolTip="Change assignment name..."
             >
-            
+
         </TextBox>
 
         <!-- Weight input section. -->
@@ -177,7 +177,7 @@
             
             ToolTip="Change assignment grade weight percentage..."
             >
-            
+
         </TextBox>
 
         <!-- Assignment name input section. -->
@@ -287,9 +287,23 @@
         </Button>
 
 
-        <!-- Button to insert the data into the database. -->
-        <!--Click="InsertAlterDeleteButton_Click"-->
-        <Button Name="InsertButton"
+        <!-- Combo box to select different assignments. -->
+        <ComboBox Name="AssignmentSelectComboBox"
+            Grid.Row="1"
+            
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"      
+            
+            
+            Margin="0,0, 230,0" 
+            
+            SelectionChanged="AssignmentSelectComboBox_SelectionChanged"
+            >
+        </ComboBox>
+
+
+        <!-- Button to insert/alter the assignment into the database. -->
+        <Button Name="InsertAlterButton"
             Grid.Row="1"
                 
             HorizontalAlignment="Right"
@@ -300,26 +314,45 @@
 
                 
             
-            Margin="0, 0, 10, 0" 
-            
-            Click="InsertButton_Click"
+            Margin="0, 0, 120, 0" 
+           
+            Click="InsertAlterButton_Click"
             
             FontSize="14"
             ToolTip="Insert current assignment..."
             >
-            Insert
+            Insert/Clear
+        </Button>
+
+        <!-- Button to clear the selected assignment/alter the assignment in the database. -->
+        <Button Name="ClearDeleteButton"
+            Grid.Row="1"
+                
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center" 
+            
+            Width="100"
+            Height="30"
+
+            Click="ClearDeleteButton_Click"    
+            
+            Margin="0, 0, 10, 0" 
+            
+            FontSize="14"
+            ToolTip="Clear current assignment details..."
+            >
+            Clear/Delete
         </Button>
 
 
 
-        
-        
-        
-        
-        
-        
+
+
+
+
+
         <!-- Table results Row. -->
-        
+
         <!-- Table to hold results. -->
         <DataGrid Name="TableGrid"
             HorizontalAlignment="Stretch"
@@ -374,9 +407,9 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                
 
-                
+
+
                 <!-- Optional columns.-->
                 <!-- Local Resources list. -->
                 <DataGridTextColumn Header="Local Resources" Binding="{Binding LocalResources}">
