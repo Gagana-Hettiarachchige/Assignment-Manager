@@ -14,15 +14,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AssignmentManager.CodeFiles"
         mc:Ignorable="d"
-        Title="Pick Due Date" Height="400" Width="300"
+        Title="Pick Due Date" Height="230" Width="270"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <!-- Calender to pick due day. -->
-        <Calendar Name="DueDayCalender"
+        <!-- DatePicker to pick due day. -->
+        <DatePicker Name="DueDayPicker"
             
-            SelectedDatesChanged="Calendar_SelectedDatesChanged"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            SelectedDateChanged="DueDayPicker_SelectedDateChanged"
+            
+            
             >
-        </Calendar>
+            <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                    <Setter Property="IsReadOnly" Value="True"/>
+                </Style>
+            </DatePicker.Resources>
+        </DatePicker>
 
 
 
@@ -32,8 +41,8 @@
         <Button Name="HourIncrementButton"
             
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Margin="-100, 60, 0, 0"
+            VerticalAlignment="Top"
+            Margin="-100, 30, 0, 0"
             FontSize="20" 
             
             Click="HourIncrementButton_Click"
@@ -49,20 +58,20 @@
         </Button>
         <TextBlock Name="HourValue"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
+            VerticalAlignment="Top"
                    
-            Margin="-100, 120, 0, 0" 
+            Margin="-100, 60, 0, 0" 
                  
             Text="11" 
-            FontSize="30" RenderTransformOrigin="0.012,0.502"
+            FontSize="30"
             
             >
         </TextBlock>
         <Button Name="HourDecrementButton"
             
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Margin="-100, 190, 0, 0"
+            VerticalAlignment="Top"
+            Margin="-100, 100, 0, 0"
                
             FontSize="20"
             Width="40"
@@ -78,9 +87,9 @@
 
         <Label 
             HorizontalAlignment="Center" 
-            VerticalAlignment="Center"
+            VerticalAlignment="Top"
             
-            Margin="-50, 120,0,0" 
+            Margin="-50, 53, 0, 0" 
             
             Content=":"
             FontSize="30"
@@ -92,8 +101,8 @@
         <Button Name="MinuteIncrementButton"
             
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Margin="0, 60, 0, 0"
+            VerticalAlignment="Top"
+            Margin="0, 30, 0, 0"
                
             FontSize="20" 
             Width="40"
@@ -111,9 +120,9 @@
         <TextBlock Name="MinuteValue"
                    
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
+            VerticalAlignment="Top"
                    
-            Margin="0, 120, 0, 0" 
+            Margin="0, 60, 0, 0" 
                  
             Text="00" 
             FontSize="30"
@@ -122,8 +131,8 @@
         <Button Name="MinuteDecrementButton"
             
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Margin="0, 190, 0, 0"
+            VerticalAlignment="Top"
+            Margin="0, 100, 0, 0"
                
             FontSize="20"
             Width="40"    
@@ -140,8 +149,8 @@
         <Button Name="AmPmValueUpButton"
             
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Margin="100, 60, 0, 0"
+            VerticalAlignment="Top"
+            Margin="100, 30, 0, 0"
                
             FontSize="20" 
             Width="40"
@@ -159,9 +168,9 @@
         <TextBlock x:Name="AmPmValue"
                    
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
+            VerticalAlignment="Top"
                    
-            Margin="100, 120, 0, 0" 
+            Margin="100, 60, 0, 0" 
                  
             Text="PM" 
             FontSize="30"
@@ -170,8 +179,8 @@
         <Button Name="AmPmValueDownButton"
             
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Margin="100, 190, 0, 0"
+            VerticalAlignment="Top"
+            Margin="100, 100, 0, 0"
                
             FontSize="20"
             Width="40"
@@ -187,8 +196,8 @@
         <Button Name="SaveDueDateButton"
             
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Margin="0, 300, 0, 0"
+            VerticalAlignment="Top"
+            Margin="0, 140, 0, 0"
                 
             
             Width="100"
