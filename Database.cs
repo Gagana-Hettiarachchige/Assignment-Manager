@@ -212,14 +212,14 @@ namespace AssignmentManager.CodeFiles
                     databaseAssignments.Add(assignment);
 
                     /* Updating the selected assignment's number to match most recent in database. */
-                    ViewModel.SelectedAssignment.AssignmentNumber = int.Parse(reader[0].ToString());
-                    ViewModel.SelectedAssignment.ClassName = reader[1].ToString();
-                    ViewModel.SelectedAssignment.AssignmentName = reader[2].ToString();
-                    ViewModel.SelectedAssignment.AssignmentWeight = double.Parse(reader[3].ToString());
-                    ViewModel.SelectedAssignment.DueDate = DateTime.Parse(reader[4].ToString());
-                    ViewModel.SelectedAssignment.AssignmentStatus = reader[5].ToString();
-                    ViewModel.SelectedAssignment.LocalResources = reader[6].ToString();
-                    ViewModel.SelectedAssignment.OnlineResources = reader[7].ToString();
+                    //ViewModel.SelectedAssignment.AssignmentNumber = int.Parse(reader[0].ToString());
+                    //ViewModel.SelectedAssignment.ClassName = reader[1].ToString();
+                    //ViewModel.SelectedAssignment.AssignmentName = reader[2].ToString();
+                    //ViewModel.SelectedAssignment.AssignmentWeight = double.Parse(reader[3].ToString());
+                    //ViewModel.SelectedAssignment.DueDate = DateTime.Parse(reader[4].ToString());
+                    //ViewModel.SelectedAssignment.AssignmentStatus = reader[5].ToString();
+                    //ViewModel.SelectedAssignment.LocalResources = reader[6].ToString();
+                    //ViewModel.SelectedAssignment.OnlineResources = reader[7].ToString();
                 }
 
                 /* Stopping read. */
