@@ -106,6 +106,17 @@ namespace AssignmentManager
             TableGrid.ItemsSource = Database.DatabaseAssignments;
 
 
+            /* Setting up assignment select combobox. */
+            AssignmentSelectComboBox.Items.Add("New");
+            AssignmentSelectComboBox.SelectedIndex = 0;
+
+            /* Getting every existing assignment number. */
+            foreach (Assignment assignment in Database.DatabaseAssignments)
+            {
+                AssignmentSelectComboBox.Items.Add(assignment.AssignmentNumber);
+            }
+
+
             /* Setting time. */
             ClockTextBlock.Text = DateTime.Now.ToString("F");
 
@@ -263,33 +274,59 @@ namespace AssignmentManager
 
 
 
+
+
         /* Modify row. */
 
-        private void InsertAlterDeleteButton_Click(object sender, RoutedEventArgs e)
+
+
+        private void AssignmentSelectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            InsertAlterDeleteMenu insert_alter_delete_menu = new InsertAlterDeleteMenu();
 
-            /* Opening insert alter delete menu. */
-            insert_alter_delete_menu.ShowDialog();
+            if (AssignmentSelectComboBox.SelectedItem != null)
+            {
+                if (AssignmentSelectComboBox.SelectedItem.ToString() == "New")
+                {
+                    /* Setting selected assignment's number to 0 if new is selected. */
+                    ViewModel.SelectedAssignment.AssignmentNumber = 0;
+
+                    /* Updating UI buttons to show available actions. */
+                    InsertAlterButton.Content = "Insert";
+                    ClearDeleteButton.Content = "Clear";
+                }
+
+                else
+                {
+                    /* Setting view model's number to the selected assignment number. */
+                    ViewModel.SelectedAssignment.AssignmentNumber =
+                              int.Parse(AssignmentSelectComboBox.SelectedItem.ToString());
 
 
-            // Needs to be removed.
+                    //Need to add searching database with number to update the view model details.
 
+
+
+                    /* Updating UI buttons to show available actions. */
+                    InsertAlterButton.Content = "Alter";
+                    ClearDeleteButton.Content = "Delete";
+                }
+            }            
         }
 
+
         /* 
-        * METHOD        : InsertButton_Click
+        * METHOD        : InsertAlterButton_Click
         * DESCRIPTION   :
-        *   Raised when the insert button is clicked and
-        *   saves the new assignment in the database with
-        *   the details entered.
+        *   Raised when the inser/alter button is clicked and
+        *   saves the assignment in the database with
+        *   the details entered in the row.
         * PARAMETERS    :
         *   object sender   : the sender
         *   RouterEventArgs : the routed event arguments
         * RETURNS       :
         *   void
         */
-        private void InsertButton_Click(object sender, RoutedEventArgs e)
+        private void InsertAlterButton_Click(object sender, RoutedEventArgs e)
         {
             Database.Connect();
 
@@ -301,8 +338,27 @@ namespace AssignmentManager
 
 
             Database.Disconnect();
+
+
+            /* Updating assignment select. */
+            AssignmentSelectComboBox.Items.Clear();
+            AssignmentSelectComboBox.Items.Add("New");
+
+            int count = 0;
+            foreach (Assignment assignment in Database.DatabaseAssignments)
+            {
+                AssignmentSelectComboBox.Items.Add(assignment.AssignmentNumber);
+                ++count;
+            }
+
+            AssignmentSelectComboBox.SelectedIndex = count;
         }
 
+
+        private void ClearDeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
 
 
@@ -315,7 +371,7 @@ namespace AssignmentManager
             TextBlock assignment_number = (TextBlock)e.OriginalSource;
 
 
-            MessageBox.Show("Slected Assignment: " + assignment_number.Text);
+            MessageBox.Show("Selected Assignment: " + assignment_number.Text);
 
 
             //Need to add screen for just editing and deleting. 
