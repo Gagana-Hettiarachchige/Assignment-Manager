@@ -298,12 +298,13 @@ namespace AssignmentManager
                 else
                 {
                     /* Setting view model's number to the selected assignment number. */
-                    ViewModel.SelectedAssignment.AssignmentNumber =
-                              int.Parse(AssignmentSelectComboBox.SelectedItem.ToString());
+                    int new_selection = int.Parse(AssignmentSelectComboBox.SelectedItem.ToString());
 
 
-                    //Need to add searching database with number to update the view model details.
+                    ViewModel.SelectedAssignment.AssignmentNumber = new_selection;
 
+
+                    //Need to add method call to update the selected assignment details with the selection.
 
 
                     /* Updating UI buttons to show available actions. */
@@ -328,36 +329,78 @@ namespace AssignmentManager
         */
         private void InsertAlterButton_Click(object sender, RoutedEventArgs e)
         {
-            Database.Connect();
 
-            /* Inserting selected assignment. */
-            Database.InsertAssignment();
-
-            /* Updating UI with newest addition. */
-            Database.UpdateAssignments();
-
-
-            Database.Disconnect();
-
-
-            /* Updating assignment select. */
-            AssignmentSelectComboBox.Items.Clear();
-            AssignmentSelectComboBox.Items.Add("New");
-
-            int count = 0;
-            foreach (Assignment assignment in Database.DatabaseAssignments)
+            /* Checking if action is insert. */
+            if (InsertAlterButton.Content.ToString() == "Insert")
             {
-                AssignmentSelectComboBox.Items.Add(assignment.AssignmentNumber);
-                ++count;
-            }
+                Database.Connect();
 
-            AssignmentSelectComboBox.SelectedIndex = count;
+                /* Inserting selected assignment. */
+                Database.InsertAssignment();
+
+                /* Updating UI with newest addition. */
+                Database.UpdateAssignments();
+
+
+                Database.Disconnect();
+
+
+                /* Updating assignment select. */
+                AssignmentSelectComboBox.Items.Clear();
+                AssignmentSelectComboBox.Items.Add("New");
+
+                int count = 0;
+                foreach (Assignment assignment in Database.DatabaseAssignments)
+                {
+                    AssignmentSelectComboBox.Items.Add(assignment.AssignmentNumber);
+                    ++count;
+                }
+
+                AssignmentSelectComboBox.SelectedIndex = count;
+            }
+            
+            /* Checking if action is alter. */
+            else if (InsertAlterButton.Content.ToString() == "Alter")
+            {
+
+            }    
         }
 
 
         private void ClearDeleteButton_Click(object sender, RoutedEventArgs e)
         {
 
+            /* Checking if action is clear. */
+            if (ClearDeleteButton.Content.ToString() == "Clear")
+            {
+
+            }
+
+            /* Checking if action is delete. */
+            else if (ClearDeleteButton.Content.ToString() == "Delete")
+            {
+
+                /* Setting view model's number to the selected assignment number. */
+                int new_selection = int.Parse(AssignmentSelectComboBox.SelectedItem.ToString());
+
+
+                Database.Connect();
+
+                /* Deleting selected assignment. */
+                Database.DeleteSelectedAssignment(new_selection);
+                
+                /* Updating display of database assignments. */
+                Database.UpdateAssignments();
+
+                Database.Disconnect();
+
+
+                /* Deleting the assignment from the combo box. */
+                int selected_assignment_index = AssignmentSelectComboBox.SelectedIndex;
+                AssignmentSelectComboBox.Items.Remove(AssignmentSelectComboBox.SelectedItem);
+                AssignmentSelectComboBox.SelectedIndex = selected_assignment_index - 1;
+
+            }
         }
 
 
@@ -370,11 +413,7 @@ namespace AssignmentManager
         {
             TextBlock assignment_number = (TextBlock)e.OriginalSource;
 
-
             MessageBox.Show("Selected Assignment: " + assignment_number.Text);
-
-
-            //Need to add screen for just editing and deleting. 
         }
 
         /* 
