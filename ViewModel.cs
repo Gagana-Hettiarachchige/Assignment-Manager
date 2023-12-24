@@ -24,9 +24,6 @@ namespace AssignmentManager.CodeFiles
         /* The assignment currently selected. */
         private static Assignment selectedAssignment = new Assignment();
 
-        /* Old version of selected assignment. */
-        private static Assignment oldSelectedAssignment = new Assignment();
-
         /* The list of local resources of the currentlly selected assignment. */
         private static ObservableCollection<string> selectedLocalResources = 
                    new ObservableCollection<string>();
@@ -49,13 +46,6 @@ namespace AssignmentManager.CodeFiles
             set { selectedAssignment = value; } 
         }
 
-
-        public static Assignment OldSelectedAssignment
-        {
-            get { return oldSelectedAssignment; }
-            set { oldSelectedAssignment = value; }
-        }
-
         public static ObservableCollection<string> SelectedLocalResources
         { 
             get { return selectedLocalResources; }
@@ -75,39 +65,5 @@ namespace AssignmentManager.CodeFiles
         }
 
 
-        /* 
-        * METHOD        : GetCompare
-        * DESCRIPTION   :
-        *   Updates the selected assignments compare.
-        * PARAMETERS    :
-        *   void
-        * RETURNS       :
-        *   void
-        */
-        public static void GetCompare()
-        {
-            /* Clearing the the compare to only have 8 columns of two assignments. */
-            if (SelectedAssignmentCompare.Count > 7)
-            {
-                SelectedAssignmentCompare.Clear();
-            }
-
-            /* Looping through each column. */
-            foreach (string column in Assignment.ColumnNames)
-            {
-                /* Creating compare object with the column and selected assignment. */
-                AssignmentCompare compare = new AssignmentCompare()
-                {
-                    ColumnName = column,
-                    OldValue = "",
-                    NewValue = SelectedAssignment.ColumnValues[column]
-                };
-
-                /* Adding it to the list. */
-                SelectedAssignmentCompare.Add(compare);
-            }
-
-
-        }
     }
 }
