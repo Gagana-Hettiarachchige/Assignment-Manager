@@ -132,7 +132,7 @@ namespace AssignmentManager
             headerClock.Tick += new EventHandler(HeaderClock_Tick);
             
             /* Starting clock. */
-            //headerClock.Start();
+            headerClock.Start();
         }
 
 
@@ -285,7 +285,10 @@ namespace AssignmentManager
             ClassTextBox.Text = "";
             AssignmentTextBox.Text = "";
             WeightTextBox.Text = "";
-            DueDateButton.Content = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt");
+            ViewModel.SelectedAssignment.DueDate = new DateTime(DateTime.Now.Year,
+                                                       DateTime.Now.Month, DateTime.Now.Day,
+                                                       23, 00, 00);
+            DueDateButton.Content = ViewModel.SelectedAssignment.DueDate.ToString();
             StatusComboBox.SelectedIndex = 0;
             ViewModel.SelectedAssignment.LocalResources = "";
             ViewModel.SelectedAssignment.OnlineResources = "";
@@ -614,7 +617,7 @@ namespace AssignmentManager
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             /* Stopping clock. */
-            //headerClock.Stop();
+            headerClock.Stop();
         }
     }
 }
