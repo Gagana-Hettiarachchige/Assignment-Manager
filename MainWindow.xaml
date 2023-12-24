@@ -69,7 +69,7 @@
             VerticalAlignment="Center"
             
             Margin="450, 0, 0, 0"
-            MaxWidth="260"
+            MaxWidth="300"
             
             FontSize="14"
             >
@@ -353,6 +353,8 @@
 
 
 
+
+
         <!-- Table results Row. -->
 
         <!-- Table to hold results. -->
@@ -379,7 +381,7 @@
                 <DataGridTextColumn Header="No." Binding="{Binding AssignmentNumber}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
-                            <EventSetter Event="MouseLeftButtonUp" Handler="AssignmentNumber_MouseLeftButtonUp"/>
+                            <EventSetter Event="MouseLeftButtonDown" Handler="AssignmentNumber_MouseLeftButtonDown"/>
                             <EventSetter Event="MouseEnter" Handler="ClickableText_MouseEnter"/>
                             <EventSetter Event="MouseLeave" Handler="ClickableText_MouseLeave"/>
                         </Style>
