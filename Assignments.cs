@@ -31,32 +31,6 @@ namespace AssignmentManager.CodeFiles
         private string localResources = "";
         private string onlineResources = "";
 
-        /* Names of the rows for display purposes. */
-        public static readonly List<string> ColumnNames = new List<string>()
-        {
-            "Number",
-            "Class",
-            "Name",
-            "Weight",
-            "Due Date",
-            "Status",
-            "Local Resources",
-            "Online Resources"
-        };
-
-        /* Dictionary to iterate through values using the name. */
-        public readonly Dictionary<string, string> ColumnValues = new Dictionary<string, string>()
-        {
-            { ColumnNames[0], "0"},
-            { ColumnNames[1], "ABCD"},
-            { ColumnNames[2], "A-01" },
-            { ColumnNames[3], "10.01" },
-            { ColumnNames[4], "yyyy-MM-dd hh:mm:ss tt"},
-            { ColumnNames[5], "Incomplete" },
-            { ColumnNames[6], "" },
-            { ColumnNames[7], "" },
-        };
-
 
         /* Properties for assignment assignment values. */
 
@@ -69,7 +43,6 @@ namespace AssignmentManager.CodeFiles
             set
             { 
                 assignmentNumber = value; 
-                ColumnValues[ColumnNames[0]] = value.ToString(); 
             } 
         }
 
@@ -82,7 +55,6 @@ namespace AssignmentManager.CodeFiles
             set 
             { 
                 className = value; 
-                ColumnValues[ColumnNames[1]] = value.ToString(); 
             }
         }
 
@@ -95,7 +67,6 @@ namespace AssignmentManager.CodeFiles
             set 
             { 
                 assignmentName = value; 
-                ColumnValues[ColumnNames[2]] = value.ToString(); 
             }
         }
 
@@ -108,7 +79,6 @@ namespace AssignmentManager.CodeFiles
             set 
             { 
                 assignmentWeight = value; 
-                ColumnValues[ColumnNames[3]] = value.ToString(); 
             }
         }
 
@@ -120,8 +90,7 @@ namespace AssignmentManager.CodeFiles
             }
             set 
             { 
-                dueDate = value; 
-                ColumnValues[ColumnNames[4]] = value.ToString(); 
+                dueDate = value;
             }
         }
 
@@ -133,8 +102,7 @@ namespace AssignmentManager.CodeFiles
             }
             set 
             { 
-                assignmentStatus = value; 
-                ColumnValues[ColumnNames[5]] = value.ToString(); 
+                assignmentStatus = value;
             }
         }
 
@@ -146,8 +114,7 @@ namespace AssignmentManager.CodeFiles
             }
             set
             { 
-                localResources = value; 
-                ColumnValues[ColumnNames[6]] = value.ToString(); 
+                localResources = value;
             }
         }
 
@@ -159,8 +126,7 @@ namespace AssignmentManager.CodeFiles
             }
             set 
             { 
-                onlineResources = value; 
-                ColumnValues[ColumnNames[7]] = value.ToString(); 
+                onlineResources = value;
             }
         }
 
