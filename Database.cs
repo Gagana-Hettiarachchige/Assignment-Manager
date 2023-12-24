@@ -223,7 +223,7 @@ namespace AssignmentManager.CodeFiles
                 Disconnect();
 
                 /* Displaying error. */
-                MessageBox.Show(error.Message, "Database Update Failed",
+                MessageBox.Show(error.Message, "Database Select Failed",
                                 MessageBoxButton.OK, MessageBoxImage.Error);
 
                 return false;
@@ -231,8 +231,15 @@ namespace AssignmentManager.CodeFiles
         }
 
 
-
-        
+        /* 
+        * METHOD        : DeleteSelectedAssignment
+        * DESCRIPTION   :
+        *   Deletes the selected assignment from the database
+        * PARAMETERS    :
+        *   void
+        * RETURNS       :
+        *   bool : whether or not the delete worked.
+        */
         public static bool DeleteSelectedAssignment()
         {
             try
@@ -268,8 +275,79 @@ namespace AssignmentManager.CodeFiles
         }
 
 
+        /* 
+        * METHOD        : UpdateSelectedAssignment
+        * DESCRIPTION   :
+        *   Updates the selected assignment in the database
+        * PARAMETERS    :
+        *   void
+        * RETURNS       :
+        *   bool : whether or not the update worked.
+        */
+        public static bool UpdateSelectedAssignment()
+        {
+            try
+            {
+                /* Making database friendly versions of the paths. */
+                string database_friendly_local_path =
+                       ViewModel.SelectedAssignment.LocalResources.Replace(@"\", @"\\");
+                string database_friendly_online_path =
+                       ViewModel.SelectedAssignment.OnlineResources.Replace(@"\", @"\\");
 
 
+
+                /* Creating update command. */
+                MySqlCommand update = 
+                    new MySqlCommand($"UPDATE Assignments " +
+                                     $"SET " +
+                                     $"AssignmentNumber = {ViewModel.SelectedAssignment.AssignmentNumber}, " +
+                                     $"ClassName = '{ViewModel.SelectedAssignment.ClassName}', " +
+                                     $"AssignmentName = '{ViewModel.SelectedAssignment.AssignmentName}', " +
+                                     $"AssignmentWeight = {ViewModel.SelectedAssignment.AssignmentWeight}, " +
+                                     $"DueDate = '{ViewModel.SelectedAssignment.DueDate.ToString("yyyy-MM-dd HH:mm:ss")}', " +
+                                     $"AssignmentStatus = '{ViewModel.SelectedAssignment.AssignmentStatus}', " +
+                                     $"LocalResources = '{database_friendly_local_path}', " +
+                                     $"OnlineResources = '{database_friendly_online_path}' " + 
+                                     $"WHERE AssignmentNumber = " +
+                                     $"{ViewModel.SelectedAssignment.AssignmentNumber};",
+                                     connection);
+
+
+                /* Creating editor with update command. */
+                MySqlDataAdapter editor = new MySqlDataAdapter(update);
+                DataSet database = new DataSet(DATABASE);
+
+
+                /* Updating the selected assignment in the database. */
+                editor.Fill(database);
+
+
+
+                return true;
+            }
+            catch (Exception error) 
+            {
+                Disconnect();
+
+                /* Displaying error. */
+                MessageBox.Show(error.Message, "Database Update Failed",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+
+                return false;
+            }
+        }
+
+
+
+        /* 
+        * METHOD        : SelectNewAssignment
+        * DESCRIPTION   :
+        *   Selects the new assignment from the database
+        * PARAMETERS    :
+        *   int new_assignment_number : the number of the new assignment
+        * RETURNS       :
+        *   bool : whether or not the select worked.
+        */
         public static bool SelectNewAssignment(int new_assignment_number)
         {
             try
@@ -311,5 +389,8 @@ namespace AssignmentManager.CodeFiles
                 return false;
             }
         }
+
+
+
     }
 }
