@@ -37,8 +37,8 @@ namespace AssignmentManager.CodeFiles
             InitializeComponent();
 
             /* Getting comparison. */
-            ViewModel.GetCompare();
-            TableGrid.ItemsSource = ViewModel.SelectedAssignmentCompare;
+            //ViewModel.GetCompare();
+            //TableGrid.ItemsSource = ViewModel.SelectedAssignmentCompare;
         }
 
         private void InsertOption_Click(object sender, RoutedEventArgs e)
