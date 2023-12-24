@@ -18,6 +18,8 @@
         Height="450" Width="850" 
         MinHeight="450" MinWidth="1000"
         WindowStartupLocation="CenterScreen"
+        
+        Closing="Window_Closing"
         >
     <Grid>
 
