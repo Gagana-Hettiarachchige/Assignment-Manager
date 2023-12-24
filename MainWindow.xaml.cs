@@ -30,6 +30,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Threading;
 using System.Windows.Media.Animation;
+using System.Windows.Automation.Peers;
 
 namespace AssignmentManager
 {
@@ -350,8 +351,13 @@ namespace AssignmentManager
                     ViewModel.SelectedAssignment.AssignmentNumber = 0;
 
                     /* Updating UI buttons to show available actions. */
-                    InsertAlterButton.Content = "Insert";
+                    InsertUpdateButton.Content = "Insert";
                     ClearDeleteButton.Content = "Clear";
+                    InsertUpdateButton.ToolTip = "Insert current assignment...";
+                    ClearDeleteButton.ToolTip = "Clear current assignment details...";
+
+                    /* Updating grid highlight. */
+                    TableGrid.SelectedItem = null;
                 }
 
                 else
@@ -371,15 +377,26 @@ namespace AssignmentManager
 
 
                     /* Updating UI buttons to show available actions. */
-                    InsertAlterButton.Content = "Alter";
+                    InsertUpdateButton.Content = "Update";
                     ClearDeleteButton.Content = "Delete";
+                    InsertUpdateButton.ToolTip = "Update current assignment...";
+                    ClearDeleteButton.ToolTip = "Delete current assignment...";
+
+                    /* Updating grid highlight. */
+                    foreach (Assignment row in TableGrid.Items)
+                    {
+                        if (row.AssignmentNumber == ViewModel.SelectedAssignment.AssignmentNumber)
+                        {
+                            TableGrid.SelectedItem = row;
+                        }
+                    }
                 }
             }            
         }
 
 
         /* 
-        * METHOD        : InsertAlterButton_Click
+        * METHOD        : InsertUpdateButton_Click
         * DESCRIPTION   :
         *   Raised when the inser/alter button is clicked and
         *   saves the assignment in the database with
@@ -390,11 +407,11 @@ namespace AssignmentManager
         * RETURNS       :
         *   void
         */
-        private void InsertAlterButton_Click(object sender, RoutedEventArgs e)
+        private void InsertUpdateButton_Click(object sender, RoutedEventArgs e)
         {
 
             /* Checking if action is insert. */
-            if (InsertAlterButton.Content.ToString() == "Insert")
+            if (InsertUpdateButton.Content.ToString() == "Insert")
             {
                 Database.Connect();
 
@@ -423,11 +440,11 @@ namespace AssignmentManager
             }
             
             /* Checking if action is alter. */
-            else if (InsertAlterButton.Content.ToString() == "Alter")
+            else if (InsertUpdateButton.Content.ToString() == "Update")
             {
 
 
-                //Need to create database method for altering selected assignment.
+                //Need to create database method for updating selected assignment.
 
 
             }    
@@ -478,8 +495,10 @@ namespace AssignmentManager
 
         private void AssignmentNumber_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            //TextBlock assignment_number = (TextBlock)e.OriginalSource;
+            TextBlock assignment_number_text = (TextBlock)e.OriginalSource;
+            int assignment_number = int.Parse(assignment_number_text.Text);
 
+            AssignmentSelectComboBox.SelectedItem = assignment_number;
         }
 
         /* 
