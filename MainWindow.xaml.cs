@@ -143,6 +143,18 @@ namespace AssignmentManager
 
         /* Header row. */
 
+
+
+        /* 
+        * METHOD        : HeaderClock_Tick
+        * DESCRIPTION   :
+        *   Updates the header clock to the current time.
+        * PARAMETERS    :
+        *   object sender   : the sender
+        *   EventArgs       : the event arguments
+        * RETURNS       :
+        *   void
+        */
         private void HeaderClock_Tick(object sender, EventArgs e)
         {
             /* Updating time. */
@@ -157,7 +169,7 @@ namespace AssignmentManager
         *   opens a new tab to the school's homepage.
         * PARAMETERS    :
         *   object sender   : the sender
-        *   RouterEventArgs : the routed event arguments
+        *   RoutedEventArgs : the routed event arguments
         * RETURNS       :
         *   void
         */
@@ -168,9 +180,18 @@ namespace AssignmentManager
         }
 
 
-
-
         /* Insert row. */
+
+
+        /* 
+        * METHOD        : ClassTextBox_TextChanged
+        * DESCRIPTION   :
+        *   
+        * PARAMETERS    :
+        *   type identifier : parameter description
+        * RETURNS       :
+        *   type : description
+        */
         private void ClassTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (ClassTextBox.Text == "")
@@ -442,11 +463,15 @@ namespace AssignmentManager
             /* Checking if action is alter. */
             else if (InsertUpdateButton.Content.ToString() == "Update")
             {
+                Database.Connect();
 
+                /* Updating selected assignment. */
+                Database.UpdateSelectedAssignment();
 
-                //Need to create database method for updating selected assignment.
+                /* Updating UI with newest addition. */
+                Database.UpdateAssignments();
 
-
+                Database.Disconnect();
             }    
         }
 
@@ -493,13 +518,15 @@ namespace AssignmentManager
         /* Table row. */
 
 
-        private void AssignmentNumber_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void AssignmentNumber_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             TextBlock assignment_number_text = (TextBlock)e.OriginalSource;
             int assignment_number = int.Parse(assignment_number_text.Text);
 
             AssignmentSelectComboBox.SelectedItem = assignment_number;
         }
+
+
 
         /* 
         * METHOD        : Resources_MouseLeftButtonUp
@@ -595,35 +622,30 @@ namespace AssignmentManager
             TextBlock due_date_text = (TextBlock)e.OriginalSource;
             DateTime due_date = DateTime.Parse(due_date_text.Text);
             
-            /* Getting number of days left. */
+            /* Getting number of days and hours left. */
             int days_due = (due_date - DateTime.Now).Days;
+            int hours_due = (due_date - DateTime.Now).Hours;
 
             /* Checking how many days are left. */
-            if (days_due == 2)
-            {
-                /* Displaying info about how many days left. */
-                GeneralInfoTextBlock.Background = Brushes.Yellow;
-                GeneralInfoTextBlock.Text = "Assignment is due day after tommorrow.";
-            }
-
-            else if (days_due == 1)
-            {
-                GeneralInfoTextBlock.Background = Brushes.Orange;
-                GeneralInfoTextBlock.Text = "Assignment is due tommorrow.";
-            }
-
-            else if (days_due == 0)
+            if (days_due <= 0)
             {
                 GeneralInfoTextBlock.Background = Brushes.OrangeRed;
-                GeneralInfoTextBlock.Text = "Assignment is due today.";
             }
 
-            else
+            else if (days_due <= 1)
             {
-                GeneralInfoTextBlock.Text = $"Assignment is due in {days_due} days.";
+                GeneralInfoTextBlock.Background = Brushes.Yellow;
+                
             }
-            
-            
+
+            else if (days_due <= 2)
+            {
+                GeneralInfoTextBlock.Background = Brushes.Orange;
+            }
+
+
+            /* Displaying info about how many days left. */
+            GeneralInfoTextBlock.Text = $"Assignment is due in {days_due} days and {hours_due} hours.";
         }
 
         private void DueDate_MouseLeave(object sender, MouseEventArgs e)
