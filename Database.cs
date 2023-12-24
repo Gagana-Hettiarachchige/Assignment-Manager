@@ -210,16 +210,6 @@ namespace AssignmentManager.CodeFiles
 
                     /* Updating list of assignments in database. */
                     databaseAssignments.Add(assignment);
-
-                    /* Updating the selected assignment's number to match most recent in database. */
-                    //ViewModel.SelectedAssignment.AssignmentNumber = int.Parse(reader[0].ToString());
-                    //ViewModel.SelectedAssignment.ClassName = reader[1].ToString();
-                    //ViewModel.SelectedAssignment.AssignmentName = reader[2].ToString();
-                    //ViewModel.SelectedAssignment.AssignmentWeight = double.Parse(reader[3].ToString());
-                    //ViewModel.SelectedAssignment.DueDate = DateTime.Parse(reader[4].ToString());
-                    //ViewModel.SelectedAssignment.AssignmentStatus = reader[5].ToString();
-                    //ViewModel.SelectedAssignment.LocalResources = reader[6].ToString();
-                    //ViewModel.SelectedAssignment.OnlineResources = reader[7].ToString();
                 }
 
                 /* Stopping read. */
@@ -242,13 +232,15 @@ namespace AssignmentManager.CodeFiles
 
 
 
-        public static bool DeleteSelectedAssignment(int assignment_number)
+        
+        public static bool DeleteSelectedAssignment()
         {
             try
             {
                 /* Creating delete command. */
                 MySqlCommand delete = new MySqlCommand($"DELETE FROM Assignments " +
-                                                       $"WHERE AssignmentNumber = {assignment_number};",
+                                                       $"WHERE AssignmentNumber = " +
+                                                       $"{ViewModel.SelectedAssignment.AssignmentNumber};",
                                                        connection);
 
                 /* Creating editor with delete command. */
@@ -256,7 +248,7 @@ namespace AssignmentManager.CodeFiles
                 DataSet database = new DataSet(DATABASE);
 
 
-                /* Deleting the assignment from the database. */
+                /* Deleting the selected assignment from the database. */
                 editor.Fill(database);
 
 
@@ -277,5 +269,47 @@ namespace AssignmentManager.CodeFiles
 
 
 
+
+        public static bool SelectNewAssignment(int new_assignment_number)
+        {
+            try
+            {
+                /* Creating read query to get the specific assignment. */
+                MySqlCommand read = new MySqlCommand($"SELECT * FROM Assignments " +
+                                                     $"WHERE AssignmentNumber = {new_assignment_number};", 
+                                                     connection);
+
+                /* Reading. */
+                MySqlDataReader reader = read.ExecuteReader();
+                reader.Read();
+
+
+                /* Updating the selected assignment. */
+                ViewModel.SelectedAssignment.AssignmentNumber = int.Parse(reader[0].ToString());
+                ViewModel.SelectedAssignment.ClassName = reader[1].ToString();
+                ViewModel.SelectedAssignment.AssignmentName = reader[2].ToString();
+                ViewModel.SelectedAssignment.AssignmentWeight = double.Parse(reader[3].ToString());
+                ViewModel.SelectedAssignment.DueDate = DateTime.Parse(reader[4].ToString());
+                ViewModel.SelectedAssignment.AssignmentStatus = reader[5].ToString();
+                ViewModel.SelectedAssignment.LocalResources = reader[6].ToString();
+                ViewModel.SelectedAssignment.OnlineResources = reader[7].ToString();
+
+
+                reader.Close();
+
+                return true;
+            }
+
+            catch (Exception error) 
+            {
+                Disconnect();
+
+                /* Displaying error. */
+                MessageBox.Show(error.Message, "Database Select Failed",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+
+                return false;
+            }
+        }
     }
 }
