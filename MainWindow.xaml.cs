@@ -277,7 +277,42 @@ namespace AssignmentManager
 
 
         /* Modify row. */
+        private void UpdateUI()
+        {
+            /* Updating UI with selected assignment details. */
+            ClassTextBox.Text = ViewModel.SelectedAssignment.ClassName;
+            AssignmentTextBox.Text = ViewModel.SelectedAssignment.AssignmentName;
+            WeightTextBox.Text = ViewModel.SelectedAssignment.AssignmentWeight.ToString();
+            DueDateButton.Content = ViewModel.SelectedAssignment.DueDate.ToString("yyyy-MM-dd hh:mm:ss tt");
+            StatusComboBox.SelectedItem = ViewModel.SelectedAssignment.AssignmentStatus;
 
+            /* Updating resource lists. */
+            string[] local_resources = ViewModel.SelectedAssignment.LocalResources.Split('\n');
+            string[] online_resources = ViewModel.SelectedAssignment.OnlineResources.Split('\n');
+
+            ViewModel.SelectedLocalResources.Clear();
+            ViewModel.SelectedOnlineResources.Clear();
+
+
+            foreach (string resource in local_resources)
+            {
+                if (resource != "")
+                {
+                    ViewModel.SelectedLocalResources.Add(resource);
+                }
+            }
+
+            foreach (string resource in online_resources)
+            {
+                if (resource != "")
+                {
+                    ViewModel.SelectedOnlineResources.Add(resource);
+                }
+            }
+
+            LocalResourcesButton.Content = ViewModel.SelectedLocalResources.Count;
+            OnlineResourcesButton.Content = ViewModel.SelectedOnlineResources.Count;
+        }
 
 
         private void AssignmentSelectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -300,11 +335,15 @@ namespace AssignmentManager
                     /* Setting view model's number to the selected assignment number. */
                     int new_selection = int.Parse(AssignmentSelectComboBox.SelectedItem.ToString());
 
+                    Database.Connect();
 
-                    ViewModel.SelectedAssignment.AssignmentNumber = new_selection;
+                    /* Updating the selected assignment details with the selection. */
+                    Database.SelectNewAssignment(new_selection);
 
+                    /* Updating UI. */
+                    UpdateUI();
 
-                    //Need to add method call to update the selected assignment details with the selection.
+                    Database.Disconnect();
 
 
                     /* Updating UI buttons to show available actions. */
@@ -363,6 +402,10 @@ namespace AssignmentManager
             else if (InsertAlterButton.Content.ToString() == "Alter")
             {
 
+
+                //Need to create database method for altering selected assignment.
+
+
             }    
         }
 
@@ -387,7 +430,7 @@ namespace AssignmentManager
                 Database.Connect();
 
                 /* Deleting selected assignment. */
-                Database.DeleteSelectedAssignment(new_selection);
+                Database.DeleteSelectedAssignment();
                 
                 /* Updating display of database assignments. */
                 Database.UpdateAssignments();
@@ -411,9 +454,8 @@ namespace AssignmentManager
 
         private void AssignmentNumber_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            TextBlock assignment_number = (TextBlock)e.OriginalSource;
+            //TextBlock assignment_number = (TextBlock)e.OriginalSource;
 
-            MessageBox.Show("Selected Assignment: " + assignment_number.Text);
         }
 
         /* 
@@ -548,6 +590,10 @@ namespace AssignmentManager
             GeneralInfoTextBlock.Text = "";
         }
 
-        
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            /* Stopping clock. */
+            headerClock.Stop();
+        }
     }
 }
