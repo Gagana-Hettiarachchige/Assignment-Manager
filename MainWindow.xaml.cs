@@ -132,7 +132,7 @@ namespace AssignmentManager
             headerClock.Tick += new EventHandler(HeaderClock_Tick);
             
             /* Starting clock. */
-            headerClock.Start();
+            //headerClock.Start();
         }
 
 
@@ -277,6 +277,27 @@ namespace AssignmentManager
 
 
         /* Modify row. */
+
+
+        private void ClearUI()
+        {
+            /* Updating UI with selected assignment details. */
+            ClassTextBox.Text = "";
+            AssignmentTextBox.Text = "";
+            WeightTextBox.Text = "";
+            DueDateButton.Content = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt");
+            StatusComboBox.SelectedIndex = 0;
+            ViewModel.SelectedAssignment.LocalResources = "";
+            ViewModel.SelectedAssignment.OnlineResources = "";
+            ViewModel.SelectedLocalResources.Clear();
+            ViewModel.SelectedOnlineResources.Clear();
+            LocalResourcesButton.Content = ViewModel.SelectedLocalResources.Count;
+            OnlineResourcesButton.Content = ViewModel.SelectedOnlineResources.Count;
+        }
+
+
+
+
         private void UpdateUI()
         {
             /* Updating UI with selected assignment details. */
@@ -416,7 +437,7 @@ namespace AssignmentManager
             /* Checking if action is clear. */
             if (ClearDeleteButton.Content.ToString() == "Clear")
             {
-
+                ClearUI();
             }
 
             /* Checking if action is delete. */
@@ -593,7 +614,7 @@ namespace AssignmentManager
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             /* Stopping clock. */
-            headerClock.Stop();
+            //headerClock.Stop();
         }
     }
 }
