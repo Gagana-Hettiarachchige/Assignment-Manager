@@ -48,6 +48,8 @@
                  
             ScrollViewer.HorizontalScrollBarVisibility="Visible"
             ScrollViewer.VerticalScrollBarVisibility="Visible"
+                 
+            SelectionMode="Extended"
             >
 
         </ListBox>
