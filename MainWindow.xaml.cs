@@ -55,6 +55,7 @@ namespace AssignmentManager
         public static RoutedCommand DueDateEditShortcut = new RoutedCommand();
         public static RoutedCommand LocalEditShortcut = new RoutedCommand();
         public static RoutedCommand OnlineEditShortcut = new RoutedCommand();
+        public static RoutedCommand SelectNewShortcut = new RoutedCommand();
         public static RoutedCommand InsertUpdateShortcut = new RoutedCommand();
         public static RoutedCommand ClearDeleteShortCut = new RoutedCommand();
 
@@ -129,6 +130,7 @@ namespace AssignmentManager
             DueDateEditShortcut.InputGestures.Add(new KeyGesture(Key.Q, ModifierKeys.Alt));
             LocalEditShortcut.InputGestures.Add(new KeyGesture(Key.W, ModifierKeys.Alt));
             OnlineEditShortcut.InputGestures.Add(new KeyGesture(Key.E, ModifierKeys.Alt));
+            SelectNewShortcut.InputGestures.Add(new KeyGesture(Key.A, ModifierKeys.Alt));
             InsertUpdateShortcut.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Alt | ModifierKeys.Shift));
             ClearDeleteShortCut.InputGestures.Add(new KeyGesture(Key.D, ModifierKeys.Alt | ModifierKeys.Shift));
 
@@ -695,6 +697,12 @@ namespace AssignmentManager
             OnlineResourcesButton_Click(sender, e);
         }
 
+        private void SelectNewShortcut_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            /* Switching selected assignment to new. */
+            AssignmentSelectComboBox.SelectedIndex = 0;
+        }
+
         private void InsertUpdateShortcut_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             InsertUpdateButton_Click(sender, e);
@@ -704,5 +712,7 @@ namespace AssignmentManager
         {
             ClearDeleteButton_Click(sender, e);
         }
+
+        
     }
 }
