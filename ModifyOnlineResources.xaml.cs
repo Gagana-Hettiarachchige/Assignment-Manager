@@ -103,7 +103,7 @@ namespace AssignmentManager.CodeFiles
         * METHOD        : OnlineResourceRemove_Click
         * DESCRIPTION   :
         *   Raised when the remove button is clicked and removes the
-        *   slected assingments from the list box and view model.
+        *   slected resources from the list box and view model.
         * PARAMETERS    :
         *   object sender     : the sender
         *   RoutedEventArgs e : the routed event args
@@ -143,7 +143,7 @@ namespace AssignmentManager.CodeFiles
         /* 
         * METHOD        : WindowClosing
         * DESCRIPTION   :
-        *   Raised when the window is closing and saves the selected assignments
+        *   Raised when the window is closing and saves the selected resources
         *   into the view model as a string.
         * PARAMETERS    :
         *   object sender                           : the sender
