@@ -56,6 +56,8 @@ namespace AssignmentManager
         public static RoutedCommand LocalEditShortcut = new RoutedCommand();
         public static RoutedCommand OnlineEditShortcut = new RoutedCommand();
         public static RoutedCommand SelectNewShortcut = new RoutedCommand();
+        public static RoutedCommand CycleUpShortcut = new RoutedCommand();
+        public static RoutedCommand CycleDownShortcut = new RoutedCommand();
         public static RoutedCommand InsertUpdateShortcut = new RoutedCommand();
         public static RoutedCommand ClearDeleteShortCut = new RoutedCommand();
 
@@ -131,6 +133,8 @@ namespace AssignmentManager
             LocalEditShortcut.InputGestures.Add(new KeyGesture(Key.W, ModifierKeys.Alt));
             OnlineEditShortcut.InputGestures.Add(new KeyGesture(Key.E, ModifierKeys.Alt));
             SelectNewShortcut.InputGestures.Add(new KeyGesture(Key.A, ModifierKeys.Alt));
+            CycleUpShortcut.InputGestures.Add(new KeyGesture(Key.D1, ModifierKeys.Alt));
+            CycleDownShortcut.InputGestures.Add(new KeyGesture(Key.D2, ModifierKeys.Alt));
             InsertUpdateShortcut.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Alt | ModifierKeys.Shift));
             ClearDeleteShortCut.InputGestures.Add(new KeyGesture(Key.D, ModifierKeys.Alt | ModifierKeys.Shift));
 
@@ -179,20 +183,28 @@ namespace AssignmentManager
 
 
         /* 
-        * METHOD        : SchoolButton_Click
+        * METHOD        : HelpButton_Click
         * DESCRIPTION   :
-        *   Raised when the school button is clicked and
-        *   opens a new tab to the school's homepage.
+        *   Raised when the help button is clicked and
+        *   opens a message box with information
         * PARAMETERS    :
-        *   object sender   : the sender
-        *   RoutedEventArgs : the routed event arguments
+        *   object sender     : the sender
+        *   RoutedEventArgs e : the routed event arguments
         * RETURNS       :
         *   void
         */
-        private void SchoolButton_Click(object sender, RoutedEventArgs e)
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            /* Opens tab to school's webpage. */
-            Process.Start("https://conestoga.desire2learn.com/d2l/home");
+            MessageBox.Show("ALT + Q = Edit Due Date\r\n" +
+                            "ALT + W = Edit Local Resources\r\n" +
+                            "ALT + E = Edit Online Resources\r\n" +
+                            "ALT + A = Select New Assignment Option\r\n" +
+                            "ALT + 1 = Cycle selected assignments up\r\n" +
+                            "ALT + 2 = Cycle selected assignments down\r\n" +
+                            "ALT + SHIFT + S = Save/Update current assignment.\r\n" +
+                            "ALT + SHIFT + D = Delete/Clear current assignment.\r\n\r\n" +
+                            "SHIFT + LEFT MOUSE CLICK = Multi-select resources", 
+                            "Help", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
 
@@ -701,6 +713,36 @@ namespace AssignmentManager
         {
             /* Switching selected assignment to new. */
             AssignmentSelectComboBox.SelectedIndex = 0;
+        }
+
+
+        private void CycleUpShortcut_Executed(object sender, ExecutedRoutedEventArgs e)
+        {   
+            if (AssignmentSelectComboBox.SelectedIndex > 0)
+            {
+                /* Cycling up. */
+                AssignmentSelectComboBox.SelectedIndex -= 1;
+            }
+            else
+            {
+                /* Wrapping around. */
+                AssignmentSelectComboBox.SelectedIndex = AssignmentSelectComboBox.Items.Count - 1;
+            }
+        }
+
+        private void CycleDownShortcut_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (AssignmentSelectComboBox.SelectedIndex < AssignmentSelectComboBox.Items.Count - 1)
+            {
+                /* Cycling down. */
+                AssignmentSelectComboBox.SelectedIndex += 1;
+            }
+
+            else
+            {
+                /* Wrapping around. */
+                AssignmentSelectComboBox.SelectedIndex = 0;
+            }
         }
 
         private void InsertUpdateShortcut_Executed(object sender, ExecutedRoutedEventArgs e)
