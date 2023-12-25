@@ -54,7 +54,7 @@ namespace AssignmentManager.CodeFiles
         * METHOD        : OnlineResourceAdd_Click
         * DESCRIPTION   :
         *   Raised when the add button is clicked and adds the
-        *   assingment to the list box and view model.
+        *   resource(s) to the list box and view model.
         * PARAMETERS    :
         *   object sender     : the sender
         *   RoutedEventArgs e : the routed event args
