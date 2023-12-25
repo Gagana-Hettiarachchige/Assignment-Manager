@@ -39,6 +39,16 @@ namespace AssignmentManager.CodeFiles
     /// </summary>
     public partial class ModifyLocalResources : Window
     {
+
+
+
+        /* 
+        * METHOD        : ModifyLocalResources
+        * DESCRIPTION   :
+        *   Constructor for this screen.
+        * PARAMETERS    :
+        *   void
+        */
         public ModifyLocalResources()
         {
             InitializeComponent();
@@ -49,6 +59,18 @@ namespace AssignmentManager.CodeFiles
             }
         }
 
+
+        /* 
+        * METHOD        : AddFileOption_Click
+        * DESCRIPTION   :
+        *   Raised when the add file button is clicked and adds the
+        *   resource to the list box and view model.
+        * PARAMETERS    :
+        *   object sender     : the sender
+        *   RoutedEventArgs e : the routed event args
+        * RETURNS       :
+        *   void
+        */
         private void AddFileOption_Click(object sender, RoutedEventArgs e)
         {
             /* Setting up dialog for adding files to be able to open. */
@@ -87,6 +109,18 @@ namespace AssignmentManager.CodeFiles
             }
         }
 
+
+        /* 
+        * METHOD        : AddFolderOption_Click
+        * DESCRIPTION   :
+        *   Raised when the add folder button is clicked and adds the
+        *   resource to the list box and view model.
+        * PARAMETERS    :
+        *   object sender     : the sender
+        *   RoutedEventArgs e : the routed event args
+        * RETURNS       :
+        *   void
+        */
         private void AddFolderOption_Click(object sender, RoutedEventArgs e)
         {
             /* Setting up dialog for selecting a folder. */
@@ -105,13 +139,35 @@ namespace AssignmentManager.CodeFiles
             this.WindowState = WindowState.Normal;
         }
 
+
+        /* 
+        * METHOD        : RemoveOption_Click
+        * DESCRIPTION   :
+        *   Raised when the remove button is clicked and removes the
+        *   slected resources from the list box and view model.
+        * PARAMETERS    :
+        *   object sender     : the sender
+        *   RoutedEventArgs e : the routed event args
+        * RETURNS       :
+        *   void
+        */
         private void RemoveOption_Click(object sender, RoutedEventArgs e)
         {
-            /* Removing selected resource from the lists. */
-            if (LocalResourcesList.SelectedItem != null)
+            /* Checking if a resource is actually selected. */
+            if (LocalResourcesList.SelectedItems != null)
             {
-                /* Removing item from current list. */
-                LocalResourcesList.Items.Remove(LocalResourcesList.SelectedItem);
+                /* Removing selected resources from UI. */
+                List<string> selected_resources = new List<string>();
+
+                foreach (string resource in LocalResourcesList.SelectedItems)
+                {
+                    selected_resources.Add(resource);
+                }
+
+                foreach (string resource in selected_resources)
+                {
+                    LocalResourcesList.Items.Remove(resource);
+                }
 
                 /* Clearing and updating ViewModel list. */
                 ViewModel.SelectedLocalResources.Clear();
@@ -124,6 +180,18 @@ namespace AssignmentManager.CodeFiles
 
         }
 
+
+        /* 
+        * METHOD        : WindowClosing
+        * DESCRIPTION   :
+        *   Raised when the window is closing and saves the selected resources
+        *   into the view model as a string.
+        * PARAMETERS    :
+        *   object sender                           : the sender
+        *   System.ComponentModel.CancelEventArgs e : the cancel event args
+        * RETURNS       :
+        *   void
+        */
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             /* Clearing out view model's selected local resources. */
