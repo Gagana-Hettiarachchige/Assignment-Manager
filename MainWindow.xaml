@@ -21,6 +21,18 @@
         
         Closing="Window_Closing"
         >
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:MainWindow.LocalEditShortcut}" 
+                     Executed="LocalEditShortcut_Executed"/>
+        <CommandBinding Command="{x:Static local:MainWindow.DueDateEditShortcut}" 
+                     Executed="DueDateEditShortcut_Executed"/>
+        <CommandBinding Command="{x:Static local:MainWindow.OnlineEditShortcut}" 
+                     Executed="OnlineEditShortcut_Executed"/>
+        <CommandBinding Command="{x:Static local:MainWindow.InsertUpdateShortcut}" 
+                     Executed="InsertUpdateShortcut_Executed"/>
+        <CommandBinding Command="{x:Static local:MainWindow.ClearDeleteShortCut}" 
+                     Executed="ClearDeleteShortCut_Executed"/>
+    </Window.CommandBindings>
     <Grid>
 
         <!-- Defining the grid rows. -->
