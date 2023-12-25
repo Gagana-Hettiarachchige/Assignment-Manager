@@ -18,7 +18,6 @@
         Height="450" Width="850" 
         MinHeight="450" MinWidth="1000"
         WindowStartupLocation="CenterScreen"
-        
         Closing="Window_Closing"
         >
     <Window.CommandBindings>
@@ -39,8 +38,8 @@
         <CommandBinding Command="{x:Static local:MainWindow.ClearDeleteShortCut}" 
                      Executed="ClearDeleteShortCut_Executed"/>
     </Window.CommandBindings>
+    
     <Grid>
-
         <!-- Defining the grid rows. -->
         <Grid.RowDefinitions>
 
@@ -96,6 +95,21 @@
 
 
         <!-- Help button. -->
+        <Button Name="SettingsButton"
+            Grid.Row="0"
+            Width="100"
+            Height="30"
+            
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center" 
+            Margin="0, 0, 120, 0" 
+            
+            Click="SettingsButton_Click"
+                
+            ToolTip="Edit settings..."
+            >
+            Settings
+        </Button>
         <Button Name="HelpButton"
             Grid.Row="0"
             Width="100"
@@ -363,10 +377,15 @@
             >
             Clear/Delete
         </Button>
-
-
-
-
+        
+        <!-- Used for better feedback. -->
+        <Rectangle Name="NotificationRectangle"
+            HorizontalAlignment="Left" 
+            Height="22" Margin="10,0,0,0" 
+            Grid.Row="1" 
+            Fill="Black"
+            VerticalAlignment="Center" 
+            Width="665"/>
 
 
 
@@ -391,7 +410,7 @@
             <DataGrid.Resources>
                 <!-- Colour of selected row. -->
                 <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" 
-                   Color="#00a2ff"/>
+                   Color="CornflowerBlue"/>
             </DataGrid.Resources>
             <DataGrid.Columns>
 
@@ -462,6 +481,8 @@
 
             </DataGrid.Columns>
         </DataGrid>
+
+        
 
 
     </Grid>
