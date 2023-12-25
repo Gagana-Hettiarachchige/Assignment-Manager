@@ -28,6 +28,8 @@
                      Executed="DueDateEditShortcut_Executed"/>
         <CommandBinding Command="{x:Static local:MainWindow.OnlineEditShortcut}" 
                      Executed="OnlineEditShortcut_Executed"/>
+        <CommandBinding Command="{x:Static local:MainWindow.SelectNewShortcut}" 
+                     Executed="SelectNewShortcut_Executed"/>
         <CommandBinding Command="{x:Static local:MainWindow.InsertUpdateShortcut}" 
                      Executed="InsertUpdateShortcut_Executed"/>
         <CommandBinding Command="{x:Static local:MainWindow.ClearDeleteShortCut}" 
