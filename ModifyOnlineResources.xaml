@@ -42,6 +42,7 @@
 
             <MenuItem Name="OnlineResourceAdd" Header="Add" FontSize="14" Click="OnlineResourceAdd_Click"/>
             <MenuItem Name="OnlineResourceRemove" Header="Remove" FontSize="14" Click="OnlineResourceRemove_Click"/>
+            <MenuItem Name="OnlineResourceClear" Header="Clear" FontSize="14" Click="OnlineResourceClear_Click"/>
         </Menu>
         
         
@@ -54,6 +55,9 @@
                  
             ScrollViewer.HorizontalScrollBarVisibility="Visible"
             ScrollViewer.VerticalScrollBarVisibility="Visible"
+                 
+                 
+            SelectionMode="Extended"
             >
 
         </ListBox>
