@@ -51,6 +51,13 @@ namespace AssignmentManager
         DispatcherTimer headerClock;
 
 
+        /* Shortcuts. */
+        public static RoutedCommand DueDateEditShortcut = new RoutedCommand();
+        public static RoutedCommand LocalEditShortcut = new RoutedCommand();
+        public static RoutedCommand OnlineEditShortcut = new RoutedCommand();
+        public static RoutedCommand InsertUpdateShortcut = new RoutedCommand();
+        public static RoutedCommand ClearDeleteShortCut = new RoutedCommand();
+
         /* Constructors. */
 
         /* 
@@ -117,6 +124,13 @@ namespace AssignmentManager
                 AssignmentSelectComboBox.Items.Add(assignment.AssignmentNumber);
             }
 
+
+            /* Creating shortcuts. */
+            DueDateEditShortcut.InputGestures.Add(new KeyGesture(Key.Q, ModifierKeys.Alt));
+            LocalEditShortcut.InputGestures.Add(new KeyGesture(Key.W, ModifierKeys.Alt));
+            OnlineEditShortcut.InputGestures.Add(new KeyGesture(Key.E, ModifierKeys.Alt));
+            InsertUpdateShortcut.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Alt | ModifierKeys.Shift));
+            ClearDeleteShortCut.InputGestures.Add(new KeyGesture(Key.D, ModifierKeys.Alt | ModifierKeys.Shift));
 
             /* Setting time. */
             ClockTextBlock.Text = DateTime.Now.ToString("F");
@@ -659,6 +673,36 @@ namespace AssignmentManager
         {
             /* Stopping clock. */
             headerClock.Stop();
+        }
+
+
+
+
+
+        /* Shortcuts. */
+        private void DueDateEditShortcut_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            DueDateButton_Click(sender, e);
+        }
+
+        private void LocalEditShortcut_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            LocalResourcesButton_Click(sender, e);
+        }
+
+        private void OnlineEditShortcut_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            OnlineResourcesButton_Click(sender, e);
+        }
+
+        private void InsertUpdateShortcut_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            InsertUpdateButton_Click(sender, e);
+        }
+
+        private void ClearDeleteShortCut_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ClearDeleteButton_Click(sender, e);
         }
     }
 }
