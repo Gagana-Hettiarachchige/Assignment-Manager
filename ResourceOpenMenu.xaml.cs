@@ -39,6 +39,8 @@ namespace AssignmentManager.CodeFiles
     */
     public partial class ResourceOpenMenu : Window
     {
+
+
         /* 
         * METHOD        : ResourceMenuOpen
         * DESCRIPTION   :
@@ -55,6 +57,17 @@ namespace AssignmentManager.CodeFiles
             ResourcesList.ItemsSource = resources;
         }
 
+
+        /* 
+        * METHOD        : OpenAllOption_Click
+        * DESCRIPTION   :
+        *   Opens all resources.
+        * PARAMETERS    :
+        *   object sender     : the sender
+        *   RoutedEventArgs e : the routed event arguments
+        * RETURNS       :
+        *   void
+        */
         private void OpenAllOption_Click(object sender, RoutedEventArgs e)
         {
             /* Looping through each resource. */
@@ -65,67 +78,93 @@ namespace AssignmentManager.CodeFiles
             }
         }
 
+
+        /* 
+        * METHOD        : OpenOption_Click
+        * DESCRIPTION   :
+        *   Opens selected resources.
+        * PARAMETERS    :
+        *   object sender     : the sender
+        *   RoutedEventArgs e : the routed event arguments
+        * RETURNS       :
+        *   void
+        */
         private void OpenOption_Click(object sender, RoutedEventArgs e)
         {
             /* Making sure something is selected. */
-            if (ResourcesList.SelectedItem != null)
+            if (ResourcesList.SelectedItems != null)
             {
-                /* Opening the selected resource. */
-                Process.Start('"' + ResourcesList.SelectedItem.ToString() + '"');
+                /* Opening the selected resources. */
+                foreach (string resource in ResourcesList.SelectedItems)
+                {
+                    Process.Start('"' + resource + '"');
+                }
             }
         }
 
+
+        /* 
+        * METHOD        : OpenCmdOption_Click
+        * DESCRIPTION   :
+        *   Opens selected resources in CMD with a command.
+        * PARAMETERS    :
+        *   object sender     : the sender
+        *   RoutedEventArgs e : the routed event arguments
+        * RETURNS       :
+        *   void
+        */
         private void OpenCmdOption_Click(object sender, RoutedEventArgs e)
         {
             
 
             /* Checking if something is selected. */
-            if (ResourcesList.SelectedItem != null)
+            if (ResourcesList.SelectedItems != null)
             {
-
-                string resource = ResourcesList.SelectedItem.ToString();
-                Uri online_resource;
-                ProcessStartInfo info = new ProcessStartInfo();
-
-                Uri.TryCreate(resource, UriKind.Absolute, out online_resource);
-
-                /* Checking if an online resource. */
-                if (online_resource.Scheme == Uri.UriSchemeHttp || 
-                    online_resource.Scheme == Uri.UriSchemeHttps)
+                /* Opening CMD for each selected item. */
+                foreach (string resource in ResourcesList.SelectedItems)
                 {
-                    /* Pinging the domain if online website. */
-                    info.WorkingDirectory = @"C:\";
-                    info.FileName = "CMD.exe";
-                    info.Arguments = "/K ping " + online_resource.Host;
-                    Process.Start(info);
-                }
+                    //string resource = ResourcesList.SelectedItem.ToString();
+                    Uri online_resource;
+                    ProcessStartInfo info = new ProcessStartInfo();
 
-                else
-                {
-                    FileAttributes resource_attributes = File.GetAttributes(resource);
+                    Uri.TryCreate(resource, UriKind.Absolute, out online_resource);
 
-                    /* Checking if it was a directory or File. */
-                    if (resource_attributes == FileAttributes.Directory)
+                    /* Checking if an online resource. */
+                    if (online_resource.Scheme == Uri.UriSchemeHttp ||
+                        online_resource.Scheme == Uri.UriSchemeHttps)
                     {
-                        /* Running git status on directory. */
-                        info.WorkingDirectory = resource;
+                        /* Pinging the domain if online website. */
+                        info.WorkingDirectory = @"C:\";
                         info.FileName = "CMD.exe";
-                        info.Arguments = "/K git status";
+                        info.Arguments = "/K ping " + online_resource.Host;
                         Process.Start(info);
                     }
+
                     else
                     {
-                        string directory = System.IO.Path.GetDirectoryName(resource);
+                        FileAttributes resource_attributes = File.GetAttributes(resource);
 
-                        /* Running git log on file. */
-                        info.WorkingDirectory = directory;
-                        info.FileName = "CMD.exe";
-                        info.Arguments = "/K git log --name-only " + resource;
-                        Process.Start(info);
+                        /* Checking if it was a directory or File. */
+                        if (resource_attributes == FileAttributes.Directory)
+                        {
+                            /* Running git status on directory. */
+                            info.WorkingDirectory = resource;
+                            info.FileName = "CMD.exe";
+                            info.Arguments = "/K git status";
+                            Process.Start(info);
+                        }
+                        else
+                        {
+                            string directory = System.IO.Path.GetDirectoryName(resource);
+
+                            /* Running git log on file. */
+                            info.WorkingDirectory = directory;
+                            info.FileName = "CMD.exe";
+                            info.Arguments = "/K git log --name-only " + resource;
+                            Process.Start(info);
+                        }
                     }
                 }
-                
-               
             }
         }
     }
