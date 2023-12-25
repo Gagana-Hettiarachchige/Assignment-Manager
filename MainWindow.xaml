@@ -30,6 +30,10 @@
                      Executed="OnlineEditShortcut_Executed"/>
         <CommandBinding Command="{x:Static local:MainWindow.SelectNewShortcut}" 
                      Executed="SelectNewShortcut_Executed"/>
+        <CommandBinding Command="{x:Static local:MainWindow.CycleUpShortcut}" 
+                     Executed="CycleUpShortcut_Executed"/>
+        <CommandBinding Command="{x:Static local:MainWindow.CycleDownShortcut}" 
+                     Executed="CycleDownShortcut_Executed"/>
         <CommandBinding Command="{x:Static local:MainWindow.InsertUpdateShortcut}" 
                      Executed="InsertUpdateShortcut_Executed"/>
         <CommandBinding Command="{x:Static local:MainWindow.ClearDeleteShortCut}" 
@@ -91,8 +95,8 @@
         </TextBlock>
 
 
-        <!-- School Link button. -->
-        <Button Name="SchoolButton"
+        <!-- Help button. -->
+        <Button Name="HelpButton"
             Grid.Row="0"
             Width="100"
             Height="30"
@@ -101,11 +105,11 @@
             VerticalAlignment="Center" 
             Margin="0, 0, 10, 0" 
             
-            Click="SchoolButton_Click"
+            Click="HelpButton_Click"
                 
-            ToolTip="Go to eConestoga..."
+            ToolTip="Show help..."
             >
-            eConestoga
+            Help
         </Button>
 
 
