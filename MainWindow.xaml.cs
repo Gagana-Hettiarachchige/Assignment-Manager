@@ -217,12 +217,21 @@ namespace AssignmentManager
 
             if (result == MessageBoxResult.Yes)
             {
-                ConfigurationManager.AppSettings["animationsEnabled"] = "false";
+                /* Updating settings. */
+                Configuration settings = ConfigurationManager.OpenExeConfiguration
+                                         (ConfigurationUserLevel.None);
+                settings.AppSettings.Settings["animationsEnabled"].Value = "false";
+                settings.Save(ConfigurationSaveMode.Full);
+                ConfigurationManager.RefreshSection("appSettings");
             }
 
             else
             {
-                ConfigurationManager.AppSettings["animationsEnabled"] = "true";
+                Configuration settings = ConfigurationManager.OpenExeConfiguration
+                                         (ConfigurationUserLevel.None);
+                settings.AppSettings.Settings["animationsEnabled"].Value = "true";
+                settings.Save(ConfigurationSaveMode.Full);
+                ConfigurationManager.RefreshSection("appSettings");
             }
 
             //Should make an actual window for options.
