@@ -50,6 +50,8 @@ namespace AssignmentManager
         double lastValidWeight = 10.01;
         DispatcherTimer headerClock;
 
+        const int NOTIFY_WIDTH = 665;
+
 
         /* Shortcuts. */
         public static RoutedCommand DueDateEditShortcut = new RoutedCommand();
@@ -144,12 +146,14 @@ namespace AssignmentManager
             /* Making general info text block blank. */
             GeneralInfoTextBlock.Text = "";
 
+            NotificationRectangle.Width = 0;
+
 
             /* Creating clock. */
             headerClock = new DispatcherTimer();
 
             /* Making it update every second. */
-            headerClock.Interval = TimeSpan.FromSeconds(0.1);
+            headerClock.Interval = TimeSpan.FromTicks(1);
             headerClock.Tick += new EventHandler(HeaderClock_Tick);
             
             /* Starting clock. */
@@ -168,7 +172,7 @@ namespace AssignmentManager
         /* 
         * METHOD        : HeaderClock_Tick
         * DESCRIPTION   :
-        *   Updates the header clock to the current time.
+        *   Updates the header clock to the current time and also animates a rectangle.
         * PARAMETERS    :
         *   object sender   : the sender
         *   EventArgs       : the event arguments
@@ -179,6 +183,49 @@ namespace AssignmentManager
         {
             /* Updating time. */
             ClockTextBlock.Text = DateTime.Now.ToString("F");
+
+            /* Making notifaction rectangle shrink. */
+            if (ConfigurationManager.AppSettings["animationsEnabled"] == "true")
+            {
+                if (NotificationRectangle.Width > 0)
+                {
+                    --NotificationRectangle.Width;
+                }
+            }
+        }
+
+
+
+        /* 
+        * METHOD        : SettingsButton_Click
+        * DESCRIPTION   :
+        *   Raised when the settings button is clicked and
+        *   gives options to change
+        * PARAMETERS    :
+        *   object sender     : the sender
+        *   RoutedEventArgs e : the routed event arguments
+        * RETURNS       :
+        *   void
+        */
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            /* Prompting to disable animations. */
+            MessageBoxResult result = MessageBox.Show("Disable animations?", "Settings", 
+                                      MessageBoxButton.YesNo, 
+                                      MessageBoxImage.Question);
+
+
+            if (result == MessageBoxResult.Yes)
+            {
+                ConfigurationManager.AppSettings["animationsEnabled"] = "false";
+            }
+
+            else
+            {
+                ConfigurationManager.AppSettings["animationsEnabled"] = "true";
+            }
+
+            //Should make an actual window for options.
         }
 
 
@@ -391,13 +438,12 @@ namespace AssignmentManager
 
         private void AssignmentSelectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             if (AssignmentSelectComboBox.SelectedItem != null)
             {
                 if (AssignmentSelectComboBox.SelectedItem.ToString() == "New")
                 {
-                    /* Setting selected assignment's number to 0 if new is selected. */
-                    ViewModel.SelectedAssignment.AssignmentNumber = 0;
+                    /* Clearing UI if new is selected */
+                    ClearUI();
 
                     /* Updating UI buttons to show available actions. */
                     InsertUpdateButton.Content = "Insert";
@@ -407,6 +453,9 @@ namespace AssignmentManager
 
                     /* Updating grid highlight. */
                     TableGrid.SelectedItem = null;
+
+                    NotificationRectangle.Width = NOTIFY_WIDTH;
+                    NotificationRectangle.Fill = Brushes.SlateGray;
                 }
 
                 else
@@ -439,6 +488,14 @@ namespace AssignmentManager
                             TableGrid.SelectedItem = row;
                         }
                     }
+
+                    NotificationRectangle.Width = NOTIFY_WIDTH;
+                    NotificationRectangle.Fill = Brushes.CornflowerBlue;
+                }
+
+                if (ConfigurationManager.AppSettings["animationsEnabled"] == "false")
+                {
+                    NotificationRectangle.Width = 0;
                 }
             }            
         }
@@ -486,6 +543,9 @@ namespace AssignmentManager
                 }
 
                 AssignmentSelectComboBox.SelectedIndex = count;
+
+                NotificationRectangle.Width = NOTIFY_WIDTH;
+                NotificationRectangle.Fill = Brushes.Green;
             }
             
             /* Checking if action is alter. */
@@ -500,7 +560,17 @@ namespace AssignmentManager
                 Database.UpdateAssignments();
 
                 Database.Disconnect();
-            }    
+
+
+                NotificationRectangle.Width = NOTIFY_WIDTH;
+                NotificationRectangle.Fill = Brushes.SeaGreen;
+            }
+
+
+            if (ConfigurationManager.AppSettings["animationsEnabled"] == "false")
+            {
+                NotificationRectangle.Width = 0;
+            }
         }
 
 
@@ -511,6 +581,8 @@ namespace AssignmentManager
             if (ClearDeleteButton.Content.ToString() == "Clear")
             {
                 ClearUI();
+                NotificationRectangle.Width = NOTIFY_WIDTH;
+                NotificationRectangle.Fill = Brushes.SlateGray;
             }
 
             /* Checking if action is delete. */
@@ -537,6 +609,14 @@ namespace AssignmentManager
                 AssignmentSelectComboBox.Items.Remove(AssignmentSelectComboBox.SelectedItem);
                 AssignmentSelectComboBox.SelectedIndex = selected_assignment_index - 1;
 
+                NotificationRectangle.Width = NOTIFY_WIDTH;
+                NotificationRectangle.Fill = Brushes.Red;
+            }
+
+
+            if (ConfigurationManager.AppSettings["animationsEnabled"] == "false")
+            {
+                NotificationRectangle.Width = 0;
             }
         }
 
