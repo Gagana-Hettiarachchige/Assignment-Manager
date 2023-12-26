@@ -70,11 +70,26 @@ namespace AssignmentManager.CodeFiles
         */
         private void OpenAllOption_Click(object sender, RoutedEventArgs e)
         {
-            /* Looping through each resource. */
-            foreach (string resource in ResourcesList.Items)
+
+            /* Used for error displaying. */
+            string resource_to_open = "";
+
+            try
             {
-                /* Opening all of them. */
-                Process.Start('"' + resource + '"');
+                /* Looping through each resource. */
+                foreach (string resource in ResourcesList.Items)
+                {
+                    /* Opening all of them. */
+                    resource_to_open = resource;
+                    Process.Start('"' + resource + '"');
+                }
+            }
+
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message + '\n' + resource_to_open,
+                                "Resource Open Failed",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -91,14 +106,29 @@ namespace AssignmentManager.CodeFiles
         */
         private void OpenOption_Click(object sender, RoutedEventArgs e)
         {
-            /* Making sure something is selected. */
-            if (ResourcesList.SelectedItems != null)
+
+            /* Used for error displaying. */
+            string resource_to_open = "";
+
+            try
             {
-                /* Opening the selected resources. */
-                foreach (string resource in ResourcesList.SelectedItems)
+                /* Making sure something is selected. */
+                if (ResourcesList.SelectedItems != null)
                 {
-                    Process.Start('"' + resource + '"');
+                    /* Opening the selected resources. */
+                    foreach (string resource in ResourcesList.SelectedItems)
+                    {
+                        resource_to_open = resource;
+                        Process.Start('"' + resource + '"');
+                    }
                 }
+            }
+            
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message + '\n' + resource_to_open, 
+                                "Resource Open Failed", 
+                                MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -116,54 +146,63 @@ namespace AssignmentManager.CodeFiles
         private void OpenCmdOption_Click(object sender, RoutedEventArgs e)
         {
             
-
             /* Checking if something is selected. */
             if (ResourcesList.SelectedItems != null)
             {
-                /* Opening CMD for each selected item. */
-                foreach (string resource in ResourcesList.SelectedItems)
+                try
                 {
-                    //string resource = ResourcesList.SelectedItem.ToString();
-                    Uri online_resource;
-                    ProcessStartInfo info = new ProcessStartInfo();
-
-                    Uri.TryCreate(resource, UriKind.Absolute, out online_resource);
-
-                    /* Checking if an online resource. */
-                    if (online_resource.Scheme == Uri.UriSchemeHttp ||
-                        online_resource.Scheme == Uri.UriSchemeHttps)
+                    /* Opening CMD for each selected item. */
+                    foreach (string resource in ResourcesList.SelectedItems)
                     {
-                        /* Pinging the domain if online website. */
-                        info.WorkingDirectory = @"C:\";
-                        info.FileName = "CMD.exe";
-                        info.Arguments = "/K ping " + online_resource.Host;
-                        Process.Start(info);
-                    }
 
-                    else
-                    {
-                        FileAttributes resource_attributes = File.GetAttributes(resource);
+                        //string resource = ResourcesList.SelectedItem.ToString();
+                        Uri online_resource;
+                        ProcessStartInfo info = new ProcessStartInfo();
 
-                        /* Checking if it was a directory or File. */
-                        if (resource_attributes == FileAttributes.Directory)
+                        Uri.TryCreate(resource, UriKind.Absolute, out online_resource);
+
+                        /* Checking if an online resource. */
+                        if (online_resource.Scheme == Uri.UriSchemeHttp ||
+                            online_resource.Scheme == Uri.UriSchemeHttps)
                         {
-                            /* Running git status on directory. */
-                            info.WorkingDirectory = resource;
+                            /* Pinging the domain if online website. */
+                            info.WorkingDirectory = @"C:\";
                             info.FileName = "CMD.exe";
-                            info.Arguments = "/K git status";
+                            info.Arguments = "/K ping " + online_resource.Host;
                             Process.Start(info);
                         }
+
                         else
                         {
-                            string directory = System.IO.Path.GetDirectoryName(resource);
+                            FileAttributes resource_attributes = File.GetAttributes(resource);
 
-                            /* Running git log on file. */
-                            info.WorkingDirectory = directory;
-                            info.FileName = "CMD.exe";
-                            info.Arguments = "/K git log --name-only " + resource;
-                            Process.Start(info);
+                            /* Checking if it was a directory or File. */
+                            if (resource_attributes == FileAttributes.Directory)
+                            {
+                                /* Running git status on directory. */
+                                info.WorkingDirectory = resource;
+                                info.FileName = "CMD.exe";
+                                info.Arguments = "/K git status";
+                                Process.Start(info);
+                            }
+                            else
+                            {
+                                string directory = System.IO.Path.GetDirectoryName(resource);
+
+                                /* Running git log on file. */
+                                info.WorkingDirectory = directory;
+                                info.FileName = "CMD.exe";
+                                info.Arguments = "/K git log --name-only " + resource;
+                                Process.Start(info);
+                            }
                         }
                     }
+                }
+
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Resource CMD Open Failed",
+                                    MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
