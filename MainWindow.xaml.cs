@@ -134,9 +134,9 @@ namespace AssignmentManager
             DueDateEditShortcut.InputGestures.Add(new KeyGesture(Key.Q, ModifierKeys.Alt));
             LocalEditShortcut.InputGestures.Add(new KeyGesture(Key.W, ModifierKeys.Alt));
             OnlineEditShortcut.InputGestures.Add(new KeyGesture(Key.E, ModifierKeys.Alt));
-            SelectNewShortcut.InputGestures.Add(new KeyGesture(Key.A, ModifierKeys.Alt));
-            CycleUpShortcut.InputGestures.Add(new KeyGesture(Key.D1, ModifierKeys.Alt));
-            CycleDownShortcut.InputGestures.Add(new KeyGesture(Key.D2, ModifierKeys.Alt));
+            SelectNewShortcut.InputGestures.Add(new KeyGesture(Key.D1, ModifierKeys.Alt));
+            CycleUpShortcut.InputGestures.Add(new KeyGesture(Key.D2, ModifierKeys.Alt));
+            CycleDownShortcut.InputGestures.Add(new KeyGesture(Key.D3, ModifierKeys.Alt));
             InsertUpdateShortcut.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Alt | ModifierKeys.Shift));
             ClearDeleteShortCut.InputGestures.Add(new KeyGesture(Key.D, ModifierKeys.Alt | ModifierKeys.Shift));
 
@@ -254,9 +254,9 @@ namespace AssignmentManager
             MessageBox.Show("ALT + Q = Edit Due Date\r\n" +
                             "ALT + W = Edit Local Resources\r\n" +
                             "ALT + E = Edit Online Resources\r\n" +
-                            "ALT + A = Select New Assignment Option\r\n" +
-                            "ALT + 1 = Cycle selected assignments up\r\n" +
-                            "ALT + 2 = Cycle selected assignments down\r\n" +
+                            "ALT + 1 = Select New Assignment Option\r\n" +
+                            "ALT + 2 = Cycle selected assignments up\r\n" +
+                            "ALT + 3 = Cycle selected assignments down\r\n" +
                             "ALT + SHIFT + S = Save/Update current assignment.\r\n" +
                             "ALT + SHIFT + D = Delete/Clear current assignment.\r\n\r\n" +
                             "SHIFT + LEFT MOUSE CLICK = Multi-select resources", 
