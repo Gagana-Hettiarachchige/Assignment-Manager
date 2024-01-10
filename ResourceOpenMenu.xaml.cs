@@ -206,5 +206,43 @@ namespace AssignmentManager.CodeFiles
                 }
             }
         }
+
+
+        /* 
+        * METHOD        : ResourcesList_MouseDoubleClick
+        * DESCRIPTION   :
+        *   Opens selected resources on double click.
+        * PARAMETERS    :
+        *   object sender          : the sender
+        *   MouseButtonEventArgs e : the mouse event arguments
+        * RETURNS       :
+        *   void
+        */
+        private void ResourcesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            /* Used for error displaying. */
+            string resource_to_open = "";
+
+            try
+            {
+                /* Making sure something is selected. */
+                if (ResourcesList.SelectedItems != null)
+                {
+                    /* Opening the selected resources. */
+                    foreach (string resource in ResourcesList.SelectedItems)
+                    {
+                        resource_to_open = resource;
+                        Process.Start('"' + resource + '"');
+                    }
+                }
+            }
+
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message + '\n' + resource_to_open,
+                                "Resource Open Failed",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }
