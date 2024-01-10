@@ -50,6 +50,7 @@
             ScrollViewer.VerticalScrollBarVisibility="Visible"
                  
             SelectionMode="Extended"
+            MouseDoubleClick="ResourcesList_MouseDoubleClick"
             >
 
         </ListBox>
