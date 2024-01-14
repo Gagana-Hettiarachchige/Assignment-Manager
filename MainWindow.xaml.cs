@@ -31,6 +31,9 @@ using System.Globalization;
 using System.Windows.Threading;
 using System.Windows.Media.Animation;
 using System.Windows.Automation.Peers;
+using Windows.UI.Notifications;
+using System.Xml;
+using Windows.ApplicationModel;
 
 namespace AssignmentManager
 {
@@ -47,10 +50,12 @@ namespace AssignmentManager
     */
     public partial class MainWindow : Window
     {
+        const int NOTIFY_WIDTH = 665;
+
         double lastValidWeight = 10.01;
         DispatcherTimer headerClock;
 
-        const int NOTIFY_WIDTH = 665;
+        List<int> assignmentsNotified = new List<int>();
 
 
         /* Shortcuts. */
@@ -192,6 +197,78 @@ namespace AssignmentManager
                     --NotificationRectangle.Width;
                 }
             }
+
+            /* Checking if any notifications need to be sent out. */
+            foreach (Assignment assignment in Database.DatabaseAssignments)
+            {
+                int days_due = (assignment.DueDate - DateTime.Now).Days;
+
+                /* Notifying if assignment is due in less than 3 days. */
+                if (days_due < 3)
+                {
+                    bool shouldShow = true;
+
+                    /* Checking if the current assignment has already been notified. */
+                    foreach (int assignmnet_number in assignmentsNotified)
+                    {
+                        if (assignment.AssignmentNumber == assignmnet_number)
+                        {
+                            /* Not sending another notification if it has. */
+                            shouldShow = false;
+                            break;
+                        }
+                    }
+
+                    if (shouldShow)
+                    {
+                        // Should put this into a function.
+                        var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
+                        var stringElements = toastXml.GetElementsByTagName("text");
+
+
+                        string title = "";
+
+                        /* Changing notification message based on how close it is. */
+                        if (days_due <= 0)
+                        {
+                            title = assignment.ClassName + ": " + assignment.AssignmentName +
+                                    " is due today.";
+                        }
+
+                        else if (days_due <= 1)
+                        {
+                            title = assignment.ClassName + ": " + assignment.AssignmentName +
+                                    " is due tomorrow.";
+                        }
+
+                        else if (days_due <= 3)
+                        {
+                            title = assignment.ClassName + ": " + assignment.AssignmentName +
+                                    " is due the day after tomorrow.";
+                        }
+
+                        else
+                        {
+                            title = assignment.ClassName + ": " + assignment.AssignmentName +
+                                    " is due in " + days_due + " days.";
+                        }
+
+                        /* Setting the title and the caption of the notification. */
+                        stringElements[0].AppendChild(toastXml.CreateTextNode(title));
+                        stringElements[1].AppendChild(toastXml.CreateTextNode
+                            ("Assignment is due on " + assignment.DueDate.ToString("F")));
+
+
+                        /* Creating notification. */
+                        var toast = new ToastNotification(toastXml);
+                        ToastNotificationManager.CreateToastNotifier("Assignment Manager").Show(toast);
+
+                        /* Added the current assignment to the list of already notified assignments. */
+                        assignmentsNotified.Add(assignment.AssignmentNumber);
+                    }
+                }
+            }
+
         }
 
 
