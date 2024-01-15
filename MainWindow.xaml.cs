@@ -51,9 +51,15 @@ namespace AssignmentManager
     public partial class MainWindow : Window
     {
         const int NOTIFY_WIDTH = 665;
+        const int DEFAULT_FLASH_COUNT = 0; // One quick flash.
+        const int DEFAULT_FLASH_DURATION = 150;
 
         double lastValidWeight = 10.01;
         DispatcherTimer headerClock;
+        DispatcherTimer flashClock = new DispatcherTimer();
+        int flashesLeft = DEFAULT_FLASH_COUNT;
+        int flashDuration = 150;
+        Brush flashColour = Brushes.White;
 
         List<int> assignmentsNotified = new List<int>();
 
@@ -153,11 +159,15 @@ namespace AssignmentManager
 
             NotificationRectangle.Width = 0;
 
+            /* Creating clock for flashing ui. */
+            flashClock.Interval = TimeSpan.FromMilliseconds(flashDuration);
+            flashClock.Tick += new EventHandler(FlashClock_Tick);
+
 
             /* Creating clock. */
             headerClock = new DispatcherTimer();
 
-            /* Making it update every second. */
+            /* Making it update every other tick. */
             headerClock.Interval = TimeSpan.FromTicks(1);
             headerClock.Tick += new EventHandler(HeaderClock_Tick);
             
@@ -166,9 +176,83 @@ namespace AssignmentManager
         }
 
 
+        /* Methods. */
+
+        /* 
+        * METHOD        : HighlightUI
+        * DESCRIPTION   :
+        *   Highlights the assignmment input section of the UI.
+        * PARAMETERS    :
+        *   Brush colour : the colour to highlight the UI with
+        * RETURNS       :
+        *   void
+        */
+        private void HighlightUI(Brush colour)
+        {
+            ClassTextBox.Background = colour;
+            AssignmentTextBox.Background = colour;
+            WeightTextBox.Background = colour;
+            DueDateButton.Background = colour;
+            StatusComboBox.Foreground = colour;
+            LocalResourcesButton.Background = colour;
+            OnlineResourcesButton.Background = colour;
+        }
+
+
+        /* 
+        * METHOD        : UnhighlightUI
+        * DESCRIPTION   :
+        *   Sets the assignmment input section of the UI back to normal.
+        * PARAMETERS    :
+        *   void
+        * RETURNS       :
+        *   void
+        */
+        private void UnhighlightUI()
+        {
+            ClassTextBox.Background = Brushes.White;
+            AssignmentTextBox.Background = Brushes.White;
+            WeightTextBox.Background = Brushes.White;
+            DueDateButton.Background = Brushes.LightGray;
+            StatusComboBox.Foreground = Brushes.Black;
+            LocalResourcesButton.Background = Brushes.LightGray;
+            OnlineResourcesButton.Background = Brushes.LightGray;
+        }
+
+
+        /* 
+        * METHOD        : FlashUI
+        * DESCRIPTION   :
+        *   Flashes the input section of the UI.
+        * PARAMETERS    :
+        *   int flash_count : the amount of times to flash + 1
+        *   Brush colour    : the colour to highlight the UI with
+        * RETURNS       :
+        *   void
+        */
+        private void FlashUI(int flash_count, Brush colour)
+        {
+            /* Resetting the clock if it has started. */
+            if (flashClock.IsEnabled)
+            {
+                flashClock.Stop();
+                UnhighlightUI();
+            }
+
+            /* Setting number of times to flash. */
+            flashesLeft = flash_count;
+
+            /* Setting colour to flash. */
+            flashColour = colour;
+
+            /* Starting flash. */
+            HighlightUI(colour);
+            flashClock.Start();
+        }
+
+
 
         /* Event handlers. */
-
 
         /* Header row. */
 
@@ -343,8 +427,50 @@ namespace AssignmentManager
         }
 
 
+
+
+
         /* Insert row. */
 
+        /* 
+        * METHOD        : FlashClock_Tick
+        * DESCRIPTION   :
+        *   Starts flashing the UI and stops by itself.
+        * PARAMETERS    :
+        *   object sender   : the sender
+        *   EventArgs       : the event arguments
+        * RETURNS       :
+        *   void
+        */
+        private void FlashClock_Tick(object sender, EventArgs e)
+        {
+            if (flashesLeft > 0)
+            {
+                /* Flashing the colour if uneven flash count. */
+                if ((flashesLeft % 2) != 0)
+                {
+                    HighlightUI(flashColour);
+                }
+
+                /* Switching to default if it is. */
+                else
+                {
+                    UnhighlightUI();
+                }
+
+                /* Reducing flash count. */
+                --flashesLeft;
+            }
+
+            else
+            {
+                /* Setting to defaults. */
+                UnhighlightUI();
+
+                /* Stopping flash. */
+                flashClock.Stop();
+            }
+        }
 
         /* 
         * METHOD        : ClassTextBox_TextChanged
@@ -544,6 +670,10 @@ namespace AssignmentManager
 
                     NotificationRectangle.Width = NOTIFY_WIDTH;
                     NotificationRectangle.Fill = Brushes.SlateGray;
+
+
+                    /* Flashing UI. */
+                    FlashUI(DEFAULT_FLASH_COUNT, Brushes.SlateGray);
                 }
 
                 else
@@ -579,6 +709,8 @@ namespace AssignmentManager
 
                     NotificationRectangle.Width = NOTIFY_WIDTH;
                     NotificationRectangle.Fill = Brushes.CornflowerBlue;
+
+                    FlashUI(DEFAULT_FLASH_COUNT, Brushes.CornflowerBlue);
                 }
 
                 if (ConfigurationManager.AppSettings["animationsEnabled"] == "false")
@@ -634,6 +766,8 @@ namespace AssignmentManager
 
                 NotificationRectangle.Width = NOTIFY_WIDTH;
                 NotificationRectangle.Fill = Brushes.Green;
+
+                FlashUI(2, Brushes.Green);
             }
             
             /* Checking if action is alter. */
@@ -652,6 +786,8 @@ namespace AssignmentManager
 
                 NotificationRectangle.Width = NOTIFY_WIDTH;
                 NotificationRectangle.Fill = Brushes.SeaGreen;
+
+                FlashUI(2, Brushes.Green);
             }
 
 
@@ -671,6 +807,9 @@ namespace AssignmentManager
                 ClearUI();
                 NotificationRectangle.Width = NOTIFY_WIDTH;
                 NotificationRectangle.Fill = Brushes.SlateGray;
+
+
+                FlashUI(DEFAULT_FLASH_COUNT, Brushes.SlateGray);
             }
 
             /* Checking if action is delete. */
@@ -699,6 +838,9 @@ namespace AssignmentManager
 
                 NotificationRectangle.Width = NOTIFY_WIDTH;
                 NotificationRectangle.Fill = Brushes.Red;
+
+
+                FlashUI(2, Brushes.Red);
             }
 
 
