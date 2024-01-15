@@ -34,6 +34,7 @@ using System.Windows.Automation.Peers;
 using Windows.UI.Notifications;
 using System.Xml;
 using Windows.ApplicationModel;
+using AssignmentManager.Properties;
 
 namespace AssignmentManager
 {
@@ -372,32 +373,35 @@ namespace AssignmentManager
         */
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            /* Prompting to disable animations. */
-            MessageBoxResult result = MessageBox.Show("Disable animations?", "Settings", 
-                                      MessageBoxButton.YesNo, 
-                                      MessageBoxImage.Question);
+            ///* Prompting to disable animations. */
+            //MessageBoxResult result = MessageBox.Show("Disable animations?", "Settings", 
+            //                          MessageBoxButton.YesNo, 
+            //                          MessageBoxImage.Question);
 
 
-            if (result == MessageBoxResult.Yes)
-            {
-                /* Updating settings. */
-                Configuration settings = ConfigurationManager.OpenExeConfiguration
-                                         (ConfigurationUserLevel.None);
-                settings.AppSettings.Settings["animationsEnabled"].Value = "false";
-                settings.Save(ConfigurationSaveMode.Full);
-                ConfigurationManager.RefreshSection("appSettings");
-            }
+            //if (result == MessageBoxResult.Yes)
+            //{
+            //    /* Updating settings. */
+            //    Configuration settings = ConfigurationManager.OpenExeConfiguration
+            //                             (ConfigurationUserLevel.None);
+            //    settings.AppSettings.Settings["animationsEnabled"].Value = "false";
+            //    settings.Save(ConfigurationSaveMode.Full);
+            //    ConfigurationManager.RefreshSection("appSettings");
+            //}
 
-            else
-            {
-                Configuration settings = ConfigurationManager.OpenExeConfiguration
-                                         (ConfigurationUserLevel.None);
-                settings.AppSettings.Settings["animationsEnabled"].Value = "true";
-                settings.Save(ConfigurationSaveMode.Full);
-                ConfigurationManager.RefreshSection("appSettings");
-            }
+            //else
+            //{
+            //    Configuration settings = ConfigurationManager.OpenExeConfiguration
+            //                             (ConfigurationUserLevel.None);
+            //    settings.AppSettings.Settings["animationsEnabled"].Value = "true";
+            //    settings.Save(ConfigurationSaveMode.Full);
+            //    ConfigurationManager.RefreshSection("appSettings");
+            //}
 
-            //Should make an actual window for options.
+            /* Opening settings menu. */
+            SettingsMenu settings_menu = new SettingsMenu();
+            settings_menu.ShowDialog();
+
         }
 
 
@@ -428,7 +432,7 @@ namespace AssignmentManager
 
 
 
-
+        
 
         /* Insert row. */
 
