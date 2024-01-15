@@ -230,7 +230,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Center" 
             Margin="220, 0, 0, 0"
-            
+            Background="LightGray"
             
             Click="DueDateButton_Click"
                 
@@ -283,6 +283,7 @@
             VerticalAlignment="Center" 
             Width="88"
             Height="20"
+            Background="LightGray"
             
             Margin="475,0,0,0" 
             Click="LocalResourcesButton_Click"
@@ -311,7 +312,9 @@
             VerticalAlignment="Center" 
             Width="95"
             Height="20"
-            
+            Background="LightGray"
+                
+                
             Margin="575,0,0,0" 
             Click="OnlineResourcesButton_Click"
                 
