@@ -1,0 +1,25 @@
+﻿<!-- 
+- FILE          : SettingsMenu.xaml
+- PROJECT       : Assignment Manager
+- PROGRAMMER    : Gagana Hettiarachchige
+- FIRST VERSION : 2024-01-15
+- DESCRIPTION   :
+-	This file holds the mark up of the Settings Menu.
+-->
+
+<Window x:Class="AssignmentManager.CodeFiles.SettingsMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AssignmentManager.CodeFiles"
+        mc:Ignorable="d"
+        Title="Settings (Current App Version: 1.1)" 
+        Height="450" 
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        >
+    <Grid>
+        
+    </Grid>
+</Window>
