@@ -202,6 +202,7 @@ namespace AssignmentManager
             foreach (Assignment assignment in Database.DatabaseAssignments)
             {
                 int days_due = (assignment.DueDate - DateTime.Now).Days;
+                int hours_due = (assignment.DueDate - DateTime.Now).Hours;
 
                 /* Notifying if assignment is due in less than 3 days. */
                 if (days_due < 3)
@@ -226,31 +227,32 @@ namespace AssignmentManager
                         var stringElements = toastXml.GetElementsByTagName("text");
 
 
-                        string title = "";
+                        string title = assignment.ClassName + ": " + assignment.AssignmentName;
 
                         /* Changing notification message based on how close it is. */
-                        if (days_due <= 0)
+                        if (hours_due < 0)
                         {
-                            title = assignment.ClassName + ": " + assignment.AssignmentName +
-                                    " is due today.";
+                            title += " is overdue.";
+                        }
+
+                        else if (days_due <= 0)
+                        {
+                            title += " is due today.";
                         }
 
                         else if (days_due <= 1)
                         {
-                            title = assignment.ClassName + ": " + assignment.AssignmentName +
-                                    " is due tomorrow.";
+                            title += " is due tomorrow.";
                         }
 
                         else if (days_due <= 3)
                         {
-                            title = assignment.ClassName + ": " + assignment.AssignmentName +
-                                    " is due the day after tomorrow.";
+                            title += " is due the day after tomorrow.";
                         }
 
                         else
                         {
-                            title = assignment.ClassName + ": " + assignment.AssignmentName +
-                                    " is due in " + days_due + " days.";
+                            title +=  " is due in " + days_due + " days.";
                         }
 
                         /* Setting the title and the caption of the notification. */
