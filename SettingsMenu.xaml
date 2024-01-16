@@ -20,6 +20,68 @@
         WindowStartupLocation="CenterScreen"
         >
     <Grid>
+        <Grid.ColumnDefinitions>
+            
+            <!-- Categories column. -->
+            <ColumnDefinition Width="200"/>
+            
+            <!-- Interact column. -->
+            <ColumnDefinition Width="*"/>
+            
+        </Grid.ColumnDefinitions>
+        
+        <!-- Categories list. -->
+        <ListBox Name="CategoriesListBox"
+            
+            FontSize="24"
+            SelectionChanged="CategoriesListBox_SelectionChanged"
+            >
+        </ListBox>
+        
+        
+        <!-- Visual Settings. -->
+        <!--Visibility="Hidden"-->
+        <Grid Name="VisualSettings"
+            Grid.Column="1"
+            
+            
+            >
+            
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Animation Toggle -->
+            <Label Name="AnimationsEnabledLabel"
+                Grid.Row="0"
+                
+                VerticalAlignment="Center"   
+                HorizontalAlignment="Left"
+                Margin="10, 0, 0, 0"
+                
+                FontSize="18"
+                >
+                Animations Enabled: 
+            </Label>
+            <Button Name="AnimationToggleButton"
+                
+                Grid.Row="0"
+                
+                VerticalAlignment="Center"   
+                HorizontalAlignment="Left"
+                Margin="200, 0, 0, 0"
+                
+                FontSize="18"
+                Width="100" Click="AnimationToggleButton_Click"
+                >
+                False
+            </Button>
+            
+
+        </Grid>
+        
         
     </Grid>
 </Window>
