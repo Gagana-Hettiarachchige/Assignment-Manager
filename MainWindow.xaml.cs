@@ -976,13 +976,12 @@ namespace AssignmentManager
 
             else if (days_due <= 1)
             {
-                GeneralInfoTextBlock.Background = Brushes.Yellow;
-                
+                GeneralInfoTextBlock.Background = Brushes.Orange;
             }
 
             else if (days_due <= 2)
             {
-                GeneralInfoTextBlock.Background = Brushes.Orange;
+                GeneralInfoTextBlock.Background = Brushes.Yellow;
             }
 
 
