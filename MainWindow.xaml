@@ -20,6 +20,8 @@
         WindowStartupLocation="CenterScreen"
         Closing="Window_Closing"
         >
+    
+    <!-- Shortcuts. -->
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static local:MainWindow.LocalEditShortcut}" 
                      Executed="LocalEditShortcut_Executed"/>
@@ -39,6 +41,17 @@
                      Executed="ClearDeleteShortCut_Executed"/>
     </Window.CommandBindings>
     
+    <!-- Theme. -->
+    <Window.Resources>
+        <SolidColorBrush Color="White" x:Key="Primary"></SolidColorBrush>
+        <SolidColorBrush Color="Black" x:Key="Secondary"></SolidColorBrush>
+        <SolidColorBrush Color="White" x:Key="Tertiary"></SolidColorBrush>
+
+        <SolidColorBrush Color="#BAE301" x:Key="StrongAccent"></SolidColorBrush>
+        <SolidColorBrush Color="#b6bf8e" x:Key="MediumAccent"></SolidColorBrush>
+        <SolidColorBrush Color="#6d783d" x:Key="WeakAccent"></SolidColorBrush>
+    </Window.Resources>
+    
     <Grid>
         <!-- Defining the grid rows. -->
         <Grid.RowDefinitions>
@@ -55,10 +68,10 @@
         </Grid.RowDefinitions>
 
         <!-- Creating borders. -->
-        <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1" />
-        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" />
-        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1" />
-        <Border Grid.Row="4" BorderBrush="Black" BorderThickness="1" />
+        <Border Grid.Row="0" BorderBrush="{DynamicResource Secondary}" Background="{DynamicResource Primary}" BorderThickness="1" />
+        <Border Grid.Row="1" BorderBrush="{DynamicResource Secondary}" Background="{DynamicResource Primary}" BorderThickness="1" />
+        <Border Grid.Row="2" BorderBrush="{DynamicResource Secondary}" Background="{DynamicResource Primary}" BorderThickness="1" />
+        <Border Grid.Row="4" BorderBrush="{DynamicResource Secondary}" Background="{DynamicResource Primary}" BorderThickness="1" />
 
 
 
@@ -74,6 +87,7 @@
             Grid.Row="0"
             
             FontSize="30"
+            Foreground="{DynamicResource Secondary}"
             >
             December 16, 2023 12:00:00 AM
         </TextBlock>
@@ -85,7 +99,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             
-            Margin="450, 0, 0, 0"
+            Margin="350, 0, 0, 0"
             MaxWidth="300"
             
             FontSize="14"
@@ -93,7 +107,10 @@
             General information over hovered objects.
         </TextBlock>
 
-
+        
+        
+        
+        
         <!-- Help button. -->
         <Button Name="SettingsButton"
             Grid.Row="0"
@@ -102,13 +119,14 @@
             
             HorizontalAlignment="Right"
             VerticalAlignment="Center" 
-            Margin="0, 0, 120, 0" 
+            Margin="0, 0, 120, 0"
+            Background="{DynamicResource StrongAccent}"
             
             Click="SettingsButton_Click"
                 
             ToolTip="Edit settings..."
             >
-            Settings
+            More...
         </Button>
         <Button Name="HelpButton"
             Grid.Row="0"
@@ -117,7 +135,8 @@
             
             HorizontalAlignment="Right"
             VerticalAlignment="Center" 
-            Margin="0, 0, 10, 0" 
+            Margin="0, 0, 10, 0"
+            Background="{DynamicResource StrongAccent}"
             
             Click="HelpButton_Click"
                 
@@ -143,6 +162,8 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Center" 
             Margin="7, -35, 0, 0"
+            
+            Foreground="{DynamicResource Secondary}"
             >
             *Class:
         </Label>
@@ -169,6 +190,8 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Center" 
             Margin="67, -35, 0, 0"
+            
+            Foreground="{DynamicResource Secondary}"
             >
             *Assignment:
         </Label>
@@ -195,6 +218,8 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Center" 
             Margin="157, -35, 0, 0"
+            
+            Foreground="{DynamicResource Secondary}"
             >
             *Weight:
         </Label>
@@ -221,6 +246,8 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Center" 
             Margin="217, -35, 0, 0"
+            
+            Foreground="{DynamicResource Secondary}"
             >
             *Due Date:
         </Label>
@@ -230,7 +257,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Center" 
             Margin="220, 0, 0, 0"
-            Background="LightGray"
+            Background="{DynamicResource StrongAccent}"
             
             Click="DueDateButton_Click"
                 
@@ -247,6 +274,7 @@
             VerticalAlignment="Top" 
             Margin="358,8,0,0"
             
+            Foreground="{DynamicResource Secondary}"
             >
             *Status:
         </Label>
@@ -273,6 +301,7 @@
             VerticalAlignment="Top" 
             Margin="471,8,0,0"
             
+            Foreground="{DynamicResource Secondary}"
             >
             Local Resources:
         </Label>
@@ -283,7 +312,7 @@
             VerticalAlignment="Center" 
             Width="88"
             Height="20"
-            Background="LightGray"
+            Background="{DynamicResource StrongAccent}"
             
             Margin="475,0,0,0" 
             Click="LocalResourcesButton_Click"
@@ -302,6 +331,7 @@
             
             Margin="571,8,0,0"
             
+            Foreground="{DynamicResource Secondary}"
             >
             Online Resources:
         </Label>
@@ -312,7 +342,7 @@
             VerticalAlignment="Center" 
             Width="95"
             Height="20"
-            Background="LightGray"
+            Background="{DynamicResource StrongAccent}"
                 
                 
             Margin="575,0,0,0" 
@@ -331,7 +361,6 @@
             HorizontalAlignment="Right"
             VerticalAlignment="Center"      
             
-            
             Margin="0,0, 230,0" 
             
             SelectionChanged="AssignmentSelectComboBox_SelectionChanged"
@@ -348,7 +377,7 @@
             
             Width="100"
             Height="30"
-
+            Background="{DynamicResource StrongAccent}"
                 
             
             Margin="0, 0, 120, 0" 
@@ -370,6 +399,7 @@
             
             Width="100"
             Height="30"
+            Background="{DynamicResource StrongAccent}"
 
             Click="ClearDeleteButton_Click"    
             
@@ -380,19 +410,6 @@
             >
             Clear/Delete
         </Button>
-        
-        <!-- Used for better feedback. -->
-        <Rectangle Name="NotificationRectangle"
-            HorizontalAlignment="Left" 
-            Height="22" Margin="10,0,0,0" 
-            Grid.Row="1" 
-            Fill="Black"
-            VerticalAlignment="Center" 
-            Width="665"/>
-
-
-
-
 
 
         <!-- Table results Row. -->
@@ -404,32 +421,65 @@
             
             HorizontalScrollBarVisibility="Visible"
             VerticalScrollBarVisibility="Visible"
+            
             Grid.Row="2"
                   
             IsReadOnly="True"
                   
             AutoGenerateColumns="False"
+            
+            Background="{DynamicResource Tertiary}" 
+            
+            SelectionChanged="TableGrid_SelectionChanged"
             >
             <DataGrid.Resources>
                 <!-- Colour of selected row. -->
                 <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" 
-                   Color="CornflowerBlue"/>
+                   Color="#0078D7"/>
             </DataGrid.Resources>
             <DataGrid.Columns>
 
-                <!-- Mandatory coulmns. -->
+                <!-- Assignment number . -->
                 <DataGridTextColumn Header="No." Binding="{Binding AssignmentNumber}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
-                            <EventSetter Event="MouseLeftButtonDown" Handler="AssignmentNumber_MouseLeftButtonDown"/>
-                            <EventSetter Event="MouseEnter" Handler="ClickableText_MouseEnter"/>
-                            <EventSetter Event="MouseLeave" Handler="ClickableText_MouseLeave"/>
+                            <EventSetter Event="MouseEnter" Handler="Cell_MouseEnter"/>
+                            <EventSetter Event="MouseLeave" Handler="Cell_MouseLeave"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Class" Binding="{Binding ClassName}" />
-                <DataGridTextColumn Header="Assignment" Binding="{Binding AssignmentName}" />
-                <DataGridTextColumn Header="Weight (%)" Binding="{Binding AssignmentWeight}" />
+                
+                <!-- Class of assignment. -->
+                <DataGridTextColumn Header="Class" Binding="{Binding ClassName}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <EventSetter Event="MouseEnter" Handler="Cell_MouseEnter"/>
+                            <EventSetter Event="MouseLeave" Handler="Cell_MouseLeave"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!-- Assignment name. -->
+                <DataGridTextColumn Header="Assignment" Binding="{Binding AssignmentName}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <EventSetter Event="MouseEnter" Handler="Cell_MouseEnter"/>
+                            <EventSetter Event="MouseLeave" Handler="Cell_MouseLeave"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                
+                <!-- Assignment weight. -->
+                <DataGridTextColumn Header="Weight (%)" Binding="{Binding AssignmentWeight}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <EventSetter Event="MouseEnter" Handler="Cell_MouseEnter"/>
+                            <EventSetter Event="MouseLeave" Handler="Cell_MouseLeave"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                
+                <!-- Due date. -->
                 <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
@@ -438,20 +488,24 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
+                
+                <!-- Assignment status. -->
                 <DataGridTextColumn Header="Status" Binding="{Binding AssignmentStatus}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Style.Triggers>
                                 <Trigger Property="Text" Value="Incomplete">
-                                    <Setter Property="Background" Value="Tomato"/>
+                                    <Setter Property="Background" Value="{DynamicResource WeakAccent}"/>
                                 </Trigger>
                                 <Trigger Property="Text" Value="In Progress">
-                                    <Setter Property="Background" Value="Yellow"/>
+                                    <Setter Property="Background" Value="{DynamicResource MediumAccent}"/>
                                 </Trigger>
                                 <Trigger Property="Text" Value="Complete">
-                                    <Setter Property="Background" Value="LightGreen"/>
+                                    <Setter Property="Background" Value="{DynamicResource StrongAccent}"/>
                                 </Trigger>
                             </Style.Triggers>
+                            <EventSetter Event="MouseEnter" Handler="Cell_MouseEnter"/>
+                            <EventSetter Event="MouseLeave" Handler="Cell_MouseLeave"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
@@ -464,8 +518,8 @@
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <EventSetter Event="MouseLeftButtonUp" Handler="Resources_MouseLeftButtonUp"/>
-                            <EventSetter Event="MouseEnter" Handler="ClickableText_MouseEnter"/>
-                            <EventSetter Event="MouseLeave" Handler="ClickableText_MouseLeave"/>
+                            <EventSetter Event="MouseEnter" Handler="Resources_MouseEnter"/>
+                            <EventSetter Event="MouseLeave" Handler="Resources_MouseLeave"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
@@ -475,14 +529,16 @@
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <EventSetter Event="MouseLeftButtonUp" Handler="Resources_MouseLeftButtonUp"/>
-                            <EventSetter Event="MouseEnter" Handler="ClickableText_MouseEnter"/>
-                            <EventSetter Event="MouseLeave" Handler="ClickableText_MouseLeave"/>
+                            <EventSetter Event="MouseEnter" Handler="Resources_MouseEnter"/>
+                            <EventSetter Event="MouseLeave" Handler="Resources_MouseLeave"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
 
 
             </DataGrid.Columns>
+            
+            
         </DataGrid>
 
         

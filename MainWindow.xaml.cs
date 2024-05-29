@@ -158,8 +158,6 @@ namespace AssignmentManager
             /* Making general info text block blank. */
             GeneralInfoTextBlock.Text = "";
 
-            NotificationRectangle.Width = 0;
-
             /* Creating clock for flashing ui. */
             flashClock.Interval = TimeSpan.FromMilliseconds(flashDuration);
             flashClock.Tick += new EventHandler(FlashClock_Tick);
@@ -214,10 +212,10 @@ namespace AssignmentManager
             ClassTextBox.Background = Brushes.White;
             AssignmentTextBox.Background = Brushes.White;
             WeightTextBox.Background = Brushes.White;
-            DueDateButton.Background = Brushes.LightGray;
+            DueDateButton.Background = (Brush)this.FindResource("StrongAccent");
             StatusComboBox.Foreground = Brushes.Black;
-            LocalResourcesButton.Background = Brushes.LightGray;
-            OnlineResourcesButton.Background = Brushes.LightGray;
+            LocalResourcesButton.Background = (Brush) this.FindResource("StrongAccent");
+            OnlineResourcesButton.Background = (Brush)this.FindResource("StrongAccent");
         }
 
 
@@ -277,10 +275,7 @@ namespace AssignmentManager
             /* Making notifaction rectangle shrink. */
             if (ConfigurationManager.AppSettings["animationsEnabled"] == "true")
             {
-                if (NotificationRectangle.Width > 0)
-                {
-                    --NotificationRectangle.Width;
-                }
+                
             }
 
             /* Checking if any notifications need to be sent out. */
@@ -672,8 +667,6 @@ namespace AssignmentManager
                     /* Updating grid highlight. */
                     TableGrid.SelectedItem = null;
 
-                    NotificationRectangle.Width = NOTIFY_WIDTH;
-                    NotificationRectangle.Fill = Brushes.SlateGray;
 
 
                     /* Flashing UI. */
@@ -711,15 +704,14 @@ namespace AssignmentManager
                         }
                     }
 
-                    NotificationRectangle.Width = NOTIFY_WIDTH;
-                    NotificationRectangle.Fill = Brushes.CornflowerBlue;
-
                     FlashUI(DEFAULT_FLASH_COUNT, Brushes.CornflowerBlue);
                 }
 
+
+                /*** Need to remove the setting as well. ***/
                 if (ConfigurationManager.AppSettings["animationsEnabled"] == "false")
                 {
-                    NotificationRectangle.Width = 0;
+                    
                 }
             }            
         }
@@ -768,9 +760,6 @@ namespace AssignmentManager
 
                 AssignmentSelectComboBox.SelectedIndex = count;
 
-                NotificationRectangle.Width = NOTIFY_WIDTH;
-                NotificationRectangle.Fill = Brushes.Green;
-
                 FlashUI(2, Brushes.Green);
             }
             
@@ -787,17 +776,13 @@ namespace AssignmentManager
 
                 Database.Disconnect();
 
-
-                NotificationRectangle.Width = NOTIFY_WIDTH;
-                NotificationRectangle.Fill = Brushes.SeaGreen;
-
                 FlashUI(2, Brushes.Green);
             }
 
 
             if (ConfigurationManager.AppSettings["animationsEnabled"] == "false")
             {
-                NotificationRectangle.Width = 0;
+                
             }
         }
 
@@ -809,10 +794,6 @@ namespace AssignmentManager
             if (ClearDeleteButton.Content.ToString() == "Clear")
             {
                 ClearUI();
-                NotificationRectangle.Width = NOTIFY_WIDTH;
-                NotificationRectangle.Fill = Brushes.SlateGray;
-
-
                 FlashUI(DEFAULT_FLASH_COUNT, Brushes.SlateGray);
             }
 
@@ -840,9 +821,6 @@ namespace AssignmentManager
                 AssignmentSelectComboBox.Items.Remove(AssignmentSelectComboBox.SelectedItem);
                 AssignmentSelectComboBox.SelectedIndex = selected_assignment_index - 1;
 
-                NotificationRectangle.Width = NOTIFY_WIDTH;
-                NotificationRectangle.Fill = Brushes.Red;
-
 
                 FlashUI(2, Brushes.Red);
             }
@@ -850,7 +828,7 @@ namespace AssignmentManager
 
             if (ConfigurationManager.AppSettings["animationsEnabled"] == "false")
             {
-                NotificationRectangle.Width = 0;
+                
             }
         }
 
@@ -858,16 +836,6 @@ namespace AssignmentManager
 
 
         /* Table row. */
-
-
-        private void AssignmentNumber_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            TextBlock assignment_number_text = (TextBlock)e.OriginalSource;
-            int assignment_number = int.Parse(assignment_number_text.Text);
-
-            AssignmentSelectComboBox.SelectedItem = assignment_number;
-        }
-
 
 
         /* 
@@ -914,30 +882,36 @@ namespace AssignmentManager
 
 
         /* 
-        * METHOD        : ClickableText_MouseEnter
+        * METHOD        : Resources_MouseEnter
         * DESCRIPTION   :
-        *   Raised when clickable text is hovered over and
-        *   changes the mouse to a hand icon.
+        *   Raised when resources are hovered over and
+        *   changes the mouse icon.
         * PARAMETERS    :
         *   object sender        : the sender
         *   MouseButtonEventArgs : the mouse event args
         * RETURNS       :
         *   void
         */
-        private void ClickableText_MouseEnter(object sender, MouseEventArgs e)
+        private void Resources_MouseEnter(object sender, MouseEventArgs e)
         {
             TextBlock text_block = (TextBlock)e.OriginalSource;
 
+            /* Only switches to hand if resources are there. */
             if (text_block.Text != "")
             {
                 Cursor = Cursors.Hand;
             }
-            
+
+            /* Switches to pen (select) otherwise. */
+            else
+            {
+                Cursor = Cursors.Pen;
+            }
         }
 
 
         /* 
-        * METHOD        : ClickableText_MouseLeave
+        * METHOD        : Resources_MouseLeave
         * DESCRIPTION   :
         *   Raised when a clickable text section is hovered off and
         *   changes the mouse back to an arrow.
@@ -947,17 +921,57 @@ namespace AssignmentManager
         * RETURNS       :
         *   void
         */
-        private void ClickableText_MouseLeave(object sender, MouseEventArgs e)
+        private void Resources_MouseLeave(object sender, MouseEventArgs e)
         {
-            TextBlock text_block = (TextBlock)e.OriginalSource;
-
-            if (text_block.Text != "")
-            {
-                Cursor = Cursors.Arrow;
-            }
-            
+            Cursor = Cursors.Arrow;
         }
 
+
+        /* 
+        * METHOD        : Cell_MouseEnter
+        * DESCRIPTION   :
+        *   Raised when a cell section is hovered on and
+        *   changes the mouse to a pen.
+        * PARAMETERS    :
+        *   object sender        : the sender
+        *   MouseButtonEventArgs : the mouse event args
+        * RETURNS       :
+        *   void
+        */
+        private void Cell_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Pen;
+        }
+
+
+        /* 
+        * METHOD        : Cell_MouseLeave
+        * DESCRIPTION   :
+        *   Raised when a cell section is hovered off and
+        *   changes the mouse back to an arrow.
+        * PARAMETERS    :
+        *   object sender        : the sender
+        *   MouseButtonEventArgs : the mouse event args
+        * RETURNS       :
+        *   void
+        */
+        private void Cell_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Arrow;
+        }
+
+
+        /* 
+        * METHOD        : DueDate_MouseEnter
+        * DESCRIPTION   :
+        *   Raised when a due date cell section is hovered on and
+        *   displays the number of days left.
+        * PARAMETERS    :
+        *   object sender        : the sender
+        *   MouseButtonEventArgs : the mouse event args
+        * RETURNS       :
+        *   void
+        */
         private void DueDate_MouseEnter(object sender, MouseEventArgs e)
         {
             /* Getting the hovered over assignment's due date. */
@@ -987,23 +1001,72 @@ namespace AssignmentManager
 
             /* Displaying info about how many days left. */
             GeneralInfoTextBlock.Text = $"Assignment is due in {days_due} days and {hours_due} hours.";
+
+            /* Changing cursor to pen. */
+            Cursor = Cursors.Pen;
         }
 
+
+        /* 
+        * METHOD        : DueDate_MouseLeave
+        * DESCRIPTION   :
+        *   Raised when a due date cell section is hovered off and
+        *   resets the general text box.
+        * PARAMETERS    :
+        *   object sender        : the sender
+        *   MouseButtonEventArgs : the mouse event args
+        * RETURNS       :
+        *   void
+        */
         private void DueDate_MouseLeave(object sender, MouseEventArgs e)
         {
             /* Resetting info text block. */
             GeneralInfoTextBlock.Background = Brushes.White;
             GeneralInfoTextBlock.Text = "";
+
+            /* Changing cursor back. */
+            Cursor = Cursors.Arrow;
         }
 
+
+        /* 
+        * METHOD        : TableGrid_SelectionChanged
+        * DESCRIPTION   :
+        *   Raised when a new assignment is selected through the table grid
+        *   and updates the selection in the combo box.
+        * PARAMETERS    :
+        *   object sender                         : the sender
+        *   System.ComponentModel.CancelEventArgs : the cancel event args
+        * RETURNS       :
+        *   void
+        */
+        private void TableGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            /* Getting the selected assignment. */
+            Assignment selected_assignment = (Assignment)TableGrid.SelectedItem;
+
+            if (selected_assignment != null)
+            {
+                AssignmentSelectComboBox.SelectedItem = selected_assignment.AssignmentNumber;
+            }
+        }
+
+
+        /* 
+        * METHOD        : Window_Closing
+        * DESCRIPTION   :
+        *   Raised when the window is closing and stops the clock.
+        * PARAMETERS    :
+        *   object sender                         : the sender
+        *   System.ComponentModel.CancelEventArgs : the cancel event args
+        * RETURNS       :
+        *   void
+        */
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             /* Stopping clock. */
             headerClock.Stop();
         }
-
-
-
 
 
         /* Shortcuts. */
@@ -1067,7 +1130,5 @@ namespace AssignmentManager
         {
             ClearDeleteButton_Click(sender, e);
         }
-
-        
     }
 }
