@@ -25,6 +25,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
+using System.Collections.ObjectModel;
 
 namespace AssignmentManager.CodeFiles
 {
@@ -49,7 +50,7 @@ namespace AssignmentManager.CodeFiles
         * PARAMETERS    :
         *   List<string> resources : the resources to open
         */
-        public ResourceOpenMenu(List<string> resources)
+        public ResourceOpenMenu(ObservableCollection<string> resources)
         {
             InitializeComponent();
 

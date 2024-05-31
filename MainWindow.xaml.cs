@@ -368,31 +368,6 @@ namespace AssignmentManager
         */
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            ///* Prompting to disable animations. */
-            //MessageBoxResult result = MessageBox.Show("Disable animations?", "Settings", 
-            //                          MessageBoxButton.YesNo, 
-            //                          MessageBoxImage.Question);
-
-
-            //if (result == MessageBoxResult.Yes)
-            //{
-            //    /* Updating settings. */
-            //    Configuration settings = ConfigurationManager.OpenExeConfiguration
-            //                             (ConfigurationUserLevel.None);
-            //    settings.AppSettings.Settings["animationsEnabled"].Value = "false";
-            //    settings.Save(ConfigurationSaveMode.Full);
-            //    ConfigurationManager.RefreshSection("appSettings");
-            //}
-
-            //else
-            //{
-            //    Configuration settings = ConfigurationManager.OpenExeConfiguration
-            //                             (ConfigurationUserLevel.None);
-            //    settings.AppSettings.Settings["animationsEnabled"].Value = "true";
-            //    settings.Save(ConfigurationSaveMode.Full);
-            //    ConfigurationManager.RefreshSection("appSettings");
-            //}
-
             /* Opening settings menu. */
             SettingsMenu settings_menu = new SettingsMenu();
             settings_menu.ShowDialog();
@@ -839,45 +814,69 @@ namespace AssignmentManager
 
 
         /* 
-        * METHOD        : Resources_MouseLeftButtonUp
+        * METHOD        : LocalResources_MouseLeftButtonUp
         * DESCRIPTION   :
-        *   Raised when either the local or online resources are clicked in
-        *   the grid and opens a menu to allow for opening the resources of that
-        *   assignment.
+        *   Raised when the local resources are clicked in the grid and opens a 
+        *   menu to allow for opening the resources of that assignment.
         * PARAMETERS    :
         *   object sender        : the sender
         *   MouseButtonEventArgs : the mouse event args
         * RETURNS       :
         *   void
         */
-        private void Resources_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void LocalResources_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            /* Getting the resources. */
-            TextBlock resources_text = (TextBlock)e.OriginalSource;
+            //Need to
+            // 1. Create a sub-window for prompting the user to add an alias when adding resources.
+            // 2. Two different event handlers for local and online resources.
+            // 3. Use the selected assignment from ViewModel to get the resources and parse them.
+            // 4. Aliases should be stored with links as strings delimited by '|' and need to be accounted for when parsing.
+
+
+            ///* Getting the resources. */
+            //TextBlock resources_text = (TextBlock)e.OriginalSource;
             
-            /* Getting each resource as a string. */
-            string[] resources = resources_text.Text.Split('\n');
-            List<string> list_resources = new List<string>();
+            ///* Getting each resource as a string. */
+            //string[] resources = resources_text.Text.Split('\n');
+            //List<string> list_resources = new List<string>();
 
-            int count = 0;
+            //int count = 0;
 
-            /* Iterating through each item and opening them. */
-            while (resources[count] != "") 
+            ///* Iterating through each resource. */
+            //while (resources[count] != "") 
+            //{
+            //    list_resources.Add(resources[count]);
+            //    ++count;
+            //}
+
+            /* Checking if at least 1 resource is in the selected assignment's resource cell. */
+            if (ViewModel.SelectedLocalResources.Count >= 1)
             {
-                //Process.Start('"' + resources[count] + '"');
-                list_resources.Add(resources[count]);
-                ++count;
-            }
-
-
-            if (count >= 1)
-            {
-                /* Creating new resource menu with current resources. */
-                ResourceOpenMenu resource_menu = new ResourceOpenMenu(list_resources);
+                ResourceOpenMenu resource_menu = new ResourceOpenMenu(ViewModel.SelectedLocalResources);
                 resource_menu.ShowDialog();
             }
+        }
 
-            
+
+        /* 
+        * METHOD        : OnlineResources_MouseLeftButtonUp
+        * DESCRIPTION   :
+        *   Raised when the online resources are clicked in the grid and opens a 
+        *   menu to allow for opening the resources of that assignment.
+        * PARAMETERS    :
+        *   object sender        : the sender
+        *   MouseButtonEventArgs : the mouse event args
+        * RETURNS       :
+        *   void
+        */
+        private void OnlineResources_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            /* Checking if at least 1 resource is in the selected assignment's resource cell. */
+            if (ViewModel.SelectedOnlineResources.Count >= 1)
+            {
+                ResourceOpenMenu resource_menu = new ResourceOpenMenu(ViewModel.SelectedOnlineResources);
+                resource_menu.ShowDialog();
+            }
         }
 
 

@@ -1,0 +1,26 @@
+﻿<!-- 
+- FILE          : Alias.xaml
+- PROJECT       : Assignment Manager
+- PROGRAMMER    : Gagana Hettiarachchige
+- FIRST VERSION : 2024-05-30
+- DESCRIPTION   :
+-	Holds the mark up of the screen to add
+-   an alias to a resource.
+-->
+
+<Window x:Class="AssignmentManager.CodeFiles.Alias"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AssignmentManager.CodeFiles"
+        mc:Ignorable="d"
+        Title="Modify Alias" 
+        Height="200"
+        Width="400"
+        WindowStartupLocation="CenterScreen"
+        >
+    <Grid>
+        
+    </Grid>
+</Window>

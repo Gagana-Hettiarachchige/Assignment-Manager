@@ -76,7 +76,8 @@ namespace AssignmentManager.CodeFiles
             /* Setting up dialog for adding files to be able to open. */
             OpenFileDialog files_to_add = new OpenFileDialog();
             files_to_add.Multiselect = true;
-            files_to_add.Filter = "Solutions (*.sln)|*.sln|" +
+            files_to_add.Filter = "All files |*.*|" +
+                                  "Solutions (*.sln)|*.sln|" +
                                   "C Files (*.c)|*.c|" +
                                   "C++ Files (*.cpp)|*.cpp|" +
                                   "C# Files (*.cs)|*.cs|" +
@@ -89,8 +90,7 @@ namespace AssignmentManager.CodeFiles
                                   "ASPX Files (*.aspx)|*.aspx|" +
                                   "CSS Files (*.css)|*.css|" +
                                   "SQL Files (*.sql)|*.sql|" +
-                                  "Text Files (*.txt)|*.txt|" +
-                                  "All files |*.*";
+                                  "Text Files (*.txt)|*.txt";
 
             /* Asking user to pick resources. */
             Nullable<bool> choice = files_to_add.ShowDialog();
@@ -102,6 +102,12 @@ namespace AssignmentManager.CodeFiles
                 /* Adding resources to the lists. */
                 while (count < files_to_add.FileNames.Length)
                 {
+
+                    /* Asking for an alias for the resource. */
+                    Alias alias_menu = new Alias();
+                    alias_menu.ShowDialog();
+
+
                     LocalResourcesList.Items.Add(files_to_add.FileNames[count]);
                     ViewModel.SelectedLocalResources.Add(files_to_add.FileNames[count]);
                     ++count;

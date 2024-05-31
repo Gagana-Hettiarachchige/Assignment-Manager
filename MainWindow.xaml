@@ -517,7 +517,7 @@
                 <DataGridTextColumn Header="Local Resources" Binding="{Binding LocalResources}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
-                            <EventSetter Event="MouseLeftButtonUp" Handler="Resources_MouseLeftButtonUp"/>
+                            <EventSetter Event="MouseLeftButtonUp" Handler="LocalResources_MouseLeftButtonUp"/>
                             <EventSetter Event="MouseEnter" Handler="Resources_MouseEnter"/>
                             <EventSetter Event="MouseLeave" Handler="Resources_MouseLeave"/>
                         </Style>
@@ -528,7 +528,7 @@
                 <DataGridTextColumn Header="Online Resources" Binding="{Binding OnlineResources}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
-                            <EventSetter Event="MouseLeftButtonUp" Handler="Resources_MouseLeftButtonUp"/>
+                            <EventSetter Event="MouseLeftButtonUp" Handler="OnlineResources_MouseLeftButtonUp"/>
                             <EventSetter Event="MouseEnter" Handler="Resources_MouseEnter"/>
                             <EventSetter Event="MouseLeave" Handler="Resources_MouseLeave"/>
                         </Style>
