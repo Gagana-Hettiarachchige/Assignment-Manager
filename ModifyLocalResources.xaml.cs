@@ -102,14 +102,13 @@ namespace AssignmentManager.CodeFiles
                 /* Adding resources to the lists. */
                 while (count < files_to_add.FileNames.Length)
                 {
-
-                    /* Asking for an alias for the resource. */
-                    Alias alias_menu = new Alias();
-                    alias_menu.ShowDialog();
+                    /* Asking user if they want an alias for this specific resource. */
+                    string new_resource = Alias.askForAlias(files_to_add.FileNames[count]);
 
 
-                    LocalResourcesList.Items.Add(files_to_add.FileNames[count]);
-                    ViewModel.SelectedLocalResources.Add(files_to_add.FileNames[count]);
+                    /* Adding the resource to the list and the selected local resources list. */
+                    LocalResourcesList.Items.Add(new_resource);
+                    ViewModel.SelectedLocalResources.Add(new_resource);
                     ++count;
                 }
             }

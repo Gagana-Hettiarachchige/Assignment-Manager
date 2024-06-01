@@ -16,11 +16,81 @@
         xmlns:local="clr-namespace:AssignmentManager.CodeFiles"
         mc:Ignorable="d"
         Title="Modify Alias" 
-        Height="200"
-        Width="400"
+        Height="160"
+        Width="250"
+        MinHeight="150"
+        MinWidth="250"
         WindowStartupLocation="CenterScreen"
         >
     <Grid>
+
+        <Grid.RowDefinitions>
+
+            <!-- Displaying resource Row. -->
+            <RowDefinition Height="40"/>
+
+            <!-- Alias creating/editing row. -->
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+
+
+        <!-- Textblock to hold the original resource name. -->
+        <ScrollViewer
+            HorizontalScrollBarVisibility="Visible"
+            VerticalScrollBarVisibility="Disabled"
+            Grid.Row="0"
+            >
+            <TextBlock Name="RawResourceTextBlock"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="10, 0, 10, 0"
+            >
+            Some resource nameSome resource nameSome resource nameSome resource nameSome resource nameSome resource nameSome resource nameSome resource nameSome resource nameSome resource nameSome resource name
+            </TextBlock>
+        </ScrollViewer>
+        
+
+        <!-- Textbox to get the alias. -->
+        <TextBox Name="AliasTextBox"
+            Width="200"
+            Height="20"
+                 
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Margin="0, 10, 0, 0"
+            Grid.Row="1"
+                 
+            TextChanged="AliasTextBox_TextChanged"
+            >
+            New alias...
+        </TextBox>
+
+        <!-- Button to add alias. -->
+        <Button Name="AddButton"
+            Height="20"
+            Width="80"
+                
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Margin="0, 45, 120, 0"
+            Grid.Row="1" Click="AddButton_Click"
+            >
+            Apply Alias
+        </Button>
+
+        <!-- Button to add alias. -->
+        <Button Name="NoAliasButton"
+            Height="20"
+            Width="80"
+                
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Margin="120, 45, 0, 0"
+            Grid.Row="1"
+            >
+            No Alias
+        </Button>
         
     </Grid>
 </Window>
