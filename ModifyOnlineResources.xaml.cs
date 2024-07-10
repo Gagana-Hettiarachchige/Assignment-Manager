@@ -94,7 +94,7 @@ namespace AssignmentManager.CodeFiles
                                     MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
-                
+
             }
         }
 
@@ -136,7 +136,7 @@ namespace AssignmentManager.CodeFiles
                     ViewModel.SelectedOnlineResources.Add(resource);
                 }
             }
-            
+
         }
 
 

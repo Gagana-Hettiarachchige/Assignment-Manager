@@ -26,10 +26,27 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <!-- Action section. -->
+        <!-- Alias Action section. -->
+        <Menu Name="AliasMenu"
+            Grid.Row="0"
+            Grid.Column="0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            >
+            <MenuItem Name="EditAliasOption" Header="Edit Alias" FontSize="14"/>
+        </Menu>
+
+        
+        <!-- Resource Action section. -->
         <Menu Name="LocalResourcesMenu"
             Grid.Row="0"
+            Grid.Column="1"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             >
@@ -37,13 +54,20 @@
             <MenuItem Name="AddFolderOption" Header="Add Folder" FontSize="14" Click="AddFolderOption_Click" />
             <MenuItem Name="RemoveOption" Header="Remove" FontSize="14" Click="RemoveOption_Click" />
         </Menu>
-        
-        
+
+
+        <!-- Aliases section. -->
+        <ListBox Name="AliasList"
+            Grid.Row="1"
+            Grid.Column="0"
+            >
+        </ListBox>
         
         
         <!-- Resource list section. -->
         <ListBox Name="LocalResourcesList"
             Grid.Row="1"
+            Grid.Column="1"
                  
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"

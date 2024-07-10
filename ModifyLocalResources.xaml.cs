@@ -76,7 +76,7 @@ namespace AssignmentManager.CodeFiles
             /* Setting up dialog for adding files to be able to open. */
             OpenFileDialog files_to_add = new OpenFileDialog();
             files_to_add.Multiselect = true;
-            files_to_add.Filter = "All files |*.*|" +
+            files_to_add.Filter = "All files |*.*|" + 
                                   "Solutions (*.sln)|*.sln|" +
                                   "C Files (*.c)|*.c|" +
                                   "C++ Files (*.cpp)|*.cpp|" +
@@ -102,13 +102,18 @@ namespace AssignmentManager.CodeFiles
                 /* Adding resources to the lists. */
                 while (count < files_to_add.FileNames.Length)
                 {
+
+
                     /* Asking user if they want an alias for this specific resource. */
-                    string new_resource = Alias.askForAlias(files_to_add.FileNames[count]);
-
-
+                    string new_resource = Alias.AskForAlias(files_to_add.FileNames[count]);
+                    
                     /* Adding the resource to the list and the selected local resources list. */
                     LocalResourcesList.Items.Add(new_resource);
                     ViewModel.SelectedLocalResources.Add(new_resource);
+
+
+                    //LocalResourcesList.Items.Add(files_to_add.FileNames[count]);
+                    //ViewModel.SelectedLocalResources.Add(files_to_add.FileNames[count]);
                     ++count;
                 }
             }
@@ -181,7 +186,7 @@ namespace AssignmentManager.CodeFiles
                     ViewModel.SelectedLocalResources.Add(resource);
                 }
             }
-            
+
 
         }
 

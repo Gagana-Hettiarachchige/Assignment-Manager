@@ -87,7 +87,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Margin="120, 45, 0, 0"
-            Grid.Row="1"
+            Grid.Row="1" Click="NoAliasButton_Click"
             >
             No Alias
         </Button>

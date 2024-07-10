@@ -29,6 +29,10 @@ namespace AssignmentManager.CodeFiles
     /// </summary>
     public partial class Alias : Window
     {
+        /* Constants. */
+        public const char DELIMITER = '|';
+
+
         /* Data members. */
         private static string aliasName = "";  /* The resource's the alias. */
         private static string rawResource = "";       /* The resource to give an alias to. */
@@ -48,28 +52,7 @@ namespace AssignmentManager.CodeFiles
         }
 
 
-        /* 
-        * METHOD        : askForAlias
-        * DESCRIPTION   :
-        *   Used by other windows when it wants to manage the alias and 
-        *   opens the alias window with the specified resource.
-        * PARAMETERS    :
-        *   string resource : the resource to give an alias to
-        * RETURNS       :
-        *   string : the resource plus the alias
-        */
-        public static string askForAlias(string resource)
-        {
-            /* Opening dialog for alias. */
-            Alias alias_menu = new Alias(resource);
-            alias_menu.ShowDialog();
-
-            /* Combinging the alias and the resource. */
-            string resource_with_alias = aliasName + "|" + rawResource;
-
-            return resource_with_alias;
-        }
-
+        /* Constructor. */
 
         public Alias(string raw_resource)
         {
@@ -83,6 +66,8 @@ namespace AssignmentManager.CodeFiles
         }
 
 
+        /* Event handlers. */
+
         private void AliasTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             //Need to add a guard for entering the delimiter '|'
@@ -93,6 +78,37 @@ namespace AssignmentManager.CodeFiles
         {
             aliasName = AliasTextBox.Text;
             Close();
+        }
+
+        private void NoAliasButton_Click(object sender, RoutedEventArgs e)
+        {
+            aliasName = "";
+            Close();
+        }
+
+
+        /* Other methods. */
+
+        /* 
+        * METHOD        : AskForAlias
+        * DESCRIPTION   :
+        *   Used by other windows when it wants to manage the alias and 
+        *   opens the alias window with the specified resource.
+        * PARAMETERS    :
+        *   string resource : the resource to give an alias to
+        * RETURNS       :
+        *   string : the resource plus the alias
+        */
+        public static string AskForAlias(string resource)
+        {
+            /* Opening dialog for alias. */
+            Alias alias_menu = new Alias(resource);
+            alias_menu.ShowDialog();
+
+            /* Combinging the alias and the resource. */
+            string resource_with_alias = aliasName + DELIMITER + rawResource;
+
+            return resource_with_alias;
         }
     }
 }
