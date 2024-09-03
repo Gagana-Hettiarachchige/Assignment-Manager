@@ -26,6 +26,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
 using System.Collections.ObjectModel;
+using System.Windows.Forms;
+using MessageBox = System.Windows.MessageBox;
 
 namespace AssignmentManager.CodeFiles
 {
@@ -54,8 +56,24 @@ namespace AssignmentManager.CodeFiles
         {
             InitializeComponent();
 
-            /* Putting the resources into the listbox. */
-            ResourcesList.ItemsSource = resources;
+            /* Splitting resource into alias and resource. */
+            try
+            {
+                /* Adding alias and resource in their respective lists. */
+                foreach (string resource_with_alias in resources) 
+                {
+                    AliasList.Items.Add(Alias.GetAlias(resource_with_alias));
+                    ResourcesList.Items.Add(Alias.GetResource(resource_with_alias));
+                }
+            }
+
+            catch
+            {
+                /* Notifying user with error. */
+                MessageBox.Show("One or more of the resources in this assignment may have been formatted incorrectly.",
+                                "Resource Formatting Error",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
 

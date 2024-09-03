@@ -25,9 +25,15 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
         <!-- Action section. -->
         <Menu Name="OpenResourcesMenu"
             Grid.Row="0"
+            Grid.ColumnSpan="150"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             >
@@ -36,12 +42,22 @@
             <MenuItem Name="OpenCmdOption" Header="Open CMD" FontSize="14" Click="OpenCmdOption_Click"/>
         </Menu>
 
-
-
-
+        
+        <!-- Alias list section. -->
+        <ListBox Name="AliasList"
+            Grid.Row="1"
+            Grid.Column="0"
+                 
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            >
+        </ListBox>
+        
+        
         <!-- Resource list section. -->
         <ListBox Name="ResourcesList"
             Grid.Row="1"
+            Grid.Column="1"
                  
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
@@ -52,7 +68,6 @@
             SelectionMode="Extended"
             MouseDoubleClick="ResourcesList_MouseDoubleClick"
             >
-
         </ListBox>
     </Grid>
 </Window>
