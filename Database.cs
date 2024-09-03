@@ -78,7 +78,7 @@ namespace AssignmentManager.CodeFiles
 
 
                 MessageBox.Show(error.Message +"\n\n(If this is the first time launching this program, " +
-                                "please make sure to have run the .sql file in the localhost connection in " +
+                                "please make sure to run the .sql file in the localhost connection in " +
                                 "your MySQL workbench).", 
                                 "Database Connection Failed", 
                                 MessageBoxButton.OK, MessageBoxImage.Error);

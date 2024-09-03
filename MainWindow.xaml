@@ -99,7 +99,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             
-            Margin="350, 0, 0, 0"
+            Margin="450, 0, 0, 0"
             MaxWidth="300"
             
             FontSize="14"

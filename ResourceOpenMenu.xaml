@@ -50,7 +50,8 @@
                  
             ScrollViewer.HorizontalScrollBarVisibility="Visible"
             ScrollViewer.VerticalScrollBarVisibility="Visible"
-                 
+            
+            SelectionMode="Extended"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             >
@@ -70,6 +71,7 @@
                  
             SelectionMode="Extended"
             MouseDoubleClick="ResourcesList_MouseDoubleClick"
+            SelectionChanged="ResourcesList_SelectionChanged"
             >
         </ListBox>
     </Grid>

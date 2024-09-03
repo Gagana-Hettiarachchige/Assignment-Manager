@@ -266,5 +266,63 @@ namespace AssignmentManager.CodeFiles
                                 MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+
+        /* 
+        * METHOD        : ResourcesList_SelectionChanged
+        * DESCRIPTION   :
+        *   Correlates the selection highlight between the alias and resource list
+        *   when the resource list is clicked on.
+        * PARAMETERS    :
+        *   object sender               : the sender
+        *   SelectionChangedEventArgs e : the items that were added to and removed form selection
+        * RETURNS       :
+        *   void
+        */
+        private void ResourcesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            /* Checking which items were selected. */
+            foreach (string item in e.AddedItems)
+            {
+                //MessageBox.Show("Selected: " + item);
+
+                /* Getting index to correlate with alias list. */
+                int count = 0;
+
+                /* Looping through resources to find the item selected. */ 
+                foreach (string resource in ResourcesList.Items)
+                {
+                    if (item == resource)
+                    {
+                        /* Adding the corresponding aliases to the selected list. */
+                        AliasList.SelectedItems.Add(AliasList.Items[count]);
+                    }
+
+                    ++count;
+                }
+            }
+
+            /* Checking which items were unselected. */
+            foreach (string item in e.RemovedItems)
+            {
+                //MessageBox.Show("Unselected: " + item);
+
+                /* Getting index to correlate with alias list. */
+                int count = 0;
+
+                /* Looping through resources to find the item selected. */
+                foreach (string resource in ResourcesList.Items)
+                {
+                    if (item == resource)
+                    {
+                        /* Removing the corresponding aliases from the selected list. */
+                        AliasList.SelectedItems.Remove(AliasList.Items[count]);
+                    }
+
+                    ++count;
+                }
+            }
+        }
     }
 }
