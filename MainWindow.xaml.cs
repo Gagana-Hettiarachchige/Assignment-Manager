@@ -272,6 +272,8 @@ namespace AssignmentManager
             /* Updating time. */
             ClockTextBlock.Text = DateTime.Now.ToString("F");
 
+
+            //Can use this for something else later
             /* Making notifaction rectangle shrink. */
             if (ConfigurationManager.AppSettings["animationsEnabled"] == "true")
             {

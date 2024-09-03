@@ -27,6 +27,12 @@ namespace AssignmentManager.CodeFiles
     /// <summary>
     /// Interaction logic for Alias.xaml
     /// </summary>
+    /// 
+
+
+    //Need to finish documenting all methods.
+
+
     public partial class Alias : Window
     {
         /* Constants. */
@@ -109,6 +115,56 @@ namespace AssignmentManager.CodeFiles
             string resource_with_alias = aliasName + DELIMITER + rawResource;
 
             return resource_with_alias;
+        }
+
+
+        /* 
+        * METHOD        : GetAlias
+        * DESCRIPTION   :
+        *   Used to get the alias part of a resource with an alias.
+        * PARAMETERS    :
+        *   string resource_with_alias : the resource with an alias
+        * RETURNS       :
+        *   string : the alias
+        */
+        public static string GetAlias(string resource_with_alias) 
+        {
+            /* Splitting by delimiter and returning the alias. */
+            string[] resource_and_alias = resource_with_alias.Split(DELIMITER);
+            return resource_and_alias[0];
+        }
+
+
+        /* 
+        * METHOD        : GetResource
+        * DESCRIPTION   :
+        *   Used to get the resource part of a resource with an alias.
+        * PARAMETERS    :
+        *   string resource_with_alias : the resource with an alias
+        * RETURNS       :
+        *   string : the resource
+        */
+        public static string GetResource(string resource_with_alias)
+        {
+            /* Splitting by delimiter and returning the resource. */
+            string[] resource_and_alias = resource_with_alias.Split(DELIMITER);
+            return resource_and_alias[1];
+        }
+
+
+        /* 
+        * METHOD        : CombineAliasResource
+        * DESCRIPTION   :
+        *   Used to combine an alias and resource into one string.
+        * PARAMETERS    :
+        *   string alias    : the alias
+        *   string resource : the resource 
+        * RETURNS       :
+        *   string : the alias with the resource
+        */
+        public static string CombineAliasResource(string alias, string resource)
+        {
+            return alias + DELIMITER + resource;
         }
     }
 }

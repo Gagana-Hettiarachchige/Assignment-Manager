@@ -53,9 +53,23 @@ namespace AssignmentManager.CodeFiles
         {
             InitializeComponent();
 
-            foreach (string resource in ViewModel.SelectedLocalResources)
+            foreach (string resource_with_alias in ViewModel.SelectedLocalResources)
             {
-                LocalResourcesList.Items.Add(resource);
+                /* Splitting resource into alias and resource. */
+                try
+                {
+                    /* Adding alias and resource in their respective lists. */
+                    AliasList.Items.Add(Alias.GetAlias(resource_with_alias));
+                    LocalResourcesList.Items.Add(Alias.GetResource(resource_with_alias));
+                }
+
+                catch 
+                {
+                    /* Notifying user with error. */
+                    MessageBox.Show("One or more of the resources in this assignment may have been formatted incorrectly.", 
+                                    "Resource Formatting Error",
+                                    MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
@@ -102,14 +116,15 @@ namespace AssignmentManager.CodeFiles
                 /* Adding resources to the lists. */
                 while (count < files_to_add.FileNames.Length)
                 {
-
-
                     /* Asking user if they want an alias for this specific resource. */
                     string new_resource = Alias.AskForAlias(files_to_add.FileNames[count]);
-                    
+
                     /* Adding the resource to the list and the selected local resources list. */
-                    LocalResourcesList.Items.Add(new_resource);
+                    LocalResourcesList.Items.Add(Alias.GetResource(new_resource));
                     ViewModel.SelectedLocalResources.Add(new_resource);
+
+                    /* Adding the alias to the seperate list. */
+                    AliasList.Items.Add(Alias.GetAlias(new_resource));
 
 
                     //LocalResourcesList.Items.Add(files_to_add.FileNames[count]);
@@ -168,26 +183,54 @@ namespace AssignmentManager.CodeFiles
             {
                 /* Removing selected resources from UI. */
                 List<string> selected_resources = new List<string>();
+                List<string> selected_aliases = new List<string>();
 
+                int index = LocalResourcesList.SelectedIndex;
+
+                /* Getting all the selected aliases and resources. */
                 foreach (string resource in LocalResourcesList.SelectedItems)
                 {
                     selected_resources.Add(resource);
+
+                    /* Using selected index to correlate with the alias list. */
+                    selected_aliases.Add(AliasList.Items[index].ToString());
+                    ++index;
                 }
 
+                /* Removing every selected resource from the list. */
                 foreach (string resource in selected_resources)
                 {
                     LocalResourcesList.Items.Remove(resource);
                 }
 
+                /* Removing every selected alias from the list. */
+                foreach (string alias in selected_aliases)
+                {
+                    AliasList.Items.Remove(alias);
+                }
+
                 /* Clearing and updating ViewModel list. */
                 ViewModel.SelectedLocalResources.Clear();
+
+
+                //This is assuming that the resource list is the one that is clicked
+                //Needs to later allow selecting the resource alias combo using the alias list as well
+
+                /* Alias index. */
+                int count = 0;
+
+                /* Updating the selected local resources list in the view model. */
                 foreach (string resource in LocalResourcesList.Items)
                 {
-                    ViewModel.SelectedLocalResources.Add(resource);
+                    /* Getting corresponding alias */ 
+                    string alias = AliasList.Items[count].ToString();
+
+                    /* Combining with delimiter and resource before adding to local resources list.*/
+                    ViewModel.SelectedLocalResources.Add(Alias.CombineAliasResource(alias, resource));
+
+                    ++count;
                 }
             }
-
-
         }
 
 
@@ -213,6 +256,15 @@ namespace AssignmentManager.CodeFiles
                 /* Adding all local resources to single string. */
                 ViewModel.SelectedAssignment.LocalResources += (resource + '\n');
             }
+        }
+
+
+
+        //Testing.
+        private void LocalResourcesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //AliasList.SelectedIndex = LocalResourcesList.SelectedIndex;
+            //MessageBox.Show(LocalResourcesList.SelectedIndex.ToString());
         }
     }
 }
