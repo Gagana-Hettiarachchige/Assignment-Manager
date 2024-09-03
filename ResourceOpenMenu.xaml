@@ -48,6 +48,9 @@
             Grid.Row="1"
             Grid.Column="0"
                  
+            ScrollViewer.HorizontalScrollBarVisibility="Visible"
+            ScrollViewer.VerticalScrollBarVisibility="Visible"
+                 
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             >

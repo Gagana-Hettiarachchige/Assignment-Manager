@@ -43,6 +43,9 @@ namespace AssignmentManager.CodeFiles
     public partial class ResourceOpenMenu : Window
     {
 
+        //Next thing to do is to visually show correlation between alias and resources in all menus
+
+
 
         /* 
         * METHOD        : ResourceMenuOpen

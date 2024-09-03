@@ -26,17 +26,45 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
 
-        <!-- Action section. -->
+        <!-- Alias Action section. -->
+        <Menu Name="AliasMenu"
+            Grid.Row="0"
+            Grid.Column="0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            >
+            <MenuItem Name="EditAliasOption" Header="Edit Alias" FontSize="14"/>
+        </Menu>
+
+        <!-- Aliases section. -->
+        <ListBox Name="AliasList"
+            Grid.Row="1"
+            Grid.Column="0"
+                 
+            ScrollViewer.HorizontalScrollBarVisibility="Visible"
+            ScrollViewer.VerticalScrollBarVisibility="Visible"
+            >
+        </ListBox>
+
+
+        
+        <!-- Resource Action section. -->
         <Menu Name="OnlineResourceMenu"
             Grid.Row="0"
-            
+            Grid.Column="1"
             >
             <TextBox Name="OnlineResourceTextBox"        
-                 Width="500"
-                 
-                 FontSize="12"
+                 VerticalAlignment="Center"
+                     
+                 Width="450"
+                 FontSize="10"
             >
             </TextBox>
 
@@ -49,6 +77,7 @@
         <!-- Resource list section. -->
         <ListBox Name="OnlineResourcesList"
             Grid.Row="1"
+            Grid.Column="1"
                  
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"

@@ -43,9 +43,23 @@ namespace AssignmentManager.CodeFiles
             InitializeComponent();
 
             /* Adding the selected assignment's resources to the list. */
-            foreach (string resource in ViewModel.SelectedOnlineResources)
+            foreach (string resource_with_alias in ViewModel.SelectedOnlineResources)
             {
-                OnlineResourcesList.Items.Add(resource);
+                /* Splitting resource into alias and resource. */
+                try
+                {
+                    /* Adding alias and resource in their respective lists. */
+                    AliasList.Items.Add(Alias.GetAlias(resource_with_alias));
+                    OnlineResourcesList.Items.Add(Alias.GetResource(resource_with_alias));
+                }
+
+                catch
+                {
+                    /* Notifying user with error. */
+                    MessageBox.Show("One or more of the resources in this assignment may have been formatted incorrectly.",
+                                    "Resource Formatting Error",
+                                    MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
@@ -76,9 +90,13 @@ namespace AssignmentManager.CodeFiles
                     if (online_resource.Scheme == Uri.UriSchemeHttp ||
                        online_resource.Scheme == Uri.UriSchemeHttps)
                     {
+                        /* Asking user if they want an alias for this specific resource. */
+                        string new_resource = Alias.AskForAlias(OnlineResourceTextBox.Text);
+
                         /* Adding entered resource to the lists. */
-                        OnlineResourcesList.Items.Add(OnlineResourceTextBox.Text);
-                        ViewModel.SelectedOnlineResources.Add(OnlineResourceTextBox.Text);
+                        ViewModel.SelectedOnlineResources.Add(new_resource);
+                        AliasList.Items.Add(Alias.GetAlias(new_resource));
+                        OnlineResourcesList.Items.Add(Alias.GetResource(new_resource));
                     }
 
                     else
@@ -116,24 +134,49 @@ namespace AssignmentManager.CodeFiles
             /* Checking if resources to remove are not empty. */
             if (OnlineResourcesList.SelectedItems != null)
             {
-                /* Removing selected resources from UI. */
+                /* Removing selected resources and aliases from UI. */
                 List<string> selected_resources = new List<string>();
+                List<string> selected_aliases = new List<string>();
 
+                int index = OnlineResourcesList.SelectedIndex;
+
+                /* Getting all the selected aliases and resources. */
                 foreach (string resource in OnlineResourcesList.SelectedItems)
                 {
                     selected_resources.Add(resource);
+
+                    /* Using selected index to correlate with the alias list. */
+                    selected_aliases.Add(AliasList.Items[index].ToString());
+                    ++index;
                 }
 
+                /* Removing every selected resource from the list. */
                 foreach (string resource in selected_resources)
                 {
                     OnlineResourcesList.Items.Remove(resource);
                 }
 
+                /* Removing every selected alias from the list. */
+                foreach (string alias in selected_aliases)
+                {
+                    AliasList.Items.Remove(alias);
+                }
+
                 /* Clearing and adding the remaining resources to the view model's list. */
                 ViewModel.SelectedOnlineResources.Clear();
+
+                /* Alias index. */
+                int count = 0;
+
                 foreach (string resource in OnlineResourcesList.Items)
                 {
-                    ViewModel.SelectedOnlineResources.Add(resource);
+                    /* Getting corresponding alias */
+                    string alias = AliasList.Items[count].ToString();
+
+                    /* Combining with delimiter and resource before adding to local resources list.*/
+                    ViewModel.SelectedOnlineResources.Add(Alias.CombineAliasResource(alias, resource));
+
+                    ++count;
                 }
             }
 

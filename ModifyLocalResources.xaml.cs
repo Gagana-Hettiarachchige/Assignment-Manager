@@ -126,9 +126,6 @@ namespace AssignmentManager.CodeFiles
                     /* Adding the alias to the seperate list. */
                     AliasList.Items.Add(Alias.GetAlias(new_resource));
 
-
-                    //LocalResourcesList.Items.Add(files_to_add.FileNames[count]);
-                    //ViewModel.SelectedLocalResources.Add(files_to_add.FileNames[count]);
                     ++count;
                 }
             }
