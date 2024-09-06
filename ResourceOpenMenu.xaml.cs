@@ -43,7 +43,7 @@ namespace AssignmentManager.CodeFiles
     public partial class ResourceOpenMenu : Window
     {
 
-        //Next thing to do is to visually show correlation between alias and resources in all menus
+        //Next thing to do is to correlate between alias and resources in all menus
 
 
 
@@ -281,43 +281,49 @@ namespace AssignmentManager.CodeFiles
         */
         private void ResourcesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /* Checking which items were selected. */
-            foreach (string item in e.AddedItems)
-            {
-                /* Getting index to correlate with alias list. */
-                int count = 0;
 
-                /* Looping through resources to find the item selected. */ 
-                foreach (string resource in ResourcesList.Items)
-                {
-                    if (item == resource)
-                    {
-                        /* Adding the corresponding aliases to the selected list. */
-                        AliasList.SelectedItems.Add(AliasList.Items[count]);
-                    }
+            //Note: there is an issue if duplicates exist in either list and needs to be fixed
+            //(either fix here or Not allow duplicate resources)
 
-                    ++count;
-                }
-            }
 
-            /* Checking which items were unselected. */
-            foreach (string item in e.RemovedItems)
-            {
-                /* Getting index to correlate with alias list. */
-                int count = 0;
+            ///* Checking which items were selected. */
+            //foreach (string item in e.AddedItems)
+            //{
+            //    /* Getting index to correlate with alias list. */
+            //    int count = 0;
 
-                /* Looping through resources to find the item selected. */
-                foreach (string resource in ResourcesList.Items)
-                {
-                    if (item == resource)
-                    {
-                        /* Removing the corresponding aliases from the selected list. */
-                        AliasList.SelectedItems.Remove(AliasList.Items[count]);
-                    }
+            //    /* Looping through resources to find the item selected. */
+            //    foreach (string resource in ResourcesList.Items)
+            //    {
+            //        if (item == resource)
+            //        {
+            //            /* Adding the corresponding aliases to the selected list. */
+            //            AliasList.SelectedItems.Add(AliasList.Items[count]);
+            //        }
 
-                    ++count;
-                }
-            }
+            //        ++count;
+            //    }
+            //}
+
+            ///* Checking which items were unselected. */
+            //foreach (string item in e.RemovedItems)
+            //{
+            //    /* Getting index to correlate with alias list. */
+            //    int count = 0;
+
+            //    /* Looping through resources to find the item selected. */
+            //    foreach (string resource in ResourcesList.Items)
+            //    {
+            //        if (item == resource)
+            //        {
+            //            /* Removing the corresponding aliases from the selected list. */
+            //            AliasList.SelectedItems.Remove(AliasList.Items[count]);
+            //        }
+
+            //        ++count;
+            //    }
+            //}
+
         }
 
 
@@ -334,43 +340,44 @@ namespace AssignmentManager.CodeFiles
         */
         private void AliasList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /* Checking which items were selected. */
-            foreach (string item in e.AddedItems)
-            {
-                /* Getting index to correlate with resource list. */
-                int count = 0;
+        //    /* Checking which items were selected. */
+        //    foreach (string item in e.AddedItems)
+        //    {
+        //        /* Getting index to correlate with resource list. */
+        //        int count = 0;
 
-                /* Looping through resources to find the item selected. */
-                foreach (string resource in AliasList.Items)
-                {
-                    if (item == resource)
-                    {
-                        /* Adding the corresponding resources to the selected list. */
-                        ResourcesList.SelectedItems.Add(ResourcesList.Items[count]);
-                    }
+        //        /* Looping through resources to find the item selected. */
+        //        foreach (string resource in AliasList.Items)
+        //        {
+        //            if (item == resource)
+        //            {
+        //                /* Adding the corresponding resources to the selected list. */
+        //                ResourcesList.SelectedItems.Add(ResourcesList.Items[count]);
+        //            }
 
-                    ++count;
-                }
-            }
+        //            ++count;
+        //        }
+        //    }
 
-            /* Checking which items were unselected. */
-            foreach (string item in e.RemovedItems)
-            {
-                /* Getting index to correlate with resource list. */
-                int count = 0;
+        //    /* Checking which items were unselected. */
+        //    foreach (string item in e.RemovedItems)
+        //    {
+        //        /* Getting index to correlate with resource list. */
+        //        int count = 0;
 
-                /* Looping through resources to find the item selected. */
-                foreach (string resource in AliasList.Items)
-                {
-                    if (item == resource)
-                    {
-                        /* Removing the corresponding resources from the selected list. */
-                        ResourcesList.SelectedItems.Remove(ResourcesList.Items[count]);
-                    }
+        //        /* Looping through resources to find the item selected. */
+        //        foreach (string resource in AliasList.Items)
+        //        {
+        //            if (item == resource)
+        //            {
+        //                /* Removing the corresponding resources from the selected list. */
+        //                ResourcesList.SelectedItems.Remove(ResourcesList.Items[count]);
+        //            }
 
-                    ++count;
-                }
-            }
+        //            ++count;
+        //        }
+        //    }
+
         }
     }
 }

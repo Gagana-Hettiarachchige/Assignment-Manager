@@ -31,6 +31,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Threading;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
+using Windows.Foundation;
 
 namespace AssignmentManager.CodeFiles
 {
@@ -119,12 +120,10 @@ namespace AssignmentManager.CodeFiles
                     /* Asking user if they want an alias for this specific resource. */
                     string new_resource = Alias.AskForAlias(files_to_add.FileNames[count]);
 
-                    /* Adding the resource to the list and the selected local resources list. */
+                    /* Adding the resource to the resource and alias list and the selected local resources list. */
                     LocalResourcesList.Items.Add(Alias.GetResource(new_resource));
-                    ViewModel.SelectedLocalResources.Add(new_resource);
-
-                    /* Adding the alias to the seperate list. */
                     AliasList.Items.Add(Alias.GetAlias(new_resource));
+                    ViewModel.SelectedLocalResources.Add(new_resource);
 
                     ++count;
                 }
@@ -152,9 +151,13 @@ namespace AssignmentManager.CodeFiles
             /* Asking user for folder. */
             if (folder_to_add.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                /* Adding folder to the lists. */
-                LocalResourcesList.Items.Add(folder_to_add.FileName);
-                ViewModel.SelectedLocalResources.Add(folder_to_add.FileName);
+                /* Asking user if they want an alias for this specific resource. */
+                string new_resource = Alias.AskForAlias(folder_to_add.FileName);
+
+                /* Adding folder to the resource and alias lists. */
+                LocalResourcesList.Items.Add(Alias.GetResource(new_resource));
+                AliasList.Items.Add(Alias.GetAlias(new_resource));
+                ViewModel.SelectedLocalResources.Add(new_resource);
             }
 
             this.WindowState = WindowState.Maximized;
