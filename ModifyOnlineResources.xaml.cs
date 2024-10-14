@@ -223,5 +223,11 @@ namespace AssignmentManager.CodeFiles
             /* Clearing the input text box. */
             OnlineResourceTextBox.Text = "";
         }
+
+
+        private void AliasList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
     }
 }

@@ -180,7 +180,9 @@ namespace AssignmentManager.CodeFiles
             try
             {
                 /* Creating read query. */
-                MySqlCommand read = new MySqlCommand("SELECT * FROM Assignments ORDER BY DueDate;", connection);
+                MySqlCommand read = new MySqlCommand("SELECT * FROM Assignments ORDER BY " + 
+                                                     "DueDate, AssignmentWeight DESC, ClassName;", 
+                                                      connection);
 
 
                 /* Starting read. */

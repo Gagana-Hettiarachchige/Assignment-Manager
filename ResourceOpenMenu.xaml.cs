@@ -269,6 +269,66 @@ namespace AssignmentManager.CodeFiles
 
 
         /* 
+        * METHOD        : AliasList_SelectionChanged
+        * DESCRIPTION   :
+        *   Correlates the selection highlight between the alias and resource list
+        *   when the alias list is clicked on.
+        * PARAMETERS    :
+        *   object sender               : the sender
+        *   SelectionChangedEventArgs e : the items that were added to and removed form selection
+        * RETURNS       :
+        *   void
+        */
+        private void AliasList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //    /* Checking which items were selected. */
+            //    foreach (string item in e.AddedItems)
+            //    {
+            //        /* Getting index to correlate with resource list. */
+            //        int count = 0;
+
+            //        /* Looping through resources to find the item selected. */
+            //        foreach (string resource in AliasList.Items)
+            //        {
+            //            if (item == resource)
+            //            {
+            //                /* Adding the corresponding resources to the selected list. */
+            //                ResourcesList.SelectedItems.Add(ResourcesList.Items[count]);
+            //            }
+
+            //            ++count;
+            //        }
+            //    }
+
+            //    /* Checking which items were unselected. */
+            //    foreach (string item in e.RemovedItems)
+            //    {
+            //        /* Getting index to correlate with resource list. */
+            //        int count = 0;
+
+            //        /* Looping through resources to find the item selected. */
+            //        foreach (string resource in AliasList.Items)
+            //        {
+            //            if (item == resource)
+            //            {
+            //                /* Removing the corresponding resources from the selected list. */
+            //                ResourcesList.SelectedItems.Remove(ResourcesList.Items[count]);
+            //            }
+
+            //            ++count;
+            //        }
+            //    }
+
+            //Temporary fix.
+            ResourcesList.SelectedIndex = AliasList.SelectedIndex;
+
+            //ResourcesList.SelectedIndex = AliasList.SelectedItems.IndexOf(this);
+
+
+        }
+
+
+        /* 
         * METHOD        : ResourcesList_SelectionChanged
         * DESCRIPTION   :
         *   Correlates the selection highlight between the alias and resources list
@@ -324,60 +384,10 @@ namespace AssignmentManager.CodeFiles
             //    }
             //}
 
-        }
-
-
-        /* 
-        * METHOD        : AliasList_SelectionChanged
-        * DESCRIPTION   :
-        *   Correlates the selection highlight between the alias and resource list
-        *   when the alias list is clicked on.
-        * PARAMETERS    :
-        *   object sender               : the sender
-        *   SelectionChangedEventArgs e : the items that were added to and removed form selection
-        * RETURNS       :
-        *   void
-        */
-        private void AliasList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-        //    /* Checking which items were selected. */
-        //    foreach (string item in e.AddedItems)
-        //    {
-        //        /* Getting index to correlate with resource list. */
-        //        int count = 0;
-
-        //        /* Looping through resources to find the item selected. */
-        //        foreach (string resource in AliasList.Items)
-        //        {
-        //            if (item == resource)
-        //            {
-        //                /* Adding the corresponding resources to the selected list. */
-        //                ResourcesList.SelectedItems.Add(ResourcesList.Items[count]);
-        //            }
-
-        //            ++count;
-        //        }
-        //    }
-
-        //    /* Checking which items were unselected. */
-        //    foreach (string item in e.RemovedItems)
-        //    {
-        //        /* Getting index to correlate with resource list. */
-        //        int count = 0;
-
-        //        /* Looping through resources to find the item selected. */
-        //        foreach (string resource in AliasList.Items)
-        //        {
-        //            if (item == resource)
-        //            {
-        //                /* Removing the corresponding resources from the selected list. */
-        //                ResourcesList.SelectedItems.Remove(ResourcesList.Items[count]);
-        //            }
-
-        //            ++count;
-        //        }
-        //    }
 
         }
+
+
+        
     }
 }

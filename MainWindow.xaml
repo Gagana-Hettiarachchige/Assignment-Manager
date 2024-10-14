@@ -43,13 +43,13 @@
     
     <!-- Theme. -->
     <Window.Resources>
-        <SolidColorBrush Color="White" x:Key="Primary"></SolidColorBrush>
-        <SolidColorBrush Color="Black" x:Key="Secondary"></SolidColorBrush>
-        <SolidColorBrush Color="White" x:Key="Tertiary"></SolidColorBrush>
+        <SolidColorBrush Color="#cad2c5" x:Key="Primary"></SolidColorBrush>
+        <SolidColorBrush Color="#52796f" x:Key="Secondary"></SolidColorBrush>
+        <SolidColorBrush Color="#354f52" x:Key="Tertiary"></SolidColorBrush>
 
-        <SolidColorBrush Color="#BAE301" x:Key="StrongAccent"></SolidColorBrush>
-        <SolidColorBrush Color="#b6bf8e" x:Key="MediumAccent"></SolidColorBrush>
-        <SolidColorBrush Color="#6d783d" x:Key="WeakAccent"></SolidColorBrush>
+        <SolidColorBrush Color="White" x:Key="StrongAccent"></SolidColorBrush>
+        <SolidColorBrush Color="Gray" x:Key="MediumAccent"></SolidColorBrush>
+        <SolidColorBrush Color="Tomato" x:Key="WeakAccent"></SolidColorBrush>
     </Window.Resources>
     
     <Grid>
@@ -87,6 +87,7 @@
             Grid.Row="0"
             
             FontSize="30"
+
             Foreground="{DynamicResource Secondary}"
             >
             December 16, 2023 12:00:00 AM
@@ -99,10 +100,11 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             
-            Margin="450, 0, 0, 0"
+            Margin="475, 0, 0, 0"
             MaxWidth="300"
             
             FontSize="14"
+            FontWeight="Bold"
             >
             General information over hovered objects.
         </TextBlock>
@@ -203,7 +205,7 @@
             Margin="70, 0, 0, 0"
             
             Width="80"
-            
+              
             TextChanged="AssignmentTextBox_TextChanged"     
             
             ToolTip="Change assignment name..."
@@ -231,7 +233,7 @@
             Margin="160, 0, 0, 0"
             
             Width="50"
-                 
+               
             TextChanged="WeightTextBox_TextChanged"
             
             ToolTip="Change assignment grade weight percentage..."
@@ -413,7 +415,6 @@
 
 
         <!-- Table results Row. -->
-
         <!-- Table to hold results. -->
         <DataGrid Name="TableGrid"
             HorizontalAlignment="Stretch"
@@ -428,10 +429,12 @@
                   
             AutoGenerateColumns="False"
             
-            Background="{DynamicResource Tertiary}" 
+            Background="{DynamicResource Secondary}" 
             
             SelectionChanged="TableGrid_SelectionChanged"
+            MouseWheel="Window_MouseWheel"
             >
+
             <DataGrid.Resources>
                 <!-- Colour of selected row. -->
                 <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" 
@@ -453,8 +456,8 @@
                 <DataGridTextColumn Header="Class" Binding="{Binding ClassName}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
-                            <EventSetter Event="MouseEnter" Handler="Cell_MouseEnter"/>
-                            <EventSetter Event="MouseLeave" Handler="Cell_MouseLeave"/>
+                            <EventSetter Event="MouseEnter" Handler="Class_MouseEnter"/>
+                            <EventSetter Event="MouseLeave" Handler="Class_MouseLeave"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
@@ -495,13 +498,16 @@
                         <Style TargetType="TextBlock">
                             <Style.Triggers>
                                 <Trigger Property="Text" Value="Incomplete">
-                                    <Setter Property="Background" Value="{DynamicResource WeakAccent}"/>
+                                    <Setter Property="Background" Value="{DynamicResource Tertiary}"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource Primary}"/>
                                 </Trigger>
                                 <Trigger Property="Text" Value="In Progress">
-                                    <Setter Property="Background" Value="{DynamicResource MediumAccent}"/>
+                                    <Setter Property="Background" Value="{DynamicResource Secondary}"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource Primary}"/>
                                 </Trigger>
                                 <Trigger Property="Text" Value="Complete">
-                                    <Setter Property="Background" Value="{DynamicResource StrongAccent}"/>
+                                    <Setter Property="Background" Value="{DynamicResource Primary}"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource Tertiary}"/>
                                 </Trigger>
                             </Style.Triggers>
                             <EventSetter Event="MouseEnter" Handler="Cell_MouseEnter"/>

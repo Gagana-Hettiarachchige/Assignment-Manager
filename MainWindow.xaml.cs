@@ -35,6 +35,7 @@ using Windows.UI.Notifications;
 using System.Xml;
 using Windows.ApplicationModel;
 using AssignmentManager.Properties;
+using MySqlX.XDevAPI.Relational;
 
 namespace AssignmentManager
 {
@@ -962,6 +963,8 @@ namespace AssignmentManager
         }
 
 
+
+
         /* 
         * METHOD        : DueDate_MouseEnter
         * DESCRIPTION   :
@@ -1005,6 +1008,32 @@ namespace AssignmentManager
 
             /* Changing cursor to pen. */
             Cursor = Cursors.Pen;
+        }
+
+
+        private void Class_MouseEnter(object sender, MouseEventArgs e)
+        {
+            /* Getting the class name hovered over. */
+            TextBlock class_name_text = (TextBlock)e.OriginalSource;
+            string class_name = class_name_text.Text;
+
+            int count = 0;
+
+            foreach (Assignment assignment in TableGrid.Items)
+            {
+                if (assignment.ClassName == class_name)
+                {
+                    //TableGrid.SelectedItems.Add(assignment); //Temporary solution.
+                    //Need to make it possible to simply change the background of rows with matching class name.
+                }
+
+                ++count;
+            }
+        }
+
+        private void Class_MouseLeave(object sender, MouseEventArgs e)
+        {
+            //TableGrid.SelectedItems.Clear();
         }
 
 
@@ -1131,5 +1160,12 @@ namespace AssignmentManager
         {
             ClearDeleteButton_Click(sender, e);
         }
+
+        private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            
+        }
+
+        
     }
 }

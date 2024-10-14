@@ -49,7 +49,8 @@
             Grid.Column="0"
                  
             ScrollViewer.HorizontalScrollBarVisibility="Visible"
-            ScrollViewer.VerticalScrollBarVisibility="Visible"
+            ScrollViewer.VerticalScrollBarVisibility="Visible" 
+            SelectionChanged="AliasList_SelectionChanged"
             >
         </ListBox>
 
