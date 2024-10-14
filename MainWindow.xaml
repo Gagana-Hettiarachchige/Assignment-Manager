@@ -47,9 +47,9 @@
         <SolidColorBrush Color="#52796f" x:Key="Secondary"></SolidColorBrush>
         <SolidColorBrush Color="#354f52" x:Key="Tertiary"></SolidColorBrush>
 
-        <SolidColorBrush Color="White" x:Key="StrongAccent"></SolidColorBrush>
+        <SolidColorBrush Color="#354f52" x:Key="StrongAccent"></SolidColorBrush>
         <SolidColorBrush Color="Gray" x:Key="MediumAccent"></SolidColorBrush>
-        <SolidColorBrush Color="Black" x:Key="WeakAccent"></SolidColorBrush>
+        <SolidColorBrush Color="#cad2c5" x:Key="WeakAccent"></SolidColorBrush>
     </Window.Resources>
     
     <Grid>
@@ -123,6 +123,7 @@
             VerticalAlignment="Center" 
             Margin="0, 0, 120, 0"
             Background="{DynamicResource StrongAccent}"
+            Foreground="{DynamicResource WeakAccent}"
             
             Click="SettingsButton_Click"
                 
@@ -139,7 +140,8 @@
             VerticalAlignment="Center" 
             Margin="0, 0, 10, 0"
             Background="{DynamicResource StrongAccent}"
-            
+            Foreground="{DynamicResource WeakAccent}"
+                
             Click="HelpButton_Click"
                 
             ToolTip="Show help..."
@@ -260,6 +262,7 @@
             VerticalAlignment="Center" 
             Margin="220, 0, 0, 0"
             Background="{DynamicResource StrongAccent}"
+            Foreground="{DynamicResource WeakAccent}"
             
             Click="DueDateButton_Click"
                 
@@ -315,6 +318,7 @@
             Width="88"
             Height="20"
             Background="{DynamicResource StrongAccent}"
+            Foreground="{DynamicResource WeakAccent}"
             
             Margin="475,0,0,0" 
             Click="LocalResourcesButton_Click"
@@ -345,7 +349,7 @@
             Width="95"
             Height="20"
             Background="{DynamicResource StrongAccent}"
-                
+            Foreground="{DynamicResource WeakAccent}"
                 
             Margin="575,0,0,0" 
             Click="OnlineResourcesButton_Click"
@@ -380,7 +384,7 @@
             Width="100"
             Height="30"
             Background="{DynamicResource StrongAccent}"
-                
+            Foreground="{DynamicResource WeakAccent}"
             
             Margin="0, 0, 120, 0" 
            
@@ -402,6 +406,7 @@
             Width="100"
             Height="30"
             Background="{DynamicResource StrongAccent}"
+            Foreground="{DynamicResource WeakAccent}"
 
             Click="ClearDeleteButton_Click"    
             
