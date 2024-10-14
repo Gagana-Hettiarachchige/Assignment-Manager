@@ -49,7 +49,7 @@
 
         <SolidColorBrush Color="White" x:Key="StrongAccent"></SolidColorBrush>
         <SolidColorBrush Color="Gray" x:Key="MediumAccent"></SolidColorBrush>
-        <SolidColorBrush Color="Tomato" x:Key="WeakAccent"></SolidColorBrush>
+        <SolidColorBrush Color="Black" x:Key="WeakAccent"></SolidColorBrush>
     </Window.Resources>
     
     <Grid>
@@ -434,6 +434,13 @@
             SelectionChanged="TableGrid_SelectionChanged"
             MouseWheel="Window_MouseWheel"
             >
+            <DataGrid.CellStyle>
+                <Style x:Name="Coloured" TargetType="{x:Type DataGridCell}">
+                    <Setter Property="Foreground" Value="{DynamicResource Tertiary}"/>
+                    <Setter Property="Background" Value="{DynamicResource Primary}"/>
+                    <Setter Property="FontWeight" Value="Medium"/>
+                </Style>
+            </DataGrid.CellStyle>
 
             <DataGrid.Resources>
                 <!-- Colour of selected row. -->
@@ -500,14 +507,17 @@
                                 <Trigger Property="Text" Value="Incomplete">
                                     <Setter Property="Background" Value="{DynamicResource Tertiary}"/>
                                     <Setter Property="Foreground" Value="{DynamicResource Primary}"/>
+                                    <Setter Property="FontWeight" Value="ExtraBold"/>
                                 </Trigger>
                                 <Trigger Property="Text" Value="In Progress">
                                     <Setter Property="Background" Value="{DynamicResource Secondary}"/>
                                     <Setter Property="Foreground" Value="{DynamicResource Primary}"/>
+                                    <Setter Property="FontWeight" Value="ExtraBold"/>
                                 </Trigger>
                                 <Trigger Property="Text" Value="Complete">
                                     <Setter Property="Background" Value="{DynamicResource Primary}"/>
                                     <Setter Property="Foreground" Value="{DynamicResource Tertiary}"/>
+                                    <Setter Property="FontWeight" Value="ExtraBold"/>
                                 </Trigger>
                             </Style.Triggers>
                             <EventSetter Event="MouseEnter" Handler="Cell_MouseEnter"/>
