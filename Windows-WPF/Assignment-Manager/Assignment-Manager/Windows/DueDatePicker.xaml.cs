@@ -1,12 +1,4 @@
-﻿/* 
-* FILE          : DueDatePicker.xaml.cs
-* PROJECT       : Assignment Manager
-* PROGRAMMER    : Gagana Hettiarachchige
-* FIRST VERSION : 2023-12-20
-* DESCRIPTION   :
-*	Holds the code behind of the due date picker screen.
-*/
-
+﻿using Assignment_Manager.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace AssignmentManager.CodeFiles
+namespace Assignment_Manager.Windows
 {
     /// <summary>
     /// Interaction logic for DueDatePicker.xaml
@@ -45,7 +37,7 @@ namespace AssignmentManager.CodeFiles
             AmPmValue.Text = ViewModel.SelectedAssignment.DueDate.ToString("tt");
         }
 
-        
+
 
         /* Methods. */
 
@@ -63,7 +55,7 @@ namespace AssignmentManager.CodeFiles
         * RETURNS       :
         *   string : the updated time value
         */
-        private string ChangeTime(string time_value, int time_change, 
+        private string ChangeTime(string time_value, int time_change,
                                   int value_min, int value_max)
         {
             int hour = int.Parse(time_value);

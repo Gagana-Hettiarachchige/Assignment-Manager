@@ -17,7 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace AssignmentManager.CodeFiles
+namespace Assignment_Manager.Classes
 {
     internal static class ViewModel
     {

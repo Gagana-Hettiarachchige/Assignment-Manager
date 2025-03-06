@@ -1,5 +1,5 @@
 ﻿/* 
-* FILE          : MainWindow.xaml.cs
+* FILE          : HomeWindow.xaml.cs
 * PROJECT       : Assignment Manager
 * PROGRAMMER    : Gagana Hettiarachchige
 * FIRST VERSION : 2023-12-17
@@ -7,7 +7,6 @@
 *	Holds the code behind of the main window.
 */
 
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -21,36 +20,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using Assignment_Manager.Classes;
+using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using AssignmentManager.CodeFiles;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
-using System.Windows.Threading;
 using System.Windows.Media.Animation;
 using System.Windows.Automation.Peers;
 using Windows.UI.Notifications;
 using System.Xml;
 using Windows.ApplicationModel;
-using AssignmentManager.Properties;
+using Assignment_Manager.Properties;
 using MySqlX.XDevAPI.Relational;
 
-namespace AssignmentManager
+namespace Assignment_Manager.Windows
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for HomeWindow.xaml
     /// </summary>
-    
-
-    /*
-    * NAME	  : MainWindow
-    * PURPOSE : The main window allows for the user to interact
-    *           with the assignments by inserting, altering, deleting,
-    *           and display assignments and information about them.
-    */
-    public partial class MainWindow : Window
+    public partial class HomeWindow : Window
     {
         const int NOTIFY_WIDTH = 665;
         const int DEFAULT_FLASH_COUNT = 0; // One quick flash.
@@ -79,13 +70,13 @@ namespace AssignmentManager
         /* Constructors. */
 
         /* 
-        * METHOD        : MainWindow
+        * METHOD        : HomeWindow
         * DESCRIPTION   :
-        *   Constructor that creates the main window
+        *   Constructor that creates the home window
         * PARAMETERS    :
         *   void
         */
-        public MainWindow()
+        public HomeWindow()
         {
             InitializeComponent();
 
@@ -94,7 +85,7 @@ namespace AssignmentManager
 
 
             /* Checking database connection. */
-            if(Database.Connect() == false)
+            if (Database.Connect() == false)
             {
                 /* Closing program if database failed to connect. */
                 Close();
@@ -119,11 +110,11 @@ namespace AssignmentManager
             WeightTextBox.Text = ViewModel.SelectedAssignment.AssignmentWeight.ToString();
 
             /* Initializing due date. */
-            ViewModel.SelectedAssignment.DueDate = new DateTime(DateTime.Now.Year, 
-                                                       DateTime.Now.Month, DateTime.Now.Day, 
+            ViewModel.SelectedAssignment.DueDate = new DateTime(DateTime.Now.Year,
+                                                       DateTime.Now.Month, DateTime.Now.Day,
                                                        23, 00, 00);
             DueDateButton.Content = ViewModel.SelectedAssignment.DueDate.ToString("yyyy-MM-dd hh:mm:ss tt");
-            
+
             LocalResourcesButton.Content = ViewModel.SelectedLocalResources.Count;
             OnlineResourcesButton.Content = ViewModel.SelectedOnlineResources.Count;
 
@@ -170,7 +161,7 @@ namespace AssignmentManager
             /* Making it update every other tick. */
             headerClock.Interval = TimeSpan.FromTicks(1);
             headerClock.Tick += new EventHandler(HeaderClock_Tick);
-            
+
             /* Starting clock. */
             headerClock.Start();
         }
@@ -215,7 +206,7 @@ namespace AssignmentManager
             WeightTextBox.Background = Brushes.White;
             DueDateButton.Background = (Brush)this.FindResource("StrongAccent");
             StatusComboBox.Foreground = Brushes.Black;
-            LocalResourcesButton.Background = (Brush) this.FindResource("StrongAccent");
+            LocalResourcesButton.Background = (Brush)this.FindResource("StrongAccent");
             OnlineResourcesButton.Background = (Brush)this.FindResource("StrongAccent");
         }
 
@@ -278,7 +269,7 @@ namespace AssignmentManager
             /* Making notifaction rectangle shrink. */
             if (ConfigurationManager.AppSettings["animationsEnabled"] == "true")
             {
-                
+
             }
 
             /* Checking if any notifications need to be sent out. */
@@ -335,7 +326,7 @@ namespace AssignmentManager
 
                         else
                         {
-                            title +=  " is due in " + days_due + " days.";
+                            title += " is due in " + days_due + " days.";
                         }
 
                         /* Setting the title and the caption of the notification. */
@@ -399,13 +390,13 @@ namespace AssignmentManager
                             "ALT + 3 = Cycle selected assignments down\r\n" +
                             "ALT + SHIFT + S = Save/Update current assignment.\r\n" +
                             "ALT + SHIFT + D = Delete/Clear current assignment.\r\n\r\n" +
-                            "SHIFT + LEFT MOUSE CLICK = Multi-select resources", 
+                            "SHIFT + LEFT MOUSE CLICK = Multi-select resources",
                             "Help", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
 
 
-        
+
 
         /* Insert row. */
 
@@ -689,9 +680,9 @@ namespace AssignmentManager
                 /*** Need to remove the setting as well. ***/
                 if (ConfigurationManager.AppSettings["animationsEnabled"] == "false")
                 {
-                    
+
                 }
-            }            
+            }
         }
 
 
@@ -740,7 +731,7 @@ namespace AssignmentManager
 
                 FlashUI(2, Brushes.Green);
             }
-            
+
             /* Checking if action is alter. */
             else if (InsertUpdateButton.Content.ToString() == "Update")
             {
@@ -760,7 +751,7 @@ namespace AssignmentManager
 
             if (ConfigurationManager.AppSettings["animationsEnabled"] == "false")
             {
-                
+
             }
         }
 
@@ -787,7 +778,7 @@ namespace AssignmentManager
 
                 /* Deleting selected assignment. */
                 Database.DeleteSelectedAssignment();
-                
+
                 /* Updating display of database assignments. */
                 Database.UpdateAssignments();
 
@@ -806,7 +797,7 @@ namespace AssignmentManager
 
             if (ConfigurationManager.AppSettings["animationsEnabled"] == "false")
             {
-                
+
             }
         }
 
@@ -838,7 +829,7 @@ namespace AssignmentManager
 
             ///* Getting the resources. */
             //TextBlock resources_text = (TextBlock)e.OriginalSource;
-            
+
             ///* Getting each resource as a string. */
             //string[] resources = resources_text.Text.Split('\n');
             //List<string> list_resources = new List<string>();
@@ -981,7 +972,7 @@ namespace AssignmentManager
             /* Getting the hovered over assignment's due date. */
             TextBlock due_date_text = (TextBlock)e.OriginalSource;
             DateTime due_date = DateTime.Parse(due_date_text.Text);
-            
+
             /* Getting number of days and hours left. */
             int days_due = (due_date - DateTime.Now).Days;
             int hours_due = (due_date - DateTime.Now).Hours;
@@ -1123,7 +1114,7 @@ namespace AssignmentManager
 
 
         private void CycleUpShortcut_Executed(object sender, ExecutedRoutedEventArgs e)
-        {   
+        {
             if (AssignmentSelectComboBox.SelectedIndex > 0)
             {
                 /* Cycling up. */
@@ -1163,9 +1154,7 @@ namespace AssignmentManager
 
         private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            
-        }
 
-        
+        }
     }
 }

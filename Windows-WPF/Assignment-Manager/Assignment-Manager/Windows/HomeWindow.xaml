@@ -1,46 +1,35 @@
-﻿<!-- 
-- FILE          : MainWindow.xaml
-- PROGRAMMER    : Gagana Hettiarachchige
-- PROJECT       : Assignment Manager
-- FIRST VERSION : 2023-12-17
-- DESCRIPTION   :
--	Holds the markup of the main screen.
--->
-
-<Window x:Class="AssignmentManager.MainWindow"
+﻿<Window x:Class="Assignment_Manager.Windows.HomeWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AssignmentManager"
+        xmlns:local="clr-namespace:Assignment_Manager.Windows"
         mc:Ignorable="d"
         Title="Assignment Manager" 
         Height="450" Width="850" 
         MinHeight="450" MinWidth="1000"
         WindowStartupLocation="CenterScreen"
-        Closing="Window_Closing"
-        >
-    
+        Closing="Window_Closing">
     <!-- Shortcuts. -->
     <Window.CommandBindings>
-        <CommandBinding Command="{x:Static local:MainWindow.LocalEditShortcut}" 
+        <CommandBinding Command="{x:Static local:HomeWindow.LocalEditShortcut}" 
                      Executed="LocalEditShortcut_Executed"/>
-        <CommandBinding Command="{x:Static local:MainWindow.DueDateEditShortcut}" 
+        <CommandBinding Command="{x:Static local:HomeWindow.DueDateEditShortcut}" 
                      Executed="DueDateEditShortcut_Executed"/>
-        <CommandBinding Command="{x:Static local:MainWindow.OnlineEditShortcut}" 
+        <CommandBinding Command="{x:Static local:HomeWindow.OnlineEditShortcut}" 
                      Executed="OnlineEditShortcut_Executed"/>
-        <CommandBinding Command="{x:Static local:MainWindow.SelectNewShortcut}" 
+        <CommandBinding Command="{x:Static local:HomeWindow.SelectNewShortcut}" 
                      Executed="SelectNewShortcut_Executed"/>
-        <CommandBinding Command="{x:Static local:MainWindow.CycleUpShortcut}" 
+        <CommandBinding Command="{x:Static local:HomeWindow.CycleUpShortcut}" 
                      Executed="CycleUpShortcut_Executed"/>
-        <CommandBinding Command="{x:Static local:MainWindow.CycleDownShortcut}" 
+        <CommandBinding Command="{x:Static local:HomeWindow.CycleDownShortcut}" 
                      Executed="CycleDownShortcut_Executed"/>
-        <CommandBinding Command="{x:Static local:MainWindow.InsertUpdateShortcut}" 
+        <CommandBinding Command="{x:Static local:HomeWindow.InsertUpdateShortcut}" 
                      Executed="InsertUpdateShortcut_Executed"/>
-        <CommandBinding Command="{x:Static local:MainWindow.ClearDeleteShortCut}" 
+        <CommandBinding Command="{x:Static local:HomeWindow.ClearDeleteShortCut}" 
                      Executed="ClearDeleteShortCut_Executed"/>
     </Window.CommandBindings>
-    
+
     <!-- Theme. -->
     <Window.Resources>
         <SolidColorBrush Color="#cad2c5" x:Key="Primary"></SolidColorBrush>
@@ -51,7 +40,7 @@
         <SolidColorBrush Color="Gray" x:Key="MediumAccent"></SolidColorBrush>
         <SolidColorBrush Color="#cad2c5" x:Key="WeakAccent"></SolidColorBrush>
     </Window.Resources>
-    
+
     <Grid>
         <!-- Defining the grid rows. -->
         <Grid.RowDefinitions>
@@ -109,10 +98,10 @@
             General information over hovered objects.
         </TextBlock>
 
-        
-        
-        
-        
+
+
+
+
         <!-- Help button. -->
         <Button Name="SettingsButton"
             Grid.Row="0"
@@ -463,7 +452,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                
+
                 <!-- Class of assignment. -->
                 <DataGridTextColumn Header="Class" Binding="{Binding ClassName}">
                     <DataGridTextColumn.ElementStyle>
@@ -483,7 +472,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                
+
                 <!-- Assignment weight. -->
                 <DataGridTextColumn Header="Weight (%)" Binding="{Binding AssignmentWeight}">
                     <DataGridTextColumn.ElementStyle>
@@ -493,7 +482,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                
+
                 <!-- Due date. -->
                 <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate}">
                     <DataGridTextColumn.ElementStyle>
@@ -503,7 +492,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                
+
                 <!-- Assignment status. -->
                 <DataGridTextColumn Header="Status" Binding="{Binding AssignmentStatus}">
                     <DataGridTextColumn.ElementStyle>
@@ -558,11 +547,11 @@
 
 
             </DataGrid.Columns>
-            
-            
+
+
         </DataGrid>
 
-        
+
 
 
     </Grid>

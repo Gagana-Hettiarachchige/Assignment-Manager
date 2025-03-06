@@ -25,24 +25,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using AssignmentManager.CodeFiles;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Threading;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
+using Assignment_Manager.Classes;
 using Windows.Foundation;
+using WindowsAPICodePack.Dialogs;
 
-namespace AssignmentManager.CodeFiles
+
+namespace Assignment_Manager.Windows
 {
     /// <summary>
     /// Interaction logic for ModifyLocalResources.xaml
     /// </summary>
     public partial class ModifyLocalResources : Window
     {
-
-
-
         /* 
         * METHOD        : ModifyLocalResources
         * DESCRIPTION   :
@@ -64,10 +62,10 @@ namespace AssignmentManager.CodeFiles
                     LocalResourcesList.Items.Add(Alias.GetResource(resource_with_alias));
                 }
 
-                catch 
+                catch
                 {
                     /* Notifying user with error. */
-                    MessageBox.Show("One or more of the resources in this assignment may have been formatted incorrectly.", 
+                    MessageBox.Show("One or more of the resources in this assignment may have been formatted incorrectly.",
                                     "Resource Formatting Error",
                                     MessageBoxButton.OK, MessageBoxImage.Error);
                 }
@@ -91,7 +89,7 @@ namespace AssignmentManager.CodeFiles
             /* Setting up dialog for adding files to be able to open. */
             OpenFileDialog files_to_add = new OpenFileDialog();
             files_to_add.Multiselect = true;
-            files_to_add.Filter = "All files |*.*|" + 
+            files_to_add.Filter = "All files |*.*|" +
                                   "Solutions (*.sln)|*.sln|" +
                                   "C Files (*.c)|*.c|" +
                                   "C++ Files (*.cpp)|*.cpp|" +
@@ -222,7 +220,7 @@ namespace AssignmentManager.CodeFiles
                 /* Updating the selected local resources list in the view model. */
                 foreach (string resource in LocalResourcesList.Items)
                 {
-                    /* Getting corresponding alias */ 
+                    /* Getting corresponding alias */
                     string alias = AliasList.Items[count].ToString();
 
                     /* Combining with delimiter and resource before adding to local resources list.*/

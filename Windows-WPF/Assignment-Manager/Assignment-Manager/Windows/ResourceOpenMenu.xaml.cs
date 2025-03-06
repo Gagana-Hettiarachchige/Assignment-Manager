@@ -1,18 +1,8 @@
-﻿/* 
-* FILE          : ResourceOpenMenu.xaml.cs
-* PROJECT       : Assignment Manager
-* PROGRAMMER    : Gagana Hettiarachchige
-* FIRST VERSION : 2023-12-19
-* DESCRIPTION   :
-*   This file holds the code behind for the
-*	menu that allows the user to open
-*	certain or all resources.
-*/
-
-using AssignmentManager.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,25 +14,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.IO;
-using System.Collections.ObjectModel;
-using System.Windows.Forms;
-using MessageBox = System.Windows.MessageBox;
 
-namespace AssignmentManager.CodeFiles
+namespace Assignment_Manager.Windows
 {
     /// <summary>
     /// Interaction logic for ResourceOpenMenu.xaml
     /// </summary>
-    
-    /*
-    * NAME	  : ResourceOpenMenu
-    * PURPOSE : The resource open menu allows for the user to
-    *           select which resources passed they want to open.
-    */
     public partial class ResourceOpenMenu : Window
     {
-
         //Next thing to do is to correlate between alias and resources in all menus
 
 
@@ -63,7 +42,7 @@ namespace AssignmentManager.CodeFiles
             try
             {
                 /* Adding alias and resource in their respective lists. */
-                foreach (string resource_with_alias in resources) 
+                foreach (string resource_with_alias in resources)
                 {
                     AliasList.Items.Add(Alias.GetAlias(resource_with_alias));
                     ResourcesList.Items.Add(Alias.GetResource(resource_with_alias));
@@ -145,11 +124,11 @@ namespace AssignmentManager.CodeFiles
                     }
                 }
             }
-            
+
             catch (Exception error)
             {
-                MessageBox.Show(error.Message + '\n' + resource_to_open, 
-                                "Resource Open Failed", 
+                MessageBox.Show(error.Message + '\n' + resource_to_open,
+                                "Resource Open Failed",
                                 MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -167,7 +146,7 @@ namespace AssignmentManager.CodeFiles
         */
         private void OpenCmdOption_Click(object sender, RoutedEventArgs e)
         {
-            
+
             /* Checking if something is selected. */
             if (ResourcesList.SelectedItems != null)
             {
@@ -386,8 +365,5 @@ namespace AssignmentManager.CodeFiles
 
 
         }
-
-
-        
     }
 }

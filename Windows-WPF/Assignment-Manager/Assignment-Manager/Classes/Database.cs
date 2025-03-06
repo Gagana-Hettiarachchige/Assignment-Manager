@@ -16,9 +16,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
-namespace AssignmentManager.CodeFiles
+namespace Assignment_Manager.Classes
 {
     internal static class Database
     {

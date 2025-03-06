@@ -19,7 +19,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AssignmentManager.CodeFiles
+namespace Assignment_Manager.Classes
 {
     internal class AssignmentCompare
     {

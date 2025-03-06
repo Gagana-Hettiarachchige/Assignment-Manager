@@ -22,7 +22,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace AssignmentManager.CodeFiles
+namespace Assignment_Manager.Windows
 {
     /// <summary>
     /// Interaction logic for SettingsMenu.xaml
@@ -49,7 +49,7 @@ namespace AssignmentManager.CodeFiles
             {
                 AnimationToggleButton.Content = "True";
             }
-            else if (current_setting == "false") 
+            else if (current_setting == "false")
             {
                 AnimationToggleButton.Content = "False";
             }
@@ -57,7 +57,7 @@ namespace AssignmentManager.CodeFiles
 
         private void CategoriesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (CategoriesListBox.SelectedItem != null) 
+            if (CategoriesListBox.SelectedItem != null)
             {
 
                 /* Checking if visual was selected. */

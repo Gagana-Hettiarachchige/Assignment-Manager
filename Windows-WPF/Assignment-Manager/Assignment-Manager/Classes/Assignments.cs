@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Diagnostics;
 
-namespace AssignmentManager.CodeFiles
+namespace Assignment_Manager.Classes
 {
     internal class Assignment
     {

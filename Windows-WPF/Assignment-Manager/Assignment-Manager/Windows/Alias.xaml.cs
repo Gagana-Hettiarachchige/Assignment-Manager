@@ -8,6 +8,7 @@
 *	the user to add/edit link aliases of resources.
 */
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,17 +23,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace AssignmentManager.CodeFiles
+namespace Assignment_Manager.Windows
 {
     /// <summary>
     /// Interaction logic for Alias.xaml
     /// </summary>
-    /// 
-
-
-    //Need to finish documenting all methods.
-
-
     public partial class Alias : Window
     {
         /* Constants. */
@@ -46,7 +41,7 @@ namespace AssignmentManager.CodeFiles
 
         /* Properties. */
         public static string AliasName
-        { 
+        {
             get { return aliasName; }
             set { aliasName = value; }
         }
@@ -127,7 +122,7 @@ namespace AssignmentManager.CodeFiles
         * RETURNS       :
         *   string : the alias
         */
-        public static string GetAlias(string resource_with_alias) 
+        public static string GetAlias(string resource_with_alias)
         {
             /* Splitting by delimiter and returning the alias. */
             string[] resource_and_alias = resource_with_alias.Split(DELIMITER);
