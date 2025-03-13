@@ -71,6 +71,7 @@
     <Compile Include="Classes\AssignmentCompare.cs" />
     <Compile Include="Classes\Assignments.cs" />
     <Compile Include="Classes\Database.cs" />
+    <Compile Include="Classes\StyleTheme.cs" />
     <Compile Include="Classes\ViewModel.cs" />
     <Compile Include="Windows\Alias.xaml.cs">
       <DependentUpon>Alias.xaml</DependentUpon>
