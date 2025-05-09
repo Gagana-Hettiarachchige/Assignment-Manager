@@ -15,7 +15,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment_Manager.Windows"
         mc:Ignorable="d"
-        Title="ModifyLocalResources" Height="450" Width="800" Closing="Window_Closing">
+        Title="ModifyLocalResources"
+        WindowStartupLocation="CenterScreen"
+        Height="450" Width="800" 
+        Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
